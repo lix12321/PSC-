@@ -1,0 +1,91 @@
+package cn.wellcare.api.auth;
+
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.wellcare.api.AuthorityBase;
+import cn.wellcare.constant.BaseParam;
+import cn.wellcare.constant.Constants;
+import cn.wellcare.exception.BusinessException;
+import cn.wellcare.pojo.ServerResponse;
+import cn.wellcare.pojo.ServiceResult;
+import cn.wellcare.service.SystemResourcesService;
+
+@Controller
+@RequestMapping(value = Constants.API_AUTH_URI)
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class CommonAuthorization extends AuthorityBase {
+
+	@Resource
+	private SystemResourcesService resourceService;
+
+	@RequestMapping(value = "getMenuPermit")
+	@ResponseBody
+	public ServerResponse<?> getMenuPermit(@RequestParam Map<String, Object> param) {
+		try {
+			Assert.notNull(param.get(BaseParam.USER));
+
+			// 1.获取用户角色权限
+			result = resourceService.getRolePermitted(Integer.valueOf(param.get(BaseParam.USER).toString()));
+			if (!result.getSuccess()) {
+				if (Constants.SERVICE_RESULT_CODE_SYSERROR.equals(result.getMsgCode())) {
+					throw new RuntimeException(result.getMsgInfo());
+				} else {
+					throw new BusinessException(result.getMsgInfo());
+				}
+			}
+			// 2.结果
+			result.setHasPermit(true);
+		} catch (Exception e) {
+			requestFail(e);
+		}
+		setRequestURI(param);
+		return result;
+	}
+
+	@RequestMapping(value = "hasResoucePermit")
+	@ResponseBody
+	public ServerResponse<?> hasResoucePermit(@RequestParam Map<String, Object> param) {
+		try {
+			Assert.notNull(param.get(BaseParam.USER));
+			Assert.notNull(param.get(BaseParam.URI));
+
+			// 1.获取用户角色权限
+			ServiceResult<Set<String>> resp = resourceService
+					.getRolePermitted(Integer.valueOf(param.get(BaseParam.USER).toString()));
+			if (!resp.getSuccess()) {
+				if (Constants.SERVICE_RESULT_CODE_SYSERROR.equals(resp.getMsgCode())) {
+					throw new RuntimeException(resp.getMsgInfo());
+				} else {
+					throw new BusinessException(resp.getMsgInfo());
+				}
+			}
+			// 2.当前操作uri是否有权限
+			result = resourceService.isAccessAllowed(resp.getData(),
+					(String) param.get(BaseParam.URI));
+			if (!result.getSuccess()) {
+				if (Constants.SERVICE_RESULT_CODE_SYSERROR.equals(result.getMsgCode())) {
+					throw new RuntimeException(result.getMsgInfo());
+				} else {
+					throw new BusinessException(result.getMsgInfo());
+				}
+			}
+		} catch (Exception e) {
+			requestFail(e);
+		}
+		setRequestURI(param);
+
+		return result;
+	}
+
+}

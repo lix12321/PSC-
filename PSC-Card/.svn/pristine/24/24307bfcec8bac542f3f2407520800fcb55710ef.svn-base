@@ -1,0 +1,462 @@
+package cn.wellcare.service.card;
+
+import cn.wellcare.api.card.ICardInfoOperateService;
+import cn.wellcare.card.bo.card.CardInfo;
+import cn.wellcare.card.bo.card.CardOperateInfo;
+import cn.wellcare.card.bo.card.PscPiAcc;
+import cn.wellcare.card.entity.CardCardinfo;
+import cn.wellcare.card.entity.CardEmpolyeeinfo;
+import cn.wellcare.card.entity.CardOperate;
+import cn.wellcare.card.entity.CardReginfo;
+import cn.wellcare.core.bean.DomainUrlUtil;
+import cn.wellcare.core.utils.DateUtil;
+import cn.wellcare.core.utils.HttpClientUtil;
+import cn.wellcare.core.utils.RandomUtil;
+import cn.wellcare.core.utils.StringUtil;
+import cn.wellcare.model.card.CardCardinfoModel;
+import cn.wellcare.model.card.CardEmpolyeeModel;
+import cn.wellcare.model.card.CardOperateModel;
+import cn.wellcare.model.card.CardRegInfoModel;
+import cn.wellcare.pojo.RpcResult;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+@Service("cardInfoOperateService")
+public class CardInfoOperateService implements ICardInfoOperateService {
+
+    private Logger log = Logger.getLogger(this.getClass());
+
+    @Resource
+    private CardRegInfoModel cardRegInfoModel;
+
+    @Resource
+    private CardCardinfoModel cardCardinfoModel;
+
+    @Resource
+    private CardEmpolyeeModel cardEmpolyeeModel;
+
+    @Resource
+    private CardOperateModel cardOperateModel;
+
+    private static final String NO_DEL_FALG = "0";
+
+    private static final String DEL_FALG = "1";
+
+    private static final int DEFAULT_SORT_NO = 1;
+
+    /**
+     * 在用状态
+     */
+    private static final String IS_USER_STATUS = "0";
+
+    /**
+     * 挂失状态
+     */
+    private static final String LOSS_OF_CARD_STATUS = "1";
+
+    /**
+     * 销卡状态
+     */
+    private static final String CANCAL_CARD_STATUS = "9";
+
+    /**
+     * 挂失
+     */
+    private static final String LOSS_OF_CARD = "1";
+    /**
+     * 启用
+     */
+    private static final String ENABLED_CARD = "2";
+    /**
+     * 注销
+     */
+    private static final String CANCEL_CARD = "3";
+
+    private static final String EMPLOYEE_CARD_TYPE = "18";
+
+    private static final String TREATMENT_CARD_TYPE = "16";
+
+
+
+    @Override
+    public RpcResult<CardInfo> SendCard(Map<String, Object> param) {
+        RpcResult<CardInfo> jsonResult = new RpcResult<>();
+        String operateId = (String) param.get("user");
+        String accountPassWord = (String) param.get("accountPassword");
+        String cardType = (String) param.get("cardType");
+
+        //查询主索引
+        // TODO: 2018/12/6
+        String mpi = RandomUtil.randomNumberic(5);
+        //创建主索引
+
+        //查询账户
+       /* log.info("调用账户中心 url："+ DomainUrlUtil.PSC_ACCOUNT_URL+"/pscPiAcc/queryAccount?pkPi="+Integer.parseInt(mpi));
+        String resultStr = HttpClientUtil.sendGet(DomainUrlUtil.PSC_ACCOUNT_URL+"/pscPiAcc/queryAccount?pkPi="+Integer.parseInt(mpi));
+        log.info("账户中心返回信息："+resultStr);*/
+        //创建账户
+        log.info("调用账户中心创建账户 url："+ DomainUrlUtil.PSC_ACCOUNT_URL+"/pscPiAcc/doAdd");
+        //TODO
+        String resultStr = HttpClientUtil.sendGet("http://localhost:8088/pscPiAcc/doAdd?pkPi="+ mpi +"&pwd="+accountPassWord);
+        log.info("账户中心返回信息："+resultStr);
+        RpcResult<PscPiAcc> accountResult = null;
+        if (!StringUtil.isEmpty(resultStr)){
+            Map<String,Class<PscPiAcc>> map = new HashMap<>();
+            map.put("data", PscPiAcc.class);
+            JSONObject jsonObject=JSONObject.fromObject(resultStr);
+            accountResult = (RpcResult<PscPiAcc>) JSONObject.toBean(jsonObject,RpcResult.class,map);
+            log.info("账户中心返回信息："+ accountResult);
+        }
+        //账户编号
+        if (null == accountResult && accountResult.getData() == null){
+            return RpcResult.failedResult("-1", "账户创建失败！!");
+        }
+        String accountCode = accountResult.getData().getCodeAcc();
+        //根据身份证号查询卡登记信息是否存在
+        String idNo = (String) param.get("credentialNo");
+        if (StringUtils.isEmpty(idNo)){
+            return RpcResult.failedResult("-1", "身份证信息为空!");
+        }
+        CardReginfo cardReginfo = cardRegInfoModel.getCardRegInfoByIdNo(idNo);
+        String pkReginfo = "";
+        //保存或是更新登记信息
+        if (null == cardReginfo){
+            cardReginfo = new CardReginfo();
+            mapToCardReginfo(cardReginfo, param);
+            cardReginfo.setPkReginfo(RandomUtil.randomNumber(32));
+            cardReginfo.setCodeReg(RandomUtil.randomNumber(10));
+            cardReginfo.setMpi(mpi);
+            cardReginfo.setCreateTime(new Date());
+            cardReginfo.setCreator(operateId);
+            cardReginfo.setDelFlag(NO_DEL_FALG);
+            cardRegInfoModel.save(cardReginfo);
+        }else{
+            /*pkReginfo = cardReginfo.getPkReginfo();
+            mapToCardReginfo(cardReginfo, param);
+            cardReginfo.setModityTime(new Date());
+            cardReginfo.setModifier(operateId);
+            cardRegInfoModel.updateByIdNo(cardReginfo);*/
+            //提示补卡
+            if (EMPLOYEE_CARD_TYPE.equals(cardType)){
+                return RpcResult.failedResult("-1", "登记信息已存在，请您补卡！");
+            }else{
+                return RpcResult.failedResult("-1", "登记信息已存在，卡片已发！");
+            }
+
+        }
+        //保存卡记录信息
+        CardCardinfo  cardCardinfo = cardCardinfoModel.getCardCardinfByPkCardinfo(pkReginfo);
+        BigDecimal sortNo = new BigDecimal(1);
+        if (cardCardinfo != null){
+            sortNo = cardCardinfo.getSortNo().add(new BigDecimal(DEFAULT_SORT_NO));
+        }
+        cardCardinfo = new CardCardinfo();
+        cardCardinfo.setPkCardinfo(RandomUtil.randomNumber(32));
+        cardCardinfo.setPkReginfo(cardReginfo.getPkReginfo());
+        cardCardinfo.setDelFlag(NO_DEL_FALG);
+        cardCardinfo.setSortNo(sortNo);
+        cardCardinfo.setEuStatus(IS_USER_STATUS);
+        cardCardinfo.setCreator(operateId);
+        cardCardinfo.setCreateTime(new Date());
+        cardCardinfo.setDtCardtype((String) param.get("cardType"));
+        cardCardinfo.setCardNo((String) param.get("cardNo"));
+        cardCardinfo.setInnerNo((String) param.get("innerNo"));
+        cardCardinfo.setPaySerialid((String) param.get("paySerialID"));
+        cardCardinfo.setFlagActive(IS_USER_STATUS);
+        cardCardinfoModel.save(cardCardinfo);
+
+        //如果是员工卡 则保存员工登记信息
+        if (EMPLOYEE_CARD_TYPE.equals(cardType)){
+            CardEmpolyeeinfo cardEmpolyeeinfo = cardEmpolyeeModel.getEmpolyeeRegInfoByRegId(cardReginfo.getPkReginfo());
+            if (cardEmpolyeeinfo == null){
+                cardEmpolyeeinfo = new CardEmpolyeeinfo();
+                cardEmpolyeeinfo.setPkEmployeeinfo(RandomUtil.randomNumber(32));
+                cardEmpolyeeinfo.setPkReginfo(cardReginfo.getPkReginfo());
+                cardEmpolyeeinfo.setCodeEmployee((String) param.get("codeEmployee"));
+                cardEmpolyeeinfo.setCodeDepartment((String) param.get("codeDepartment"));
+                cardEmpolyeeinfo.setCreateTime(new Date());
+                cardEmpolyeeinfo.setCreator("123");
+                //cardEmpolyeeinfo.setCodeApplyer(codeApplyer);
+                //cardEmpolyeeinfo.setCodeApplydepartment((String) param.get("codeApplyDepartment"));
+                cardEmpolyeeinfo.setDelFlag(NO_DEL_FALG);
+                cardEmpolyeeModel.save(cardEmpolyeeinfo);
+            }else{
+                cardEmpolyeeinfo.setCodeEmployee((String) param.get("codeEmployee"));
+                cardEmpolyeeinfo.setCodeDepartment((String) param.get("codeDepartment"));
+                cardEmpolyeeinfo.setModifier("");
+                cardEmpolyeeinfo.setModityTime(new Date());
+                cardEmpolyeeModel.update(cardEmpolyeeinfo);
+            }
+        }
+
+        //卡操作流水
+        CardOperate cardOperate = new CardOperate();
+        cardOperate.setPkOperateDetail(RandomUtil.randomNumber(32));
+        cardOperate.setPkReginfo(cardReginfo.getPkReginfo());
+        cardOperate.setCardNo(cardCardinfo.getCardNo());
+        cardOperate.setPkEmpOpera(operateId);
+        cardOperate.setDateHap(new Date());
+        cardOperate.setEuOptype(IS_USER_STATUS);
+        cardOperate.setCreator(operateId);
+        cardOperate.setCreateTime(new Date());
+        cardOperate.setDelFlag(NO_DEL_FALG);
+        cardOperateModel.save(cardOperate);
+
+        //封装结果信息
+        CardInfo cardInfo = new CardInfo();
+        cardInfo.setMPI(mpi);
+        cardInfo.setAccountCode(accountCode);
+        cardInfo.setCardRegCode(cardReginfo.getCodeReg());
+        cardInfo.setSortNo(cardCardinfo.getSortNo().intValue()); //卡序号
+
+        jsonResult.setData(cardInfo);
+        return jsonResult;
+    }
+
+    /**
+     *  注销/挂失/启用 操作
+     * @param cardOperateInfo
+     * @return
+     */
+    @Override
+    public RpcResult<String> cardOperate(CardOperateInfo cardOperateInfo) {
+        RpcResult<String> jsonResult = new RpcResult<>();
+        String cardNo = cardOperateInfo.getCardNo();
+        if (StringUtils.isEmpty(cardNo)){
+            return RpcResult.failedResult("-1", "卡号为空!");
+        }
+        //查询卡是否存在
+        CardCardinfo cardCardinfo = cardCardinfoModel.getCardCardinfByCardNo(cardNo);
+        if (null == cardCardinfo){
+            return RpcResult.failedResult("-1", "卡号有误!");
+        }
+        //通过卡号查询用户的mpi
+        CardReginfo cardReginfo = cardRegInfoModel.getCardRegInfoByCardNo(cardNo);
+        if (null == cardReginfo){
+            return RpcResult.failedResult("-1", "卡号有误!");
+        }
+        if (cardCardinfo != null && !EMPLOYEE_CARD_TYPE.equals(cardCardinfo.getDtCardtype())){
+            //验证账户密码是否正确
+            String accountPassWord = cardOperateInfo.getAccountPassword();
+            if (StringUtils.isEmpty(accountPassWord)){
+                return RpcResult.failedResult("-1", "账户密码为空！");
+            }
+            String mpi = cardReginfo.getMpi();
+            //调用账户中心的查询账户
+            /*log.info("调用账户中心 url："+ DomainUrlUtil.PSC_ACCOUNT_URL+"/pscPiAcc/queryAccount?pkPi="+mpi);
+            String resultStr = HttpClientUtil.sendGet("http://localhost:8088/pscPiAcc/queryAccount?pkPi="+mpi);
+            log.info("账户中心返回信息："+resultStr);
+            ServiceResult<PscPiAcc> accountResult = null;
+            if (!StringUtil.isEmpty(resultStr)){
+                Map<String,Class<PscPiAcc>> map = new HashMap<>();
+                map.put("data",PscPiAcc.class);
+                JSONObject jsonObject=JSONObject.fromObject(resultStr);
+                accountResult = (ServiceResult<PscPiAcc>) JSONObject.toBean(jsonObject,ServiceResult.class,map);
+                log.info("账户中心返回信息："+accountResult);
+            }
+            //验证密码
+            if (null != accountResult && accountResult.getData() != null){
+                log.info("用户密码："+accountResult.getData().getPwd());
+                String pwd = accountResult.getData().getPwd();
+                if(!accountPassWord.equals(Md5.getMd5String(pwd))){
+                    return  JsonResult.failedResult("-1","密码不正确!");
+                }
+            }*/
+            String resultStr = HttpClientUtil.sendGet("http://localhost:8088/pscPiAcc/passwordCheck?pkPi="+mpi+"&encryptPwd="+accountPassWord);
+            log.info("账户中心返回信息："+resultStr);
+            RpcResult<String> accountResult = null;
+            if (!StringUtil.isEmpty(resultStr)){
+                Map<String,Class<String>> map = new HashMap<>();
+                map.put("data",String.class);
+                JSONObject jsonObject = JSONObject.fromObject(resultStr);
+                accountResult = (RpcResult<String>) JSONObject.toBean(jsonObject,RpcResult.class);
+                log.info("账户中心返回信息："+accountResult);
+            }
+            if (null != accountResult && accountResult.getData() != null){
+                String pwd = accountResult.getData();
+                if("0".equals(pwd)){
+                    return  RpcResult.failedResult("-1","密码不正确!");
+                }
+            }
+        }
+
+        // 注销/挂失/启用
+        CardOperate cardOperate = new CardOperate();
+        String operateType = cardOperateInfo.getOperateType();
+        if (LOSS_OF_CARD.equals(operateType)){
+            //挂失
+            //挂失状态
+            if (LOSS_OF_CARD_STATUS.equals(cardCardinfo.getEuStatus())){
+                return  RpcResult.failedResult("-1","卡已挂失，提示已挂失!");
+            }
+            // 注销状态
+            if (CANCAL_CARD_STATUS.equals(cardCardinfo.getEuStatus())){
+                return  RpcResult.failedResult("-1","卡已注销，不能挂失!");
+            }
+
+            cardCardinfo.setEuStatus(LOSS_OF_CARD_STATUS);
+            cardOperate.setEuOptype(LOSS_OF_CARD_STATUS);
+
+        }else if (ENABLED_CARD.equals(operateType)){
+            //启用
+            if (IS_USER_STATUS.equals(cardCardinfo.getEuStatus())){
+                return  RpcResult.failedResult("-1","卡已启用!");
+            }
+            // 注销状态
+            if (CANCAL_CARD_STATUS.equals(cardCardinfo.getEuStatus())){
+                return  RpcResult.failedResult("-1","卡已注销，不能挂失!");
+            }
+            cardCardinfo.setEuStatus(IS_USER_STATUS);
+            cardOperate.setEuOptype(ENABLED_CARD);
+        }else if (CANCEL_CARD.equals(operateType)){
+            //注销
+            cardCardinfo.setEuStatus(CANCAL_CARD_STATUS);
+            cardOperate.setEuOptype(CANCAL_CARD_STATUS);
+        }
+        cardCardinfo.setModifier(cardOperateInfo.getOperateId());
+        cardCardinfo.setModityTime(new Date());
+        cardCardinfoModel.update(cardCardinfo);
+
+        //卡操作流水
+        cardOperate.setPkOperateDetail(RandomUtil.randomNumber(32));
+        cardOperate.setPkReginfo(cardReginfo.getPkReginfo());
+        cardOperate.setCardNo(cardCardinfo.getCardNo());
+        cardOperate.setPkEmpOpera(cardOperateInfo.getOperateId());
+        cardOperate.setDateHap(new Date());
+        cardOperate.setCreator(cardOperateInfo.getOperateId());
+        cardOperate.setCreateTime(new Date());
+        cardOperate.setDelFlag(NO_DEL_FALG);
+        cardOperateModel.save(cardOperate);
+        jsonResult.setData("操作成功！");
+        return jsonResult;
+    }
+
+    /**
+     * 补卡
+     * @param cardOperateInfo
+     * @return
+     */
+    @Override
+    public RpcResult<Map<String, Object>> reissueCard(CardOperateInfo cardOperateInfo) {
+        RpcResult<Map<String, Object>> jsonResult = new RpcResult<>();
+        String cardRegCode = cardOperateInfo.getCardRegCode();
+        String credentialNo = cardOperateInfo.getCredentialNo();
+        //验证账户密码
+        String accountPassWord = cardOperateInfo.getAccountPassword();
+        if (StringUtils.isEmpty(accountPassWord)){
+            return RpcResult.failedResult("-1", "账户密码为空！");
+        }
+        //根据发卡登记码查询用户登记信息
+        CardReginfo cardReginfo = null;
+        if (StringUtils.isNotEmpty(cardRegCode)){
+            // return JsonResult.failedResult("-1","发卡登记码为空！");
+            cardReginfo = cardRegInfoModel.getCardRegInfoByCardRegCode(cardRegCode);
+        }else if(StringUtils.isNotEmpty(credentialNo)){
+            cardReginfo = cardRegInfoModel.getCardRegInfoByIdNo(credentialNo);
+        }
+        //CardReginfo cardReginfo = cardRegInfoModel.getCardRegInfoByCardNo(cardNo);
+        if (null == cardReginfo){
+            return RpcResult.failedResult("-1", "未找到登记信息!");
+        }
+        String mpi = cardReginfo.getMpi();
+        //调用账户中心的查询账户
+        /*log.info("调用账户中心 url："+ DomainUrlUtil.PSC_ACCOUNT_URL+"/pscPiAcc/queryAccount?pkPi="+mpi);
+        String resultStr = HttpClientUtil.sendGet("http://localhost:8088/pscPiAcc/queryAccount?pkPi="+mpi);
+        log.info("账户中心返回信息："+resultStr);
+        ServiceResult<PscPiAcc> accountResult = null;
+        if (!StringUtil.isEmpty(resultStr)){
+            Map<String,Class<PscPiAcc>> map = new HashMap<>();
+            map.put("data",PscPiAcc.class);
+            JSONObject jsonObject=JSONObject.fromObject(resultStr);
+            accountResult = (ServiceResult<PscPiAcc>) JSONObject.toBean(jsonObject,ServiceResult.class,map);
+            log.info("账户中心返回信息："+accountResult);
+        }
+        //验证密码
+        if (null != accountResult && accountResult.getData() != null){
+            log.info("用户密码："+accountResult.getData().getPwd());
+            String pwd = accountResult.getData().getPwd();
+            if(!accountPassWord.equals(Md5.getMd5String(pwd))){
+                return  JsonResult.failedResult("-1","密码不正确!");
+            }
+        }*/
+        String resultStr = HttpClientUtil.sendGet("http://localhost:8088/pscPiAcc/passwordCheck?pkPi="+mpi+"&encryptPwd="+accountPassWord);
+        log.info("账户中心返回信息："+resultStr);
+        RpcResult<String> accountResult = null;
+        if (!StringUtil.isEmpty(resultStr)){
+            Map<String,Class<String>> map = new HashMap<>();
+            map.put("data",String.class);
+            JSONObject jsonObject=JSONObject.fromObject(resultStr);
+            accountResult = (RpcResult<String>) JSONObject.toBean(jsonObject,RpcResult.class);
+            log.info("账户中心返回信息："+accountResult);
+        }
+        if (null != accountResult && accountResult.getData() != null){
+            String pwd = accountResult.getData();
+            if("0".equals(pwd)){
+                return  RpcResult.failedResult("-1","密码不正确!");
+            }
+        }
+
+        CardCardinfo cardCardinfo = cardCardinfoModel.getCardCardinfByPkCardinfo(cardReginfo.getPkReginfo());
+        //更新新卡信息
+        if (cardCardinfo == null){
+            return RpcResult.failedResult("-1","卡信息不存在！");
+        }
+
+        if (CANCAL_CARD_STATUS.equals(cardCardinfo.getEuStatus())){
+            return RpcResult.failedResult("-1","卡未注销，请先注销卡！");
+        }
+
+        cardCardinfo.setDelFlag(DEL_FALG);
+        cardCardinfoModel.update(cardCardinfo);
+        cardCardinfo.setPkCardinfo(RandomUtil.randomNumber(32));
+        cardCardinfo.setCardNo(cardOperateInfo.getNewCardNo());
+        cardCardinfo.setSortNo(cardCardinfo.getSortNo().add(new BigDecimal(DEFAULT_SORT_NO)));
+        cardCardinfo.setEuStatus(IS_USER_STATUS);
+        cardCardinfo.setPaySerialid(cardOperateInfo.getPaySerialId());
+        cardCardinfo.setDelFlag(NO_DEL_FALG);
+        cardCardinfo.setInnerNo(cardOperateInfo.getInnerNo());
+        cardCardinfo.setCreateTime(new Date());
+        /*cardCardinfo.setModifier(cardOperateInfo.getOperateId());
+        cardCardinfo.setModityTime(new Date());*/
+        cardCardinfoModel.save(cardCardinfo);
+        //卡操作流水
+        CardOperate cardOperate = new CardOperate();
+        cardOperate.setPkOperateDetail(RandomUtil.randomNumber(32));
+        cardOperate.setPkReginfo(cardReginfo.getPkReginfo());
+        cardOperate.setCardNo(cardCardinfo.getCardNo());
+        cardOperate.setPkEmpOpera(cardOperateInfo.getOperateId());
+        cardOperate.setDateHap(new Date());
+        cardOperate.setEuOptype(IS_USER_STATUS);
+        cardOperate.setCreator(cardOperateInfo.getOperateId());
+        cardOperate.setCreateTime(new Date());
+        cardOperate.setDelFlag(NO_DEL_FALG);
+        cardOperateModel.save(cardOperate);
+
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("cardSortNo",cardCardinfo.getSortNo());
+        jsonResult.setData(resultMap);
+        return jsonResult;
+    }
+
+    private CardReginfo mapToCardReginfo(CardReginfo cardReginfo,Map<String, Object> param){
+
+        cardReginfo.setNameReg((String) param.get("regName"));
+        cardReginfo.setIdNo((String) param.get("credentialNo"));
+        cardReginfo.setDtSex((String) param.get("sex"));
+        cardReginfo.setBirthDay(DateUtil.strToDate((String)param.get("birthDay"),"yyyyMMddHHmmss"));
+        cardReginfo.setTelNo((String) param.get("teleNo"));
+        cardReginfo.setAddressCode((String) param.get("addressCode"));
+        cardReginfo.setDetailedAddress((String) param.get("detailedAddress"));
+        cardReginfo.setPostcode((String) param.get("postCode"));
+        return cardReginfo;
+    }
+
+}

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.card.CardEmpolyeeinfoDao">
+	<resultMap id="CardEmpolyeeinfoResult" type="cn.wellcare.card.entity.CardEmpolyeeinfo">
+		<result property="codeApplydepartment" column="code_applydepartment" />
+		<result property="codeApplyer" column="code_applyer" />
+		<result property="codeDepartment" column="code_department" />
+		<result property="codeEmployee" column="code_employee" />
+		<result property="createTime" column="create_time" />
+		<result property="creator" column="creator" />
+		<result property="delFlag" column="del_flag" />
+		<result property="modifier" column="modifier" />
+		<result property="modityTime" column="modity_time" />
+		<result property="pkEmployeeinfo" column="pk_employeeinfo" />
+		<result property="pkReginfo" column="pk_reginfo" />
+		<result property="ts" column="ts" />
+	</resultMap>
+
+	<select id="get" parameterType="Integer" resultMap="CardEmpolyeeinfoResult">
+		select
+			code_applydepartment,
+			code_applyer,
+			code_department,
+			code_employee,
+			create_time,
+			creator,
+			del_flag,
+			modifier,
+			modity_time,
+			pk_employeeinfo,
+			pk_reginfo,
+			ts
+		from card_empolyeeinfo
+	</select>
+
+	<select id="getCount" parameterType="java.util.Map"
+			resultType="java.lang.Integer">
+		select count(1) from card_empolyeeinfo t1
+		<include refid="whereConditions" />
+	</select>
+
+	<select id="getList" resultType="cn.wellcare.card.entity.CardEmpolyeeinfo">
+		select
+		code_applydepartment,
+		code_applyer,
+		code_department,
+		code_employee,
+		create_time,
+		creator,
+		del_flag,
+		modifier,
+		modity_time,
+		pk_employeeinfo,
+		pk_reginfo,
+		ts
+		from card_empolyeeinfo
+		<include refid="whereConditions" />
+	</select>
+
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="codeApplydepartment != null and codeApplydepartment !=''"  >
+				and code_applydepartment= #{codeApplydepartment}
+			</if>
+			<if test="codeApplyer != null and codeApplyer !=''"  >
+				and code_applyer= #{codeApplyer}
+			</if>
+			<if test="codeDepartment != null and codeDepartment !=''"  >
+				and code_department= #{codeDepartment}
+			</if>
+			<if test="codeEmployee != null and codeEmployee !=''"  >
+				and code_employee= #{codeEmployee}
+			</if>
+			<if test="createTime != null and createTime !=''"  >
+				and create_time= #{createTime}
+			</if>
+			<if test="creator != null and creator !=''"  >
+				and creator= #{creator}
+			</if>
+			<if test="delFlag != null and delFlag !=''"  >
+				and del_flag= #{delFlag}
+			</if>
+			<if test="modifier != null and modifier !=''"  >
+				and modifier= #{modifier}
+			</if>
+			<if test="modityTime != null and modityTime !=''"  >
+				and modity_time= #{modityTime}
+			</if>
+			<if test="pkEmployeeinfo != null and pkEmployeeinfo !=''"  >
+				and pk_employeeinfo= #{pkEmployeeinfo}
+			</if>
+			<if test="pkReginfo != null and pkReginfo !=''"  >
+				and pk_reginfo= #{pkReginfo}
+			</if>
+			<if test="ts != null and ts !=''"  >
+				and ts= #{ts}
+			</if>
+		</trim>
+	</sql>
+
+	<delete id="del">
+        delete from card_empolyeeinfo where id = #{id}
+	</delete>
+
+	<select id="getEmpolyeeRegInfo" resultType="cn.wellcare.card.bo.card.EmpolyeeRegInfo">
+		select cr.name_reg regName,
+		cr.mpi mpi,
+		cr.tel_no teleNo,
+		cr.id_no credentialNo,
+		cr.dt_sex sex,
+		cr.birth_day birthDay,
+		cr.detailed_address detailedAddress,
+		cr.address_code addressCode,
+		cr.postcode postCode,
+		ce.code_department codeDepartment,
+		ce.code_employee codeEmployee
+		from card_regInfo cr
+		left join card_empolyeeinfo ce on cr.pk_reginfo = ce.pk_reginfo
+		<!--left join card_cardinfo cardinfo on cr.pk_reginfo = cardinfo.pk_reginfo  -->
+		where 1 = 1
+		<!--and cardinfo.dt_cardtype = 18 -->
+		<trim  suffixOverrides="," >
+			<if test="codeDepartment != null and codeDepartment !='' and codeDepartment !='null'"  >
+				and ce.code_department = #{codeDepartment}
+			</if>
+			<if test="credentialNo != null and credentialNo !='' and credentialNo !='null'"  >
+				and cr.id_no = #{credentialNo}
+			</if>
+			<if test="regName != null and regName !='' and regName !='null'"  >
+				and cr.name_reg = #{regName}
+			</if>
+			<if test="teleNo != null and teleNo !='' and teleNo !='null'"  >
+				and cr.tel_no = #{teleNo}
+			</if>
+		</trim>
+	</select>
+
+	<insert id="save" parameterType="cn.wellcare.card.entity.CardEmpolyeeinfo">
+    insert into
+        card_empolyeeinfo
+        (
+        pk_employeeinfo,
+        pk_reginfo,
+        code_department,
+        code_employee,
+        code_applydepartment,
+        code_applyer,
+        creator,
+        create_time,
+        modifier,
+        modity_time,
+        del_flag,
+        ts
+        )
+        values
+            (
+            #{pkEmployeeinfo},
+            #{pkReginfo},
+            #{codeDepartment},
+            #{codeEmployee},
+            #{codeApplydepartment},
+            #{codeApplyer},
+            #{creator},
+            #{createTime},
+            #{modifier},
+            #{modityTime},
+            #{delFlag},
+            #{ts}
+            )
+</insert>
+
+	<insert id="batchSave" parameterType="java.util.List">
+		insert into
+		card_empolyeeinfo
+		(
+		pk_employeeinfo,
+		pk_reginfo,
+		code_department,
+		code_employee,
+		code_applydepartment,
+		code_applyer,
+		creator,
+		create_time,
+		modifier,
+		modity_time,
+		del_flag,
+		ts
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.pkEmployeeinfo},
+			#{item.pkReginfo},
+			#{item.codeDepartment},
+			#{item.codeEmployee},
+			#{item.codeApplydepartment},
+			#{item.codeApplyer},
+			#{item.creator},
+			#{item.createTime},
+			#{item.modifier},
+			#{item.modityTime},
+			#{item.delFlag},
+			#{item.ts}
+			)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="cn.wellcare.card.entity.CardEmpolyeeinfo">
+		update card_empolyeeinfo
+		<set>
+			<if test="codeApplydepartment != null">code_applydepartment= #{codeApplydepartment},</if>
+			<if test="codeDepartment != null">code_department= #{codeDepartment},</if>
+			<if test="codeEmployee != null">code_employee= #{codeEmployee},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="creator != null">creator= #{creator},</if>
+			<if test="delFlag != null">del_flag= #{delFlag},</if>
+			<if test="codeApplyer != null">code_employee= #{codeApplyer},</if>
+			<if test="modifier != null">modifier= #{modifier},</if>
+			<if test="modityTime != null">modity_time= #{modityTime},</if>
+			<if test="ts != null">ts= #{ts}</if>
+		</set>
+		where pk_employeeinfo = #{pkEmployeeinfo}
+	</update>
+
+</mapper>

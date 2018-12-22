@@ -1,0 +1,780 @@
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(200): 日志保存路径:E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\mislog\
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(204): 配置文件路径:E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\log.ini
+2018-10-10 09:19:48 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-10 09:19:48 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-10 09:19:48 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-10 09:19:48 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-10 09:19:48 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=1
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=1
+2018-10-10 09:19:48 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-10 09:19:49 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-10 09:20:14 [INFO] LD_PosMain.cpp(958): 传入参数1[452]:
+[D2015   |A001    |62|000000000001|20121119|                    000000000167|000000|W20150616205755001  |李四                |15|350121199912196619                      |张三                                    |0|12345654321|汉族|19991219|16  |福建省福州市                                                                                        |||||||                                                  |                                                  |]
+2018-10-10 09:20:14 [TRACE] LD_PosMain.cpp(961): 解析传入参数|个数为26
+2018-10-10 09:20:14 [TRACE] LD_PosMain.cpp(973): f_order[20]=[W20150616205755001  ]
+2018-10-10 09:20:14 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:20:14 [INFO] LD_PosMain.cpp(1136): 传入参数[56]:
+D2015   A001    6200000000000120121119            000000
+2018-10-10 09:20:21 [INFO] LD_PosMain.cpp(8655): 服务器标志关,不进行状态更新
+2018-10-10 09:21:02 [TRACE] LD_PosMain.cpp(8153): POS返回15,当前tlvItems=0或可能未开启tlv
+2018-10-10 09:21:02 [ERROR] LD_PosMain.cpp(3916): POS.NAK[XX]=交易失败
+2018-10-10 09:21:02 [ERROR] LD_PosMain.cpp(3917): TransProcess.while pos response NAK exit
+2018-10-10 09:21:02 [TRACE] LD_PosMain.cpp(2685): TransProcess准备释放tlvmap...
+2018-10-10 09:21:02 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:21:02 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:21:02 [WARN] LD_PosMain.cpp(5483): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:21:02 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:21:02 [WARN] LD_PosMain.cpp(2354): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:21:02 [INFO] LD_PosMain.cpp(2409): 交易类型=[132]
+2018-10-10 09:21:02 [INFO] LD_PosMain.cpp(2423): 返回码:XX 返回信息:交易失败, 请选择是否继续查询
+2018-10-10 09:21:26 [INFO] LD_PosMain.cpp(2478): 用户取消
+2018-10-10 09:21:26 [WARN] LD_PosMain.cpp(2554): 卡号为[]
+2018-10-10 09:21:26 [INFO] LD_PosMain.cpp(2602): 传出参数[964]:
+XX                                                                                2018                                         交易失败                                                                                            62                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-10 09:21:26 [INFO] LD_PosMain.cpp(1071): 传出参数1[801]:
+[XX|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |交易失败                                          |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-10 09:21:46 [INFO] LD_PosMain.cpp(958): 传入参数1[452]:
+[D2015   |A001    |62|000000000001|20121119|                    000000000167|000000|W20150616205755001  |李四                |15|350121199912196619                      |张三                                    |0|12345654321|汉族|19991219|16  |福建省福州市                                                                                        |||||||                                                  |                                                  |]
+2018-10-10 09:21:46 [TRACE] LD_PosMain.cpp(961): 解析传入参数|个数为26
+2018-10-10 09:21:46 [TRACE] LD_PosMain.cpp(973): f_order[20]=[W20150616205755001  ]
+2018-10-10 09:21:46 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:21:46 [INFO] LD_PosMain.cpp(1136): 传入参数[56]:
+D2015   A001    6200000000000120121119            000000
+2018-10-10 09:22:00 [INFO] LD_PosMain.cpp(8655): 服务器标志关,不进行状态更新
+2018-10-10 09:23:48 [TRACE] LD_PosMain.cpp(8153): POS返回15,当前tlvItems=0或可能未开启tlv
+2018-10-10 09:23:48 [ERROR] LD_PosMain.cpp(3916): POS.NAK[ME]=仍有异常流水待处理
+2018-10-10 09:23:48 [ERROR] LD_PosMain.cpp(3917): TransProcess.while pos response NAK exit
+2018-10-10 09:23:48 [TRACE] LD_PosMain.cpp(2685): TransProcess准备释放tlvmap...
+2018-10-10 09:23:48 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:23:48 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:23:48 [WARN] LD_PosMain.cpp(5483): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:23:48 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:23:48 [WARN] LD_PosMain.cpp(2354): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:23:48 [INFO] LD_PosMain.cpp(2409): 交易类型=[132]
+2018-10-10 09:23:48 [INFO] LD_PosMain.cpp(2423): 返回码:ME 返回信息:仍有异常流水待处理, 请选择是否继续查询
+2018-10-10 09:24:06 [INFO] LD_PosMain.cpp(2428): 继续查询
+2018-10-10 09:24:23 [INFO] LD_PosMain.cpp(2439): 订单号为[6101531100000003a9jGu]
+2018-10-10 09:24:23 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:24:23 [INFO] LD_PosMain.cpp(1136): 传入参数[1836]:
+                64000000000001                                                                                                                                                                                                                                                                                    6101531100000003a9jGu                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         6101531100000003a9jGu                                                                                                                                                                                                                                                                                       
+2018-10-10 09:25:45 [INFO] LD_PosMain.cpp(8655): 服务器标志关,不进行状态更新
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(8153): POS返回06,当前tlvItems=0或可能未开启tlv
+2018-10-10 09:25:46 [ERROR] LD_PosMain.cpp(4257): fidData.tratype=134
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9344): 1域返回:[交易成功]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9352): 2域返回:[105610153110000 #0003]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9358): 3域返回:[00000815]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9362): 4域返回:[卡中心1测试]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9366): 5域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9371): 6域返回:[0105]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9377): 7域返回:[        CUP]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9385): 8域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9389): 9域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9404): 10域返回:[01]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9409): 11域返回:[94]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9414): 12域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9420): 13域返回:[000262]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9425): 14域返回:[000048]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9432): 15域返回:[20181010092206]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9437): 16域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9442): 17域返回:[828309707896]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9449): 18域返回:[000000000001]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9453): 19域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9457): 20域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9461): 21域返回:[000000000001]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9466): 22域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9470): 23域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9474): 24域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9478): 25域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9482): 26域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9486): 27域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9490): 28域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9494): 29域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9498): 30域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9502): 31域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9506): 32域返回:[0]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9510): 33域返回:[0]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9557): 34域返回:[金额(AMOUNT):RMB 0.01]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9561): 35域返回[ ]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9572): 36域返回:[D2015]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9577): 37域返回:[A001]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9581): 38域返回:[W20150616205755001]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9585): 39域返回:[20181010]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9590): 46域返回:[89705999]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9594): 47域返回:[00000601180701]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9599): 48域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9603): 49域返回:[微信消费退货]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9607): 50域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9611): 51域返回:[无需签名 NO SIGNATURE REQUIRED]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9292): 52域返回:电子签名图片
+2018-10-10 09:25:46 [WARN] LD_PosMain.cpp(9311): 返回的签名图片头长度为0
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9212): 53域返回:二维码信息
+2018-10-10 09:25:46 [ERROR] LD_PosMain.cpp(9217): 返回的二维码信息长度为空.
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9158): 第56域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9158): 第57域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9158): 第58域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9158): 第59域返回:[]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9158): 第60域返回:[6101531100000003a9jGu]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9158): 第61域返回:[1]
+2018-10-10 09:25:46 [TRACE] LD_PosMain.cpp(9158): 第62域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10620): 
+解析取打印数据:
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10792): 1域返回:[61]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10800): 2域返回:[105610153110000 #0003]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10805): 3域返回:[00000815]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10809): 4域返回:[卡中心1测试]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10813): 5域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10818): 6域返回:[0105]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10825): 7域返回:[        CUP]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10828): 8域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10833): 9域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10881): 10域返回:[01]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10885): 11域返回:[94]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10889): 12域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10894): 13域返回:[000262]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10898): 14域返回:[000048]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10907): 15域返回:[20181010092206]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10911): 16域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10915): 17域返回:[828309707896]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10921): 18域返回:[000000000001]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10925): 19域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10929): 20域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10933): 21域返回:[000000000001]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10938): 22域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10942): 23域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10946): 24域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10950): 25域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10954): 26域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10958): 27域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10962): 28域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10966): 29域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10970): 30域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10974): 31域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10978): 32域返回:[0]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10982): 33域返回:[0]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11038): 34域返回:[金额(AMOUNT):RMB 0.01]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11042): 35域返回[ ]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11051): 36域返回:[D2015]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11055): 37域返回:[A001]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11059): 38域返回:[W20150616205755001]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11063): 39域返回:[20181010]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11068): 46域返回:[89705999]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11072): 47域返回:[00000601180701]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11077): 48域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11081): 49域返回:[微信消费退货]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11085): 50域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(11089): 51域返回:[无需签名 NO SIGNATURE REQUIRED]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10740): 52域返回:电子签名图片
+2018-10-10 09:25:47 [WARN] LD_PosMain.cpp(10759): 返回的签名图片头长度为0
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10673): 53域返回:二维码信息
+2018-10-10 09:25:47 [ERROR] LD_PosMain.cpp(10678): 返回的二维码信息长度为空.
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10632): 第54域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10632): 第55域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10632): 第56域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10632): 第57域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10632): 第58域返回:[]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10632): 第59域返回:[6101531100000003a9jGu]
+2018-10-10 09:25:47 [TRACE] LD_PosMain.cpp(10632): 第60域返回:[1]
+2018-10-10 09:25:47 [WARN] LD_PosMain.cpp(11190): 取签名图片信息标志=1,图片长度=0
+2018-10-10 09:25:47 [INFO] LD_PosMain.cpp(4685): 签购单模版为[E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\Print_Single_hdq.fmt]
+2018-10-10 09:25:47 [DEBUG] LD_PosMain.cpp(4750): 保留#ODBMP#签名标签
+2018-10-10 09:25:47 [DEBUG] LD_PosMain.cpp(4768): 不保留#QRBMP#签名标签
+2018-10-10 09:25:50 [TRACE] LD_PosMain.cpp(2685): TransProcess准备释放tlvmap...
+2018-10-10 09:25:50 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:25:50 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:25:50 [WARN] LD_PosMain.cpp(5483): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:25:50 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:25:50 [WARN] LD_PosMain.cpp(2354): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:25:50 [INFO] LD_PosMain.cpp(2409): 交易类型=[134]
+2018-10-10 09:25:50 [WARN] LD_PosMain.cpp(2554): 卡号为[]
+2018-10-10 09:25:50 [INFO] LD_PosMain.cpp(2602): 传出参数[964]:
+00                                      000000000001000048828309707896      0002622018101009220610561015311000000000815        交易成功                                          6101531100000003a9jGu                             641                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+2018-10-10 09:25:50 [INFO] LD_PosMain.cpp(1071): 传出参数1[801]:
+[00|    |                              |    |000000000001|000048|828309707896|      |000262|20181010092206|105610153110000|00000815|        |                    |交易成功                                          |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |6101531100000003a9jGu                             |]
+2018-10-10 09:26:37 [INFO] LD_PosMain.cpp(958): 传入参数1[452]:
+[D2015   |A001    |60|000000000001|20121119|                    000000000167|000000|W20150616205755001  |李四                |15|350121199912196619                      |张三                                    |0|12345654321|汉族|19991219|16  |福建省福州市                                                                                        |||||||                                                  |                                                  |]
+2018-10-10 09:26:37 [TRACE] LD_PosMain.cpp(961): 解析传入参数|个数为26
+2018-10-10 09:26:37 [TRACE] LD_PosMain.cpp(973): f_order[20]=[W20150616205755001  ]
+2018-10-10 09:26:37 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:26:37 [INFO] LD_PosMain.cpp(1136): 传入参数[56]:
+D2015   A001    6000000000000120121119            000000
+2018-10-10 09:26:47 [INFO] LD_PosMain.cpp(8655): 服务器标志关,不进行状态更新
+2018-10-10 09:28:36 [TRACE] LD_PosMain.cpp(8153): POS返回15,当前tlvItems=0或可能未开启tlv
+2018-10-10 09:28:36 [ERROR] LD_PosMain.cpp(3916): POS.NAK[XX]=交易失败
+2018-10-10 09:28:36 [ERROR] LD_PosMain.cpp(3917): TransProcess.while pos response NAK exit
+2018-10-10 09:28:36 [TRACE] LD_PosMain.cpp(2685): TransProcess准备释放tlvmap...
+2018-10-10 09:28:36 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:28:36 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:28:36 [WARN] LD_PosMain.cpp(5483): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:28:36 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:28:36 [WARN] LD_PosMain.cpp(2354): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:28:36 [INFO] LD_PosMain.cpp(2409): 交易类型=[130]
+2018-10-10 09:28:36 [INFO] LD_PosMain.cpp(2423): 返回码:XX 返回信息:交易失败, 请选择是否继续查询
+2018-10-10 09:28:51 [INFO] LD_PosMain.cpp(2428): 继续查询
+2018-10-10 09:28:55 [INFO] LD_PosMain.cpp(2439): 订单号为[6101531100000003aa9rR]
+2018-10-10 09:28:55 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:28:55 [INFO] LD_PosMain.cpp(1136): 传入参数[1836]:
+                64000000000001                                                                                                                                                                                                                                                                                    6101531100000003aa9rR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         6101531100000003aa9rR                                                                                                                                                                                                                                                                                       
+2018-10-10 09:28:58 [INFO] LD_PosMain.cpp(8655): 服务器标志关,不进行状态更新
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(8153): POS返回06,当前tlvItems=0或可能未开启tlv
+2018-10-10 09:29:00 [ERROR] LD_PosMain.cpp(4257): fidData.tratype=134
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9344): 1域返回:[交易成功]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9352): 2域返回:[105610153110000 #0003]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9358): 3域返回:[00000815]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9362): 4域返回:[卡中心1测试]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9366): 5域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9371): 6域返回:[0105]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9377): 7域返回:[        CUP]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9385): 8域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9389): 9域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9404): 10域返回:[01]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9409): 11域返回:[92]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9414): 12域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9420): 13域返回:[000262]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9425): 14域返回:[000051]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9432): 15域返回:[20181010092653]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9437): 16域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9442): 17域返回:[828309718667]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9449): 18域返回:[000000000001]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9453): 19域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9457): 20域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9461): 21域返回:[000000000001]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9466): 22域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9470): 23域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9474): 24域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9478): 25域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9482): 26域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9486): 27域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9490): 28域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9494): 29域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9498): 30域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9502): 31域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9506): 32域返回:[0]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9510): 33域返回:[0]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9557): 34域返回:[金额(AMOUNT):RMB 0.01]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9561): 35域返回[ ]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9572): 36域返回:[D2015]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9577): 37域返回:[A001]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9581): 38域返回:[W20150616205755001]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9585): 39域返回:[20181010]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9590): 46域返回:[89705999]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9594): 47域返回:[00000601180701]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9599): 48域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9603): 49域返回:[微信消费被扫]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9607): 50域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9611): 51域返回:[无需签名 NO SIGNATURE REQUIRED]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9292): 52域返回:电子签名图片
+2018-10-10 09:29:00 [WARN] LD_PosMain.cpp(9311): 返回的签名图片头长度为0
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9212): 53域返回:二维码信息
+2018-10-10 09:29:00 [ERROR] LD_PosMain.cpp(9217): 返回的二维码信息长度为空.
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9158): 第56域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9158): 第57域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9158): 第58域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9158): 第59域返回:[]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9158): 第60域返回:[6101531100000003aa9rR]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9158): 第61域返回:[1]
+2018-10-10 09:29:00 [TRACE] LD_PosMain.cpp(9158): 第62域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10620): 
+解析取打印数据:
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10792): 1域返回:[61]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10800): 2域返回:[105610153110000 #0003]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10805): 3域返回:[00000815]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10809): 4域返回:[卡中心1测试]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10813): 5域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10818): 6域返回:[0105]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10825): 7域返回:[        CUP]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10828): 8域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10833): 9域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10881): 10域返回:[01]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10885): 11域返回:[92]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10889): 12域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10894): 13域返回:[000262]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10898): 14域返回:[000051]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10907): 15域返回:[20181010092653]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10911): 16域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10915): 17域返回:[828309718667]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10921): 18域返回:[000000000001]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10925): 19域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10929): 20域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10933): 21域返回:[000000000001]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10938): 22域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10942): 23域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10946): 24域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10950): 25域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10954): 26域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10958): 27域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10962): 28域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10966): 29域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10970): 30域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10974): 31域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10978): 32域返回:[0]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10982): 33域返回:[0]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11038): 34域返回:[金额(AMOUNT):RMB 0.01]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11042): 35域返回[ ]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11051): 36域返回:[D2015]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11055): 37域返回:[A001]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11059): 38域返回:[W20150616205755001]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11063): 39域返回:[20181010]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11068): 46域返回:[89705999]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11072): 47域返回:[00000601180701]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11077): 48域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11081): 49域返回:[微信消费被扫]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11085): 50域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(11089): 51域返回:[无需签名 NO SIGNATURE REQUIRED]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10740): 52域返回:电子签名图片
+2018-10-10 09:29:01 [WARN] LD_PosMain.cpp(10759): 返回的签名图片头长度为0
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10673): 53域返回:二维码信息
+2018-10-10 09:29:01 [ERROR] LD_PosMain.cpp(10678): 返回的二维码信息长度为空.
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10632): 第54域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10632): 第55域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10632): 第56域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10632): 第57域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10632): 第58域返回:[]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10632): 第59域返回:[6101531100000003aa9rR]
+2018-10-10 09:29:01 [TRACE] LD_PosMain.cpp(10632): 第60域返回:[1]
+2018-10-10 09:29:01 [WARN] LD_PosMain.cpp(11190): 取签名图片信息标志=1,图片长度=0
+2018-10-10 09:29:01 [INFO] LD_PosMain.cpp(4685): 签购单模版为[E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\Print_Single_hdq.fmt]
+2018-10-10 09:29:01 [DEBUG] LD_PosMain.cpp(4750): 保留#ODBMP#签名标签
+2018-10-10 09:29:01 [DEBUG] LD_PosMain.cpp(4768): 不保留#QRBMP#签名标签
+2018-10-10 09:29:03 [TRACE] LD_PosMain.cpp(2685): TransProcess准备释放tlvmap...
+2018-10-10 09:29:03 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:29:03 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:29:03 [WARN] LD_PosMain.cpp(5483): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:29:03 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:29:03 [WARN] LD_PosMain.cpp(2354): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:29:03 [INFO] LD_PosMain.cpp(2409): 交易类型=[134]
+2018-10-10 09:29:03 [WARN] LD_PosMain.cpp(2554): 卡号为[]
+2018-10-10 09:29:03 [INFO] LD_PosMain.cpp(2602): 传出参数[964]:
+00                                      000000000001000051828309718667      0002622018101009265310561015311000000000815        交易成功                                          6101531100000003aa9rR                             641                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+2018-10-10 09:29:03 [INFO] LD_PosMain.cpp(1071): 传出参数1[801]:
+[00|    |                              |    |000000000001|000051|828309718667|      |000262|20181010092653|105610153110000|00000815|        |                    |交易成功                                          |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |6101531100000003aa9rR                             |]
+2018-10-10 09:29:43 [INFO] LD_PosMain.cpp(958): 传入参数1[452]:
+[D2015   |A001    |62|000000000001|20121119|                    000000000167|000000|W20150616205755001  |李四                |15|350121199912196619                      |张三                                    |0|12345654321|汉族|19991219|16  |福建省福州市                                                                                        |||||||                                                  |                                                  |]
+2018-10-10 09:29:43 [TRACE] LD_PosMain.cpp(961): 解析传入参数|个数为26
+2018-10-10 09:29:43 [TRACE] LD_PosMain.cpp(973): f_order[20]=[W20150616205755001  ]
+2018-10-10 09:29:43 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:29:43 [INFO] LD_PosMain.cpp(1136): 传入参数[56]:
+D2015   A001    6200000000000120121119            000000
+2018-10-10 09:30:00 [INFO] LD_PosMain.cpp(8655): 服务器标志关,不进行状态更新
+2018-10-10 09:31:47 [TRACE] LD_PosMain.cpp(8153): POS返回15,当前tlvItems=0或可能未开启tlv
+2018-10-10 09:31:47 [ERROR] LD_PosMain.cpp(3916): POS.NAK[ME]=仍有异常流水待处理
+2018-10-10 09:31:47 [ERROR] LD_PosMain.cpp(3917): TransProcess.while pos response NAK exit
+2018-10-10 09:31:47 [TRACE] LD_PosMain.cpp(2685): TransProcess准备释放tlvmap...
+2018-10-10 09:31:47 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:31:47 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:31:47 [WARN] LD_PosMain.cpp(5483): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:31:47 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:31:47 [WARN] LD_PosMain.cpp(2354): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:31:47 [INFO] LD_PosMain.cpp(2409): 交易类型=[132]
+2018-10-10 09:31:47 [INFO] LD_PosMain.cpp(2423): 返回码:ME 返回信息:仍有异常流水待处理, 请选择是否继续查询
+2018-10-10 09:32:53 [INFO] LD_PosMain.cpp(2428): 继续查询
+2018-10-10 09:34:43 [INFO] LD_PosMain.cpp(2439): 订单号为[6101531100000003aa9rR]
+2018-10-10 09:34:43 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:34:43 [INFO] LD_PosMain.cpp(1136): 传入参数[1836]:
+                64000000000001                                                                                                                                                                                                                                                                                    6101531100000003aa9rR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         6101531100000003aa9rR                                                                                                                                                                                                                                                                                       
+2018-10-10 09:34:45 [INFO] LD_PosMain.cpp(8655): 服务器标志关,不进行状态更新
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(8153): POS返回06,当前tlvItems=0或可能未开启tlv
+2018-10-10 09:35:08 [ERROR] LD_PosMain.cpp(4257): fidData.tratype=134
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9344): 1域返回:[交易成功]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9352): 2域返回:[105610153110000 #0003]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9358): 3域返回:[00000815]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9362): 4域返回:[卡中心1测试]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9366): 5域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9371): 6域返回:[0105]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9377): 7域返回:[        CUP]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9385): 8域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9389): 9域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9404): 10域返回:[01]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9409): 11域返回:[94]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9414): 12域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9420): 13域返回:[000262]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9425): 14域返回:[000054]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9432): 15域返回:[20181010093006]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9437): 16域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9442): 17域返回:[828309724398]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9449): 18域返回:[000000000001]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9453): 19域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9457): 20域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9461): 21域返回:[000000000001]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9466): 22域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9470): 23域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9474): 24域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9478): 25域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9482): 26域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9486): 27域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9490): 28域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9494): 29域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9498): 30域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9502): 31域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9506): 32域返回:[0]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9510): 33域返回:[0]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9557): 34域返回:[金额(AMOUNT):RMB 0.01]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9561): 35域返回[ ]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9572): 36域返回:[D2015]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9577): 37域返回:[A001]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9581): 38域返回:[W20150616205755001]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9585): 39域返回:[20181010]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9590): 46域返回:[89705999]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9594): 47域返回:[00000601180701]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9599): 48域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9603): 49域返回:[微信消费退货]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9607): 50域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9611): 51域返回:[无需签名 NO SIGNATURE REQUIRED]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9292): 52域返回:电子签名图片
+2018-10-10 09:35:08 [WARN] LD_PosMain.cpp(9311): 返回的签名图片头长度为0
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9212): 53域返回:二维码信息
+2018-10-10 09:35:08 [ERROR] LD_PosMain.cpp(9217): 返回的二维码信息长度为空.
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9158): 第56域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9158): 第57域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9158): 第58域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9158): 第59域返回:[]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9158): 第60域返回:[6101531100000003aa9rR]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9158): 第61域返回:[1]
+2018-10-10 09:35:08 [TRACE] LD_PosMain.cpp(9158): 第62域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10620): 
+解析取打印数据:
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10792): 1域返回:[61]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10800): 2域返回:[105610153110000 #0003]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10805): 3域返回:[00000815]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10809): 4域返回:[卡中心1测试]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10813): 5域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10818): 6域返回:[0105]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10825): 7域返回:[        CUP]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10828): 8域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10833): 9域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10881): 10域返回:[01]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10885): 11域返回:[94]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10889): 12域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10894): 13域返回:[000262]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10898): 14域返回:[000054]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10907): 15域返回:[20181010093006]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10911): 16域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10915): 17域返回:[828309724398]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10921): 18域返回:[000000000001]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10925): 19域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10929): 20域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10933): 21域返回:[000000000001]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10938): 22域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10942): 23域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10946): 24域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10950): 25域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10954): 26域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10958): 27域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10962): 28域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10966): 29域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10970): 30域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10974): 31域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10978): 32域返回:[0]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10982): 33域返回:[0]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11038): 34域返回:[金额(AMOUNT):RMB 0.01]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11042): 35域返回[ ]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11051): 36域返回:[D2015]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11055): 37域返回:[A001]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11059): 38域返回:[W20150616205755001]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11063): 39域返回:[20181010]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11068): 46域返回:[89705999]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11072): 47域返回:[00000601180701]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11077): 48域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11081): 49域返回:[微信消费退货]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11085): 50域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(11089): 51域返回:[无需签名 NO SIGNATURE REQUIRED]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10740): 52域返回:电子签名图片
+2018-10-10 09:35:09 [WARN] LD_PosMain.cpp(10759): 返回的签名图片头长度为0
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10673): 53域返回:二维码信息
+2018-10-10 09:35:09 [ERROR] LD_PosMain.cpp(10678): 返回的二维码信息长度为空.
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10632): 第54域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10632): 第55域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10632): 第56域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10632): 第57域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10632): 第58域返回:[]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10632): 第59域返回:[6101531100000003aa9rR]
+2018-10-10 09:35:09 [TRACE] LD_PosMain.cpp(10632): 第60域返回:[1]
+2018-10-10 09:35:09 [WARN] LD_PosMain.cpp(11190): 取签名图片信息标志=1,图片长度=0
+2018-10-10 09:35:09 [INFO] LD_PosMain.cpp(4685): 签购单模版为[E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\Print_Single_hdq.fmt]
+2018-10-10 09:35:09 [DEBUG] LD_PosMain.cpp(4750): 保留#ODBMP#签名标签
+2018-10-10 09:35:09 [DEBUG] LD_PosMain.cpp(4768): 不保留#QRBMP#签名标签
+2018-10-10 09:35:12 [TRACE] LD_PosMain.cpp(2685): TransProcess准备释放tlvmap...
+2018-10-10 09:35:12 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:35:12 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:35:12 [WARN] LD_PosMain.cpp(5483): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:35:12 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:35:12 [WARN] LD_PosMain.cpp(2354): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:35:12 [INFO] LD_PosMain.cpp(2409): 交易类型=[134]
+2018-10-10 09:35:12 [WARN] LD_PosMain.cpp(2554): 卡号为[]
+2018-10-10 09:35:12 [INFO] LD_PosMain.cpp(2602): 传出参数[964]:
+00                                      000000000001000054828309724398      0002622018101009300610561015311000000000815        交易成功                                          6101531100000003aa9rR                             641                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+2018-10-10 09:35:12 [INFO] LD_PosMain.cpp(1071): 传出参数1[801]:
+[00|    |                              |    |000000000001|000054|828309724398|      |000262|20181010093006|105610153110000|00000815|        |                    |交易成功                                          |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |6101531100000003aa9rR                             |]
+2018-10-10 09:35:26 [TRACE] CardMisDll.cpp(94): 析构释放tlvmap...
+2018-10-10 09:35:26 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:35:26 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:35:26 [INFO] CardMisDll.cpp(97): 动态库释放成功
+
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(200): 日志保存路径:E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\mislog\
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(204): 配置文件路径:E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\log.ini
+2018-10-10 09:39:22 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-10 09:39:22 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-10 09:39:22 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-10 09:39:22 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-10 09:39:22 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=1
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=1
+2018-10-10 09:39:22 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-10 09:39:22 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-10 09:39:44 [INFO] LD_PosMain.cpp(958): 传入参数1[452]:
+[D2015   |A001    |07|000000000001|20121119|                    000000000167|000262|W20150616205755001  |李四                |15|350121199912196619                      |张三                                    |0|12345654321|汉族|19991219|16  |福建省福州市                                                                                        |||||||                                                  |                                                  |]
+2018-10-10 09:39:44 [TRACE] LD_PosMain.cpp(961): 解析传入参数|个数为26
+2018-10-10 09:39:44 [TRACE] LD_PosMain.cpp(973): f_order[20]=[W20150616205755001  ]
+2018-10-10 09:39:44 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:39:44 [INFO] LD_PosMain.cpp(1136): 传入参数[56]:
+D2015   A001    0700000000000120121119            000262
+2018-10-10 09:39:45 [INFO] LD_PosMain.cpp(8655): 服务器标志关,不进行状态更新
+2018-10-10 09:39:51 [TRACE] LD_PosMain.cpp(8153): POS返回15,当前tlvItems=0或可能未开启tlv
+2018-10-10 09:39:51 [ERROR] LD_PosMain.cpp(3916): POS.NAK[XX]=交易失败
+2018-10-10 09:39:51 [ERROR] LD_PosMain.cpp(3917): TransProcess.while pos response NAK exit
+2018-10-10 09:39:51 [TRACE] LD_PosMain.cpp(2685): TransProcess准备释放tlvmap...
+2018-10-10 09:39:51 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:39:51 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:39:51 [WARN] LD_PosMain.cpp(5483): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:39:51 [TRACE] LD_PosMain.cpp(8344): 格式后卡号[len=0]=[]
+2018-10-10 09:39:51 [WARN] LD_PosMain.cpp(2354): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:39:51 [INFO] LD_PosMain.cpp(2409): 交易类型=[7]
+2018-10-10 09:39:51 [WARN] LD_PosMain.cpp(2554): 卡号为[]
+2018-10-10 09:39:51 [INFO] LD_PosMain.cpp(2602): 传出参数[964]:
+XX                                                                                2018                                         交易失败                                                                                            07                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-10 09:39:51 [INFO] LD_PosMain.cpp(1071): 传出参数1[801]:
+[XX|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |交易失败                                          |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-10 09:53:26 [TRACE] CardMisDll.cpp(94): 析构释放tlvmap...
+2018-10-10 09:53:26 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:53:26 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:53:26 [INFO] CardMisDll.cpp(97): 动态库释放成功
+
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(200): 日志保存路径:E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\mislog\
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(204): 配置文件路径:E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\log.ini
+2018-10-10 09:55:33 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-10 09:55:33 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-10 09:55:33 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-10 09:55:33 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-10 09:55:33 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=1
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=1
+2018-10-10 09:55:33 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-10 09:55:33 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-10 09:55:50 [INFO] LD_PosMain.cpp(958): 传入参数1[452]:
+[D2015   |A001    |07|000000000001|20121119|                    000000000167|000262|W20150616205755001  |李四                |15|350121199912196619                      |张三                                    |0|12345654321|汉族|19991219|16  |福建省福州市                                                                                        |||||||                                                  |                                                  |]
+2018-10-10 09:55:50 [TRACE] LD_PosMain.cpp(961): 解析传入参数|个数为26
+2018-10-10 09:55:50 [TRACE] LD_PosMain.cpp(973): f_order[20]=[W20150616205755001  ]
+2018-10-10 09:55:50 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:55:50 [INFO] LD_PosMain.cpp(1136): 传入参数[56]:
+D2015   A001    0700000000000120121119            000262
+2018-10-10 09:55:55 [ERROR] LD_PosMain.cpp(10613): 接收取打印串口数据返回NAK[ZA]=取打印信息失败
+2018-10-10 09:55:55 [ERROR] LD_PosMain.cpp(3230): TransProcess重打印失败,Read_Rrint_Data=-3
+2018-10-10 09:55:55 [TRACE] LD_PosMain.cpp(2686): TransProcess准备释放tlvmap...
+2018-10-10 09:55:55 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:55:55 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:55:55 [WARN] LD_PosMain.cpp(5484): 要解密的卡号长度为0,不进行解密
+2018-10-10 09:55:55 [TRACE] LD_PosMain.cpp(8345): 格式后卡号[len=0]=[]
+2018-10-10 09:55:55 [WARN] LD_PosMain.cpp(2355): 解密卡号失败,返回pos上送的卡号
+2018-10-10 09:55:55 [INFO] LD_PosMain.cpp(2410): 交易类型=[61]
+2018-10-10 09:55:55 [WARN] LD_PosMain.cpp(2555): 卡号为[]
+2018-10-10 09:55:55 [INFO] LD_PosMain.cpp(2603): 传出参数[964]:
+ZA                                                                                2018                                         取打印信息失败                                                                                      07                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-10 09:55:55 [INFO] LD_PosMain.cpp(1071): 传出参数1[801]:
+[ZA|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |取打印信息失败                                    |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-10 09:57:17 [INFO] LD_PosMain.cpp(958): 传入参数1[452]:
+[D2015   |A001    |07|000000000001|20121119|                    000000000167|000054|W20150616205755001  |李四                |15|350121199912196619                      |张三                                    |0|12345654321|汉族|19991219|16  |福建省福州市                                                                                        |||||||                                                  |                                                  |]
+2018-10-10 09:57:17 [TRACE] LD_PosMain.cpp(961): 解析传入参数|个数为26
+2018-10-10 09:57:17 [TRACE] LD_PosMain.cpp(973): f_order[20]=[W20150616205755001  ]
+2018-10-10 09:57:17 [INFO] LD_PosMain.cpp(1135): REQUEST.len=1836,RESPONSE.len=964
+2018-10-10 09:57:17 [INFO] LD_PosMain.cpp(1136): 传入参数[56]:
+D2015   A001    0700000000000120121119            000054
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10621): 
+解析取打印数据:
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10793): 1域返回:[61]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10801): 2域返回:[105610153110000 #0003]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10806): 3域返回:[00000815]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10810): 4域返回:[卡中心1测试]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10814): 5域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10819): 6域返回:[0105]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10826): 7域返回:[        CUP]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10829): 8域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10834): 9域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10882): 10域返回:[01]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10886): 11域返回:[94]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10890): 12域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10895): 13域返回:[000262]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10899): 14域返回:[000054]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10908): 15域返回:[20181010093006]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10912): 16域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10916): 17域返回:[828309724398]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10922): 18域返回:[000000000001]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10926): 19域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10930): 20域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10934): 21域返回:[000000000001]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10939): 22域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10943): 23域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10947): 24域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10951): 25域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10955): 26域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10959): 27域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10963): 28域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10967): 29域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10971): 30域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10975): 31域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10979): 32域返回:[0]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10983): 33域返回:[0]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11039): 34域返回:[金额(AMOUNT):RMB 0.01]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11043): 35域返回[ ]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11052): 36域返回:[D2015]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11056): 37域返回:[A001]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11060): 38域返回:[W20150616205755001]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11064): 39域返回:[20181010]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11069): 46域返回:[89705999]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11073): 47域返回:[00000601180701]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11078): 48域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11082): 49域返回:[微信消费退货]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11086): 50域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(11090): 51域返回:[无需签名 NO SIGNATURE REQUIRED]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10741): 52域返回:电子签名图片
+2018-10-10 09:57:21 [WARN] LD_PosMain.cpp(10760): 返回的签名图片头长度为0
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10674): 53域返回:二维码信息
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10691): 二维码信息长度为len=163
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10699): 版本编号=[00000601180701  ]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10701): 终端序号=[89705999            ]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10703): 交易卡号=[E72F548AF4141239E72F548AF4141239]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10705): 交易类型=[94]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10707): 卡失效期=[      ]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10709): 授权码=[      ]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10711): 金额符号=[C]C正数D负数
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10713): 交易金额=[000000000001]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10715): 商户编号=[105610153110000]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10717): 商户编号=[00000815]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10719): 凭证编号=[000054]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10721): 交易日期=[1010]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10723): 交易时间=[093006]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10725): 系统参考号=[828309724398]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10727): 银行卡类型=[1]1内卡2外卡
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10729): 银行代码=[        ]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10731): 批次编号=[000262]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10733): LRC校验=[44]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10633): 第54域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10633): 第55域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10633): 第56域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10633): 第57域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10633): 第58域返回:[]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10633): 第59域返回:[6101531100000003aa9rR]
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(10633): 第60域返回:[1]
+2018-10-10 09:57:21 [WARN] LD_PosMain.cpp(11191): 取签名图片信息标志=1,图片长度=0
+2018-10-10 09:57:21 [INFO] LD_PosMain.cpp(4698): 签购单模版为[E:\最近工作\陕西建行\高新医院\高新医院MISPOS接口\landiccbmispos-v1.6.8-2018.08.22\Print_Single.fmt]
+2018-10-10 09:57:21 [DEBUG] LD_PosMain.cpp(4740): 不保留#LDSIGN#签名标签
+2018-10-10 09:57:21 [DEBUG] LD_PosMain.cpp(4751): 保留#ODBMP#签名标签
+2018-10-10 09:57:21 [DEBUG] LD_PosMain.cpp(4769): 不保留#QRBMP#签名标签
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(2686): TransProcess准备释放tlvmap...
+2018-10-10 09:57:21 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:57:21 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(5523): 解密后的卡号:
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2018-10-10 09:57:21 [TRACE] LD_PosMain.cpp(5538): bcd2asc's cardno=[FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF]
+46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 46 00 
+2018-10-10 09:57:21 [INFO] LD_PosMain.cpp(2360): 卡号设置不屏蔽,返回解密后的明文卡号
+2018-10-10 09:57:21 [INFO] LD_PosMain.cpp(2410): 交易类型=[61]
+2018-10-10 09:57:21 [WARN] LD_PosMain.cpp(2555): 卡号为[FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF]
+2018-10-10 09:57:21 [INFO] LD_PosMain.cpp(2603): 传出参数[964]:
+00    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF    000000000001000054828309724398      0002622018101009300610561015311000000000815        交易成功                                          6101531100000003aa9rR                             071                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+2018-10-10 09:57:21 [INFO] LD_PosMain.cpp(1071): 传出参数1[801]:
+[00|    |FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF|    |000000000001|000054|828309724398|      |000262|20181010093006|105610153110000|00000815|        |                    |交易成功                                          |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |6101531100000003aa9rR                             |]
+2018-10-10 09:58:09 [TRACE] CardMisDll.cpp(94): 析构释放tlvmap...
+2018-10-10 09:58:09 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-10 09:58:09 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-10 09:58:09 [INFO] CardMisDll.cpp(97): 动态库释放成功
+

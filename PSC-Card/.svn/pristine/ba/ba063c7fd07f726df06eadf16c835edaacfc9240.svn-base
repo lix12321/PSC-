@@ -1,0 +1,130 @@
+package cn.wellcare.portal.controller.card;
+
+import java.text.ParseException;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.wellcare.api.card.ICardInfoOperateService;
+import cn.wellcare.card.bo.card.CardInfo;
+import cn.wellcare.card.bo.card.CardOperateInfo;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.exception.UnauthorizedException;
+import cn.wellcare.pojo.RpcResult;
+import cn.wellcare.pojo.ServiceResult;
+import cn.wellcare.web.BaseController;
+
+@Controller
+@RequestMapping("cardOperate")
+public class CardInfoOperateController extends BaseController {
+
+	@Resource
+	private ICardInfoOperateService cardInfoOperateService;
+
+    /**
+     * 发卡操作
+     * @param paramMap
+     * @return
+     */
+    @RequestMapping(value = "sendCard",method = RequestMethod.POST)
+    @ResponseBody
+	public ServiceResult<CardInfo> SendCard(@RequestParam Map<String, Object> paramMap) throws ParseException {
+		RpcResult<CardInfo> result = null;
+		try {
+			if (null == paramMap || paramMap.isEmpty()){
+				throw new BusinessException("卡信息为空");
+			}
+			result = cardInfoOperateService.SendCard(paramMap);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					result.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					result.setMsgInfo(e.getMessage());
+				result.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				if (e instanceof UnauthorizedException) {
+					result.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+				} else {
+					e.printStackTrace();
+					result.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+				}
+			}
+		}
+		return new ServiceResult<CardInfo>().convert2SR(result);
+    }
+
+    /**
+     *  挂失/注销/启用操作
+     * @param cardOperateInfo
+     * @return
+     */
+    @RequestMapping(value = "cardOperate",method = RequestMethod.POST)
+    @ResponseBody
+	public ServiceResult<String> cardOperate(CardOperateInfo cardOperateInfo) {
+		RpcResult<String> result = null;
+		try {
+			if (null == cardOperateInfo){
+				throw new BusinessException("卡信息为空");
+			}
+			result = cardInfoOperateService.cardOperate(cardOperateInfo);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					result.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					result.setMsgInfo(e.getMessage());
+				result.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				if (e instanceof UnauthorizedException) {
+					result.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+				} else {
+					e.printStackTrace();
+					result.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+				}
+			}
+		}
+		return new ServiceResult<String>().convert2SR(result);
+    }
+
+    @RequestMapping(value = "reissueCard", method = RequestMethod.POST)
+    @ResponseBody
+	public ServiceResult<Map<String, Object>> reissueCard(CardOperateInfo cardOperateInfo) {
+		RpcResult<Map<String, Object>> result = null;
+		try {
+			if (null == cardOperateInfo) {
+				throw new BusinessException("卡信息为空");
+			}
+			result = cardInfoOperateService.reissueCard(cardOperateInfo);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					result.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					result.setMsgInfo(e.getMessage());
+				result.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				if (e instanceof UnauthorizedException) {
+					result.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+				} else {
+					e.printStackTrace();
+					result.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+				}
+			}
+		}
+		return new ServiceResult<Map<String, Object>>().convert2SR(result);
+    }
+}

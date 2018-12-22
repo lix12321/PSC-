@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="context1">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection
+			connectionURL="jdbc:postgresql://192.168.2.40:5444/orcl"
+			driverClass="org.postgresql.Driver" password="psc" userId="psc" />
+
+		<!-- 生成PO类的位置 -->
+		<javaModelGenerator
+			targetPackage="cn.wellcare.entity" targetProject="PSC-Dao" />
+
+		<!-- mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="sql_mapper"
+			targetProject="PSC-Dao/src/main/resources" />
+
+		<!-- mapper接口生成的位置 -->
+		<javaClientGenerator
+			targetPackage="cn.wellcare.dao" targetProject="PSC-Dao"
+			type="XMLMAPPER" />
+
+		<table tableName="pay_notify_log" catalog="psc_payment"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+	</context>
+</generatorConfiguration>

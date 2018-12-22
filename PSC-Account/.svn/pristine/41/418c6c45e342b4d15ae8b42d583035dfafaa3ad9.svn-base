@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.acc.PscPiAccDetailDao">
+	<resultMap id="PscPiAccDetailResult" type="cn.wellcare.acc.entity.PscPiAccDetail">
+			<result property="amount" column="amount" />
+			<result property="amtBalance" column="amt_balance" />
+			<result property="atmNo" column="atm_no" />
+			<result property="createTime" column="create_time" />
+			<result property="creator" column="creator" />
+			<result property="dateHap" column="date_hap" />
+			<result property="delFlag" column="del_flag" />
+			<result property="euDirect" column="eu_direct" />
+			<result property="euOptype" column="eu_optype" />
+			<result property="modifier" column="modifier" />
+			<result property="modityTime" column="modity_time" />
+			<result property="nameEmpOpera" column="name_emp_opera" />
+			<result property="note" column="note" />
+			<result property="pkAccdt" column="pk_accdt" />
+			<result property="pkDepopi" column="pk_depopi" />
+			<result property="pkEmpOpera" column="pk_emp_opera" />
+			<result property="pkOrg" column="pk_org" />
+			<result property="pkPiacc" column="pk_piacc" />
+			<result property="rechargeType" column="recharge_type" />
+			<result property="remark" column="remark" />
+			<result property="orderId" column="order_id" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PscPiAccDetailResult">
+		select
+			amount,
+			amt_balance,
+			atm_no,
+			create_time,
+			creator,
+			date_hap,
+			del_flag,
+			eu_direct,
+			eu_optype,
+			modifier,
+			modity_time,
+			name_emp_opera,
+			note,
+			pk_accdt,
+			pk_depopi,
+			pk_emp_opera,
+			pk_org,
+			pk_piacc,
+			recharge_type,
+			remark,
+			order_id
+		from psc_pi_acc_detail
+		where pk_accdt = #{pkAccdt} order by date_hap asc
+	</select>
+
+	<select id="getPiaccDetail" parameterType="Integer" resultMap="PscPiAccDetailResult">
+		select
+			amount,
+			amt_balance,
+			atm_no,
+			create_time,
+			creator,
+			date_hap,
+			del_flag,
+			eu_direct,
+			eu_optype,
+			modifier,
+			modity_time,
+			name_emp_opera,
+			note,
+			pk_accdt,
+			pk_depopi,
+			pk_emp_opera,
+			pk_org,
+			pk_piacc,
+			recharge_type,
+			remark,
+			order_id
+		from psc_pi_acc_detail
+		where 1=1 and del_flag='0'
+		<if test="pkPiacc != null and pkPiacc !=''"  > 
+			and pk_piacc= #{pkPiacc}
+		</if>
+		<if test="startTime != null and startTime !=''"  > 
+			and date_hap &gt;= to_date(#{startTime},'YYYY-MM-DD HH24:MI:SS')
+		</if>
+		<if test="endTime != null and endTime !=''"  > 
+			and date_hap &lt;= to_date(#{endTime},'YYYY-MM-DD HH24:MI:SS')
+		</if>
+		order by date_hap asc
+		
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from psc_pi_acc_detail t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.acc.entity.PscPiAccDetail">
+		select 
+			amount,
+			amt_balance,
+			atm_no,
+			create_time,
+			creator,
+			date_hap,
+			del_flag,
+			eu_direct,
+			eu_optype,
+			modifier,
+			modity_time,
+			name_emp_opera,
+			note,
+			pk_accdt,
+			pk_depopi,
+			pk_emp_opera,
+			pk_org,
+			pk_piacc,
+			recharge_type,
+			remark,
+			order_id
+		from psc_pi_acc_detail
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="amount != null and amount !=''"  > 
+				and amount= #{amount}
+			</if>
+			<if test="amtBalance != null and amtBalance !=''"  > 
+				and amt_balance= #{amtBalance}
+			</if>
+			<if test="atmNo != null and atmNo !=''"  > 
+				and atm_no= #{atmNo}
+			</if>
+			<if test="createTime != null and createTime !=''"  > 
+				and create_time= #{createTime}
+			</if>
+			<if test="creator != null and creator !=''"  > 
+				and creator= #{creator}
+			</if>
+			<if test="dateHap != null and dateHap !=''"  > 
+				and date_hap= #{dateHap}
+			</if>
+			<if test="delFlag != null and delFlag !=''"  > 
+				and del_flag= #{delFlag}
+			</if>
+			<if test="euDirect != null and euDirect !=''"  > 
+				and eu_direct= #{euDirect}
+			</if>
+			<if test="euOptype != null and euOptype !=''"  > 
+				and eu_optype= #{euOptype}
+			</if>
+			<if test="modifier != null and modifier !=''"  > 
+				and modifier= #{modifier}
+			</if>
+			<if test="modityTime != null and modityTime !=''"  > 
+				and modity_time= #{modityTime}
+			</if>
+			<if test="nameEmpOpera != null and nameEmpOpera !=''"  > 
+				and name_emp_opera= #{nameEmpOpera}
+			</if>
+			<if test="note != null and note !=''"  > 
+				and note= #{note}
+			</if>
+			<if test="pkAccdt != null and pkAccdt !=''"  > 
+				and pk_accdt= #{pkAccdt}
+			</if>
+			<if test="pkDepopi != null and pkDepopi !=''"  > 
+				and pk_depopi= #{pkDepopi}
+			</if>
+			<if test="pkEmpOpera != null and pkEmpOpera !=''"  > 
+				and pk_emp_opera= #{pkEmpOpera}
+			</if>
+			<if test="pkOrg != null and pkOrg !=''"  > 
+				and pk_org= #{pkOrg}
+			</if>
+			<if test="pkPiacc != null and pkPiacc !=''"  > 
+				and pk_piacc= #{pkPiacc}
+			</if>
+			<if test="rechargeType != null and rechargeType !=''"  > 
+				and recharge_type= #{rechargeType}
+			</if>
+			<if test="remark != null and remark !=''"  > 
+				and remark= #{remark}
+			</if>
+			<if test="orderId != null and orderId !=''"  > 
+				and order_id= #{orderId}
+			</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from psc_pi_acc_detail where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.acc.entity.PscPiAccDetail">
+        update psc_pi_acc_detail
+    	<set>
+			<if test="amount != null">amount= #{amount},</if>
+			<if test="amtBalance != null">amt_balance= #{amtBalance},</if>
+			<if test="atmNo != null">atm_no= #{atmNo},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="creator != null">creator= #{creator},</if>
+			<if test="dateHap != null">date_hap= #{dateHap},</if>
+			<if test="delFlag != null">del_flag= #{delFlag},</if>
+			<if test="euDirect != null">eu_direct= #{euDirect},</if>
+			<if test="euOptype != null">eu_optype= #{euOptype},</if>
+			<if test="modifier != null">modifier= #{modifier},</if>
+			<if test="modityTime != null">modity_time= #{modityTime},</if>
+			<if test="nameEmpOpera != null">name_emp_opera= #{nameEmpOpera},</if>
+			<if test="note != null">note= #{note},</if>
+			<if test="pkAccdt != null">pk_accdt= #{pkAccdt},</if>
+			<if test="pkDepopi != null">pk_depopi= #{pkDepopi},</if>
+			<if test="pkEmpOpera != null">pk_emp_opera= #{pkEmpOpera},</if>
+			<if test="pkOrg != null">pk_org= #{pkOrg},</if>
+			<if test="pkPiacc != null">pk_piacc= #{pkPiacc},</if>
+			<if test="rechargeType != null">recharge_type= #{rechargeType},</if>
+			<if test="remark != null">remark= #{remark},</if>
+			<if test="orderId != null">order_id= #{orderId}</if>
+	    </set>
+        where pk_accdt = #{pkAccdt}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.acc.entity.PscPiAccDetail" useGeneratedKeys="true" keyProperty="pkAccdt" keyColumn="pk_accdt">
+		insert into 
+			psc_pi_acc_detail
+		(
+			amount,
+			amt_balance,
+			atm_no,
+			create_time,
+			creator,
+			date_hap,
+			del_flag,
+			eu_direct,
+			eu_optype,
+			modifier,
+			modity_time,
+			name_emp_opera,
+			note,
+			
+			pk_depopi,
+			pk_emp_opera,
+			pk_org,
+			pk_piacc,
+			recharge_type,
+			remark,
+			order_id
+		)
+		values
+		(
+			#{amount},
+			#{amtBalance},
+			#{atmNo},
+			#{createTime},
+			#{creator},
+			#{dateHap},
+			#{delFlag},
+			#{euDirect},
+			#{euOptype},
+			#{modifier},
+			#{modityTime},
+			#{nameEmpOpera},
+			#{note},
+			
+			#{pkDepopi},
+			#{pkEmpOpera},
+			#{pkOrg},
+			#{pkPiacc},
+			#{rechargeType},
+			#{remark},
+			#{orderId}
+		)
+	</insert>
+	
+</mapper>

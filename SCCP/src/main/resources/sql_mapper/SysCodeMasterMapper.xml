@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.SysCodeMasterDao">
+	<resultMap id="SysCodeMasterResult" type="SysCodeMaster">
+			<result property="codeCd" column="code_cd" />
+			<result property="codeDiv" column="code_div" />
+			<result property="codeText" column="code_text" />
+			<result property="createTime" column="create_time" />
+			<result property="sortOrder" column="sort_order" />
+			<result property="updateTime" column="update_time" />
+			<result property="useYn" column="use_yn" />
+	</resultMap>
+	
+	<select id="get" resultMap="SysCodeMasterResult">
+		select
+			code_cd,
+			code_div,
+			code_text,
+			create_time,
+			sort_order,
+			update_time,
+			use_yn
+		from sys_code_master
+		where code_div = #{0} and code_cd = #{1}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from sys_code_master t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="SysCodeMaster">
+		select 
+			code_cd,
+			code_div,
+			code_text,
+			create_time,
+			sort_order,
+			update_time,
+			use_yn
+		from sys_code_master
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="codeCd != null and codeCd !=''"  > 
+			and code_cd= #{codeCd}
+		</if>
+		<if test="codeDiv != null and codeDiv !=''"  > 
+			and code_div= #{codeDiv}
+		</if>
+		<if test="codeText != null and codeText !=''"  > 
+			and code_text= #{codeText}
+		</if>
+		<if test="q_codeText != null and q_codeText !=''"  > 
+				and code_text like CONCAT('%',#{q_codeText},'%')
+		</if>
+		<if test="createTime != null and createTime !=''"  > 
+			and create_time= #{createTime}
+		</if>
+		<if test="sortOrder != null and sortOrder !=''"  > 
+			and sort_order= #{sortOrder}
+		</if>
+		<if test="updateTime != null and updateTime !=''"  > 
+			and update_time= #{updateTime}
+		</if>
+		<if test="useYn != null and useYn !=''"  > 
+			and use_yn= #{useYn}
+		</if>
+		<if test="q_codeDiv != null and q_codeDiv !=''"  >
+			and code_div like CONCAT('%',#{q_codeDiv},'%')
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from sys_code_master where code_div = #{0} and code_cd = #{1}
+	</delete>
+	
+	<update id="update" parameterType="SysCodeMaster">
+        update sys_code_master
+    	<set>
+			<if test="codeCd != null">code_cd= #{codeCd},</if>
+			<if test="codeDiv != null">code_div=upper(#{codeDiv}),</if>
+			<if test="codeText != null">code_text= #{codeText},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="sortOrder != null">sort_order= #{sortOrder},</if>
+			<if test="updateTime != null">update_time= #{updateTime},</if>
+			<if test="useYn != null">use_yn= #{useYn}</if>
+	    </set>
+        where code_div = #{codeDiv} and code_cd = #{codeCd}
+	</update>
+	
+	<insert id="save" parameterType="SysCodeMaster" useGeneratedKeys="true" keyProperty="codeDiv" keyColumn="code_div">
+		insert into 
+			sys_code_master
+		(
+			code_div,
+			code_cd,
+			code_text,
+			create_time,
+			sort_order,
+			update_time,
+			use_yn
+		)
+		values
+		(
+			upper(#{codeDiv}),
+			#{codeCd},
+			#{codeText},
+			#{createTime},
+			#{sortOrder},
+			#{updateTime},
+			#{useYn}
+		)
+	</insert>
+	
+</mapper>

@@ -1,0 +1,199 @@
+package cn.wellcare.model.acc;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import cn.wellcare.acc.bo.RechargeParamDto;
+import cn.wellcare.acc.entity.PscPiAcc;
+import cn.wellcare.acc.entity.PscPiAccDetail;
+import cn.wellcare.core.utils.CommonUtils;
+import cn.wellcare.core.utils.EnumerateParameter;
+import cn.wellcare.core.utils.Md5;
+import cn.wellcare.core.utils.PagerInfo;
+import cn.wellcare.core.utils.RandomUtil;
+import cn.wellcare.dao.acc.PscPiAccDao;
+import cn.wellcare.dao.acc.PscPiAccDetailDao;
+
+@Component
+public class PscPiAccModel {
+
+	private Logger log = Logger.getLogger(this.getClass());
+    
+    @Resource
+    private PscPiAccDao pscPiAccDao;
+	@Resource
+	private PscPiAccDetailDao pscPiAccDetailDao;
+    
+    /**
+     * 根据id取得psc_pi_acc对象
+     * @param  pscPiAccId
+     * @return
+     */
+    public PscPiAcc getPscPiAccById(Integer pscPiAccId) {
+    	return pscPiAccDao.get(pscPiAccId);
+    }
+
+    /**
+     * 根据id取得psc_pi_acc对象
+     * @param
+     * @return
+     */
+    public PscPiAcc getPscPiAccBypkPi(String pkPi) {
+        return pscPiAccDao.getAccount(pkPi);
+    }
+    /**
+     * 根据id取得psc_pi_acc对象
+     * @param
+     * @return
+     */
+    public PscPiAcc getPscPiAccBycodeAcc(String codeAcc) {
+        return pscPiAccDao.getAccountBycode(codeAcc);
+    }
+
+    /**
+     * 保存psc_pi_acc对象
+     * @param  pscPiAcc
+     * @return
+     */
+     public Integer savePscPiAcc(PscPiAcc pscPiAcc) {
+     	this.dbConstrains(pscPiAcc);
+             String no = RandomUtil.randomNumberic(18);//生成18位随机数
+             if (pscPiAcc != null && pscPiAcc.getPwd()!= null){
+                 pscPiAcc.setPwd(Md5.getMd5String(pscPiAcc.getPwd()));
+             }
+             Date nowTime = new Date();
+             pscPiAcc.setCreateTime(nowTime);
+             pscPiAcc.setCodeAcc(no);
+             pscPiAcc.setEuStatus(EnumerateParameter.ONE);
+             pscPiAcc.setDelFlag(EnumerateParameter.ZERO);
+             pscPiAcc.setAmtAcc(BigDecimal.ZERO);//新开账户余额及信用额度置零
+             pscPiAcc.setCreditAcc(BigDecimal.ZERO);
+             pscPiAcc.setUnavailableAcc(BigDecimal.ZERO);
+     	return pscPiAccDao.save(pscPiAcc);
+     }
+    /**
+     * 批量保存psc_pi_acc对象
+     * @param
+     * @return
+     */
+     public Integer saveBatchPscPiAcc(List<PscPiAcc> pscPiAccsList) {
+         Date nowTime = null;
+         for (PscPiAcc pscPiAcc:pscPiAccsList) {
+             this.dbConstrains(pscPiAcc);
+             String no = RandomUtil.randomNumberic(10);//生成10位随机数
+             nowTime = new Date();
+             pscPiAcc.setUnavailableAcc(BigDecimal.ZERO);
+             pscPiAcc.setCreateTime(nowTime);
+             pscPiAcc.setCodeAcc(no);
+             pscPiAcc.setEuStatus(EnumerateParameter.ONE);
+             pscPiAcc.setDelFlag(EnumerateParameter.ZERO);
+             pscPiAcc.setAmtAcc(BigDecimal.ZERO);//新开账户余额及信用额度置零
+             pscPiAcc.setCreditAcc(BigDecimal.ZERO);
+             pscPiAcc.setPwd(Md5.getMd5String(pscPiAcc.getPwd()));
+         }
+     	return pscPiAccDao.batchInsertPscPiAcc(pscPiAccsList);
+     }
+
+     /**
+     * 更新psc_pi_acc对象
+     * @param  pscPiAcc
+     * @return
+     */
+     public Integer updatePscPiAcc(PscPiAcc pscPiAcc) {
+     	this.dbConstrains(pscPiAcc);
+     	Date nowTime = new Date();
+     	pscPiAcc.setModityTime(nowTime);
+     	return pscPiAccDao.update(pscPiAcc);
+     }
+
+    /**
+     * 批量更新psc_pi_acc对象
+     * @param
+     * @return
+     */
+    public Integer updateBatchPscPiAcc(List<PscPiAcc> pscPiAccsList) {
+        /*for (PscPiAcc pscPiAcc:pscPiAccsList) {
+            this.dbConstrains(pscPiAcc);
+            Date nowTime = new Date();
+            pscPiAcc.setModityTime(nowTime);
+        }*/
+        return pscPiAccDao.batchUpdatePscPiAcc(pscPiAccsList);
+    }
+     
+     private void dbConstrains(PscPiAcc pscPiAcc) {
+		pscPiAcc.setCodeAcc(CommonUtils.dbSafeString(pscPiAcc.getCodeAcc(), true, 30));
+		pscPiAcc.setCreator(CommonUtils.dbSafeString(pscPiAcc.getCreator(), true, 32));
+		pscPiAcc.setDelFlag(CommonUtils.dbSafeString(pscPiAcc.getDelFlag(), true, 1));
+		pscPiAcc.setEuStatus(CommonUtils.dbSafeString(pscPiAcc.getEuStatus(), true, 2));
+		pscPiAcc.setModifier(CommonUtils.dbSafeString(pscPiAcc.getModifier(), true, 32));
+		pscPiAcc.setNote(CommonUtils.dbSafeString(pscPiAcc.getNote(), true, 128));
+     }
+     
+    public List<PscPiAcc> page(Map<String, Object> queryMap, PagerInfo pager) throws Exception {
+     	Map<String, Object> param = new HashMap<String, Object>(queryMap);
+            Integer start = 0, size = 0;
+            if (pager != null) {
+                pager.setRowsCount(pscPiAccDao.getCount(param));
+                start = pager.getStart();
+                size = pager.getPageSize();
+            }
+ 			param.put("start", start);
+            param.put("size", size);
+            List<PscPiAcc> list = pscPiAccDao.getList(param);
+        return list;
+    }
+     
+      public Integer del(Integer id) {
+        return pscPiAccDao.del(id);
+     }
+
+	public PscPiAcc accRecharge(RechargeParamDto rpd) {
+		try {
+			// 1.账户余额
+			PscPiAcc acc = pscPiAccDao.get(rpd.getAccId());
+			Assert.notNull(acc);
+			
+			log.debug("账户充值，原余额：" + acc.getAmtAcc().setScale(2, BigDecimal.ROUND_HALF_UP));
+			acc.setAmtAcc(acc.getAmtAcc().add(rpd.getMoney()).setScale(2, BigDecimal.ROUND_HALF_UP));
+			pscPiAccDao.update(acc);
+			log.debug("账户充值，充值后余额：" + acc.getAmtAcc().setScale(2, BigDecimal.ROUND_HALF_UP));
+
+			// 2.账户流水
+			PscPiAccDetail pscPiAccDetail = new PscPiAccDetail();
+			pscPiAccDetail.setAmount(rpd.getMoney().setScale(2, BigDecimal.ROUND_HALF_UP));
+			pscPiAccDetail.setAmtBalance(acc.getAmtAcc().setScale(2, BigDecimal.ROUND_HALF_UP));
+
+			pscPiAccDetail.setEuOptype(EnumerateParameter.ONE);
+			pscPiAccDetail.setEuDirect(Integer.valueOf(EnumerateParameter.ONE));
+			pscPiAccDetail.setPkOrg(rpd.getOrgId());
+			pscPiAccDetail.setPkPiacc(rpd.getAccId());
+			pscPiAccDetail.setCreator(rpd.getAccName());
+
+			Date nowTime = new Date();
+			pscPiAccDetail.setModityTime(nowTime);
+			pscPiAccDetail.setCreateTime(nowTime);
+			pscPiAccDetail.setDelFlag(EnumerateParameter.ZERO);
+			pscPiAccDetail.setDateHap(nowTime);
+			pscPiAccDetail.setOrderId(rpd.getOrderId());
+			pscPiAccDetail.setRechargeType(rpd.getRechargeType());
+			pscPiAccDetail.setNameEmpOpera(rpd.getHandleName());
+
+			pscPiAccDetailDao.save(pscPiAccDetail);
+			log.debug("账户流水保存成功 ");
+			return acc;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+}

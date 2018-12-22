@@ -1,0 +1,373 @@
+package cn.wellcare.service.acc;
+
+import cn.wellcare.acc.entity.PscPiAcc;
+import cn.wellcare.api.acc.IPscPiAccService;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.utils.EnumerateParameter;
+import cn.wellcare.core.utils.PagerInfo;
+import cn.wellcare.model.acc.PscPiAccModel;
+import cn.wellcare.pojo.common.RpcResult;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+@Service(value = "pscPiAccService")
+public class PscPiAccService implements IPscPiAccService {
+	private Logger log = Logger.getLogger(this.getClass());
+	
+	@Resource
+	private PscPiAccModel pscPiAccModel;
+    
+     /**
+     * 根据id取得psc_pi_acc对象
+     * @param  pscPiAccId
+     * @return
+     */
+    @Override
+    public RpcResult<PscPiAcc> getPscPiAccById(Integer pscPiAccId) {
+        RpcResult<PscPiAcc> serviceResult = new RpcResult<PscPiAcc>();
+        try {
+            serviceResult.setData(pscPiAccModel.getPscPiAccById(pscPiAccId));
+        } catch (Exception e) {
+            log.error("[IPscPiAccService][getPscPiAccById]根据id["+pscPiAccId+"]取得psc_pi_acc对象时出现未知异常：",
+                e);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+        }
+        return serviceResult;
+    }
+
+	/**
+	 * 根据患者主键获取账户信息
+	 * @param pkPi
+	 * @return
+	 */
+	@Override
+	public RpcResult<PscPiAcc> getPscPiAccBypkPi(String pkPi) {
+		RpcResult<PscPiAcc> serviceResult = new RpcResult<PscPiAcc>();
+		try {
+			serviceResult.setData(pscPiAccModel.getPscPiAccBypkPi(pkPi));
+		} catch (Exception e) {
+			log.error("[IPscPiAccService][getPscPiAccById]根据用户主索引["+pkPi+"]取得psc_pi_acc对象时出现未知异常：",
+					e);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+		}
+		return serviceResult;
+	}
+
+    /**
+     * 根据账户编码查询患者账户
+     * @param codeAcc
+     * @return
+     */
+    @Override
+    public RpcResult<PscPiAcc> getPscPiAccByCodeAcc(String codeAcc) {
+        RpcResult<PscPiAcc> serviceResult = new RpcResult<PscPiAcc>();
+        try {
+            serviceResult.setData(pscPiAccModel.getPscPiAccBycodeAcc(codeAcc));
+        } catch (Exception e) {
+            log.error("[IPscPiAccService][getPscPiAccById]根据账户编码["+codeAcc+"]取得psc_pi_acc对象时出现未知异常：",
+                    e);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+                    serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+                else
+                    serviceResult.setMsgInfo(e.getMessage());
+                serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+            } else {
+                e.printStackTrace();
+                serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+            }
+            throw e;
+        }
+        return serviceResult;
+    }
+
+    /**
+     * 根据患者主索引查询账户状态
+     * @param pkPi
+     * @return
+     */
+    @Override
+	public RpcResult<Boolean>  getAccountStatus(String pkPi) {
+        RpcResult<Boolean> serviceResult = new RpcResult<Boolean>();
+        boolean accountFlag = false;
+        try {
+            PscPiAcc pscPiAcc = pscPiAccModel.getPscPiAccBypkPi(pkPi);
+            if (pscPiAcc == null) {
+                throw new BusinessException("未查询到患者账户信息");
+            }
+            String euStatus = pscPiAcc.getEuStatus();//获取账户状态
+            if (euStatus.equals(EnumerateParameter.ONE)){
+                accountFlag = true;
+            }
+            serviceResult.setData(accountFlag);
+        } catch (Exception e) {
+            log.error("[IPscPiAccService][getAccountStatus]根据id["+pkPi+"]取得账户状态时出现未知异常：",
+                    e);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+                    serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+                else
+                    serviceResult.setMsgInfo(e.getMessage());
+                serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+            } else {
+                e.printStackTrace();
+                serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+            }
+            throw e;
+        }
+        return serviceResult;
+
+    }
+
+    /**
+     * 根据账户主键查询账户状态
+     * @param id
+     * @return
+     */
+    @Override
+    public RpcResult<Boolean> queryAccountStatus(Integer id) {
+        RpcResult<Boolean> serviceResult = new RpcResult<Boolean>();
+        boolean accountFlag = false;
+        try {
+            PscPiAcc pscPiAcc = pscPiAccModel.getPscPiAccById(id);
+            if (pscPiAcc == null) {
+                throw new BusinessException("未查询到患者账户信息");
+            }
+            String euStatus = pscPiAcc.getEuStatus();//获取账户状态
+            if (euStatus.equals(EnumerateParameter.ONE)){
+                accountFlag = true;
+            }
+            serviceResult.setData(accountFlag);
+        } catch (Exception e) {
+            log.error("[IPscPiAccService][queryAccountStatus]根据id["+id+"]取得账户状态时出现未知异常：",
+                    e);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+                    serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+                else
+                    serviceResult.setMsgInfo(e.getMessage());
+                serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+            } else {
+                e.printStackTrace();
+                serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+            }
+            throw e;
+        }
+        return serviceResult;
+    }
+
+    /**
+     * 保存psc_pi_acc对象（新建账户信息）
+     * @param  pscPiAcc
+     * @return
+     */
+     @Override
+     public RpcResult<Integer> savePscPiAcc(PscPiAcc pscPiAcc) {
+			RpcResult<Integer> serviceResult = new RpcResult<Integer>();
+        try {
+            serviceResult.setData(pscPiAccModel.savePscPiAcc(pscPiAcc));
+        } catch (Exception e) {
+            log.error("[IPscPiAccService][savePscPiAcc]保存psc_pi_acc对象时出现未知异常：",
+                e);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+        }
+        return serviceResult;
+     }
+
+    /**
+     * 批量插入账户信息
+     * @param map
+     * @return
+     */
+    @Override
+    public RpcResult<Integer> batchInsertPscPiAcc(Map<String,Object> map) {
+        RpcResult<Integer> serviceResult = new RpcResult<Integer>();
+        try {
+            Gson gson = new GsonBuilder().create();
+            List<PscPiAcc> list = gson.fromJson
+                    (String.valueOf(map.get("pscPiAccList")), new TypeToken<List<PscPiAcc>>() {
+                    }.getType());
+            serviceResult.setData(pscPiAccModel.saveBatchPscPiAcc(list));
+        } catch (Exception e) {
+            log.error("[IPscPiAccService][batchInsertPscPiAcc]保存psc_pi_acc对象时出现未知异常：",
+                    e);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+                    serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+                else
+                    serviceResult.setMsgInfo(e.getMessage());
+                serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+            } else {
+                e.printStackTrace();
+                serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+            }
+            throw e;
+        }
+        return serviceResult;
+    }
+
+    /**
+     * 更新psc_pi_acc对象
+     * @param  pscPiAcc
+     * @return
+     *
+     */
+     @Override
+     public RpcResult<Integer> updatePscPiAcc(PscPiAcc pscPiAcc) {
+			RpcResult<Integer> serviceResult = new RpcResult<Integer>();
+        try {
+            serviceResult.setData(pscPiAccModel.updatePscPiAcc(pscPiAcc));
+        } catch (Exception e) {
+            log.error("[IPscPiAccService][updatePscPiAcc]更新psc_pi_acc对象时出现未知异常：",
+                e);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+        }
+        return serviceResult;
+     }
+
+    /**
+     * 批量更新账户信息(内部卡批量充值)
+     * @param map
+     * @return
+     */
+    @Override
+    public RpcResult<Integer> batchUpdatePscPiAcc(Map<String, Object> map) {
+        RpcResult<Integer> serviceResult = new RpcResult<Integer>();
+        try {
+            Gson gson = new GsonBuilder().create();
+            List<PscPiAcc> list = gson.fromJson
+                    (String.valueOf(map.get("pscPiAccList")), new TypeToken<List<PscPiAcc>>() {
+                    }.getType());
+            PscPiAcc piAcc = null;
+            Date nowTime = null;
+            for (PscPiAcc pscPiAcc:list) {
+                piAcc = pscPiAccModel.getPscPiAccBypkPi(pscPiAcc.getPkPi());
+                pscPiAcc.setAmtAcc(pscPiAcc.getAmtAcc().add(piAcc.getAmtAcc()));
+                nowTime = new Date();
+                pscPiAcc.setModityTime(nowTime);
+            }
+            serviceResult.setData(pscPiAccModel.updateBatchPscPiAcc(list));
+        } catch (Exception e) {
+            log.error("[IPscPiAccService][batchUpdatePscPiAcc]保存psc_pi_acc对象时出现未知异常：",
+                    e);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+                    serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+                else
+                    serviceResult.setMsgInfo(e.getMessage());
+                serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+            } else {
+                e.printStackTrace();
+                serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+            }
+            throw e;
+        }
+        return serviceResult;
+    }
+
+
+    @Override
+    public RpcResult<List<PscPiAcc>> page(Map<String, Object> queryMap, PagerInfo pager) {
+        RpcResult<List<PscPiAcc>> serviceResult = new RpcResult<List<PscPiAcc>>();
+        try {
+              serviceResult.setData(pscPiAccModel.page(queryMap, pager));
+        } catch (Exception e) {
+            log.error("[PscPiAccService][page] exception:" + e.getMessage());
+            
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+        }
+        return serviceResult;
+    }
+
+    @Override
+    public RpcResult<Boolean> del(Integer id) {
+ 		RpcResult<Boolean> serviceResult = new RpcResult<Boolean>();
+        try {
+            serviceResult.setData(pscPiAccModel.del(id) > 0);
+        } catch (Exception e) {
+            log.error("[PscPiAccService][del] exception:" + e.getMessage());
+            
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+        }
+        return serviceResult;
+    }
+}

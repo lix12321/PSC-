@@ -1,0 +1,111 @@
+[LOG]
+# .代表当前dll路径,否则使用指定的目录(目录须以/结尾)
+LOGDIR=.
+#0:TRACE  1:DEBUG     2:INFO    3:WARN    4:ERROR 
+Level=0
+LogHead=1
+FileMaxCount=365
+#logFileName=mislog
+#logFileSuffix=.txt
+
+[MISCFG]
+#网络超时(秒单位)默认90
+SocketTimeout=90
+#首次指令交互等待超时(参考pos设置的超时时间)默认120
+FirstComTimeout=120
+#首次指令后的交互等待超时(参考pos设置的超时时间)默认75
+SecondComTimeout=75
+#取打印的交互等待超时(参考pos设置的超时时间)默认80
+GetPrintDataTimeout=80
+#取结算的交互等待超时,默认60
+GetSummDataTimeout=60
+PrintServerPacket=1
+#网络超时检测,关掉则为操作系统默认超时30s
+RecvServerCheck=1
+#波特率
+BPS=9600
+#自动读卡程序开关 默认为1
+AutoReadCard=0
+#自动检测串口开关 默认为1
+AutoTestCOM=0
+#签名对话框是否显示 1为显示 0为不显示
+ShowDlg=0
+#交易选择对话框是否显示 1为显示 0为不显示
+SelectDlg=0
+#交易条码输入框是否显示 1为显示 0为不显示
+SCANCODEMODE=0
+#返回金额模式 0为返回实际扣款金额 1为返回请求金额
+ReturnAmountMode=0
+#测试模式 1开启 0不开启
+DEBUG=0
+#是否扫码失败后自动弹出查询订单
+QUERYORDER=0
+#集中收银
+CENTRALIZED=0
+
+SSLEnable=1
+SSLUrl=ibsbjstar.ccb.com.cn
+SSLPort=443
+SSLUrl_2=ea.ccb.com
+SSLPort_2=442
+HDQUrl=hdq.uncentury.com
+HDQPort=443
+AUTH=7F75D2
+AUTHURL=http://www.wdmedical.com/mispos_auth_v2/terminalAuth.action
+
+[RETRY]
+#状态上送超时(秒单位)默认5
+SocketTime=3
+#重新上送间隔(毫秒)默认500
+LoopSleep=500
+#失败尝试上送次数,默认2次
+LoopTimes=1
+#前置服务器开关 1有前置 0没有前置
+ServerFlag=0
+
+
+[BMP]
+QRTimes=10
+ODTimes=50
+BCStartX=10
+BCStartY=10
+CodeStartX=10
+CodeStartY=10
+Space=0
+FontType=宋体
+FontSize=30
+[CONSUME]
+DISABLE1=0
+DISABLE2=1
+DISABLE3=1
+DISABLE4=1
+DISABLE5=0
+DISABLE6=0
+DISABLE7=0
+DISABLE8=1
+DISABLE9=0
+
+[DISCOUNT]
+DISABLE1=0
+DISABLE2=0
+DISABLE3=1
+DISABLE4=1
+DISABLE5=0
+DISABLE6=0
+DISABLE7=1
+
+[MANAGE]
+DISABLE1=0
+DISABLE2=0
+DISABLE3=0
+
+[REFUND]
+DISABLE1=0
+DISABLE2=0
+DISABLE3=0
+
+[REPEAL]
+DISABLE1=0
+DISABLE2=1
+DISABLE3=1
+DISABLE4=1

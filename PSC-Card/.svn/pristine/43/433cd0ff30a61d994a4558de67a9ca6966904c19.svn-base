@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<import
+		resource="spring-dubbo-provider.xml" />
+
+	<bean id="domainUrlUtil"
+		class="cn.wellcare.core.bean.DomainUrlUtil">
+	</bean>
+
+	<import
+		resource="classpath*:spring-config/spring-datasources.xml" />
+
+	<context:component-scan
+		base-package="cn.wellcare">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath*:props/*.properties</value>
+		</property>
+	</bean>
+
+	<bean id="serviceLocator"
+		class="cn.wellcare.core.bean.ServiceLocator" lazy-init="false" />
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="count*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<aop:config>
+		<aop:advisor
+			pointcut="execution(* cn.wellcare.service..*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+
+</beans>

@@ -1,0 +1,11 @@
+<#include "/commons/_detailheader.ftl" />
+	  
+<div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	对不起，您无权访问本页面！
+</div>
+<#include "/commons/_detailfooter.ftl" />

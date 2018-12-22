@@ -1,0 +1,89 @@
+package cn.wellcare.service.card;
+
+import cn.wellcare.api.card.ICardRegInfoService;
+import cn.wellcare.card.bo.card.CardRegInfoBo;
+import cn.wellcare.card.bo.card.PscPiAcc;
+import cn.wellcare.core.utils.HttpClientUtil;
+import cn.wellcare.core.utils.StringUtil;
+import cn.wellcare.model.card.CardRegInfoModel;
+import cn.wellcare.pojo.RpcResult;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.*;
+
+@Service("cardRegInfoService")
+public class CardRegInfoService implements ICardRegInfoService {
+
+    private Logger log = Logger.getLogger(this.getClass());
+
+    @Resource
+    private CardRegInfoModel cardRegInfoModel;
+
+    /**
+     * 获取发卡登记信息
+     * @param paramMap
+     * @return
+     */
+    @Override
+    public RpcResult<List<CardRegInfoBo>> getCardRegInfo(Map<String, Object> paramMap) {
+        RpcResult<List<CardRegInfoBo>> jsonResult = new RpcResult<>();
+        String cardType = (String)paramMap.get("cardType");
+        List<String> cardTypes = null;
+        if (!StringUtils.isEmpty(cardType) && !"null".equals(cardType)){
+            cardTypes = Arrays.asList((cardType).split(","));
+            paramMap.put("cardTypes",cardTypes);
+        }
+        List<CardRegInfoBo> resultList = cardRegInfoModel.getCardRegInfo(paramMap);
+        List<CardRegInfoBo> cardRegInfoBos = new ArrayList<>();
+        if (null == resultList || resultList.isEmpty()){
+            jsonResult.setData(cardRegInfoBos);
+            return jsonResult;
+        }
+        //通过主索引查询用户的账户信息
+
+        for (CardRegInfoBo cardRegInfo : resultList){
+
+            //cardRegInfoBo = resultList.get(0);
+            String mpi = cardRegInfo.getMpi();
+            log.info("调用账户中心 url：http://localhost:8088/pscPiAcc/queryAccount?pkPi="+mpi);
+            // TODO
+            String resultStr = HttpClientUtil.sendGet("http://localhost:8088/pscPiAcc/queryAccount?pkPi="+mpi);
+            log.info("账户中心返回信息："+resultStr);
+            RpcResult<PscPiAcc> accountResult = null;
+            if (!StringUtil.isEmpty(resultStr)){
+                Map<String,Class<PscPiAcc>> map = new HashMap<>();
+                map.put("data",PscPiAcc.class);
+                JSONObject jsonObject=JSONObject.fromObject(resultStr);
+                accountResult = (RpcResult<PscPiAcc>) JSONObject.toBean(jsonObject,RpcResult.class,map);
+                log.info("账户中心返回信息："+accountResult);
+            }
+            //账户余额
+            BigDecimal amtAcc = new BigDecimal(0);
+            String accountId = "";
+            String accountStatus = "";
+            String codeAccount = "";
+            if (null != accountResult && accountResult.getData() != null){
+                log.info("账户余额："+accountResult.getData().getAmtAcc());
+                amtAcc = accountResult.getData().getAmtAcc();
+                accountId = String.valueOf(accountResult.getData().getPkPiacc());
+                accountStatus = accountResult.getData().getEuStatus();
+                codeAccount = accountResult.getData().getCodeAcc();
+            }
+            cardRegInfo.setAccountBalance(amtAcc);
+            cardRegInfo.setAccountId(accountId);
+            cardRegInfo.setAccountStatus(accountStatus);
+            cardRegInfo.setCodeAccount(codeAccount);
+            cardRegInfoBos.add(cardRegInfo);
+        }
+        jsonResult.setData(cardRegInfoBos);
+        return jsonResult;
+    }
+
+}
+
+

@@ -1,0 +1,4 @@
+cn\wellcare\codegenerator\mapperFactory\MapperFactory.class
+cn\wellcare\codegenerator\mapperFactory\pojo\Table.class
+cn\wellcare\codegenerator\main\Run.class
+cn\wellcare\codegenerator\mapperFactory\pojo\Column.class

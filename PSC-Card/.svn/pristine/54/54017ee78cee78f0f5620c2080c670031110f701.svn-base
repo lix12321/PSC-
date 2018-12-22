@@ -1,0 +1,15 @@
+package cn.wellcare.api.card;
+
+import java.util.Map;
+
+import cn.wellcare.card.bo.card.CardInfo;
+import cn.wellcare.card.bo.card.CardOperateInfo;
+import cn.wellcare.pojo.RpcResult;
+
+public interface ICardInfoOperateService {
+	RpcResult<CardInfo> SendCard(Map<String, Object> cardRegInfoBo);
+
+	RpcResult<String> cardOperate(CardOperateInfo paramMap);
+
+	RpcResult<Map<String, Object>> reissueCard(CardOperateInfo cardOperateInfo);
+}

@@ -1,0 +1,130 @@
+package cn.wellcare.controller.acc.refundpay;
+
+import cn.wellcare.acc.entity.PscPiAcc;
+import cn.wellcare.api.acc.IPscPiAccService;
+import cn.wellcare.api.trade.IPscAccPaymentService;
+import cn.wellcare.core.constant.BaseParam;
+import cn.wellcare.core.constant.Constants;
+import cn.wellcare.core.constant.PaymentType;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.exception.UnauthorizedException;
+import cn.wellcare.core.utils.EnumerateParameter;
+import cn.wellcare.payment.api.RefundPayApi;
+import cn.wellcare.pojo.common.AccPaymentResult;
+import cn.wellcare.pojo.common.RefundPayResult;
+import cn.wellcare.pojo.common.RpcResult;
+import cn.wellcare.pojo.common.ServiceResult;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
+
+@RequestMapping(Constants.REFUND_PAY)
+@Controller
+public class AccountBalanceRefundController {
+    @Resource(name = "accountPayService")
+    private IPscAccPaymentService iPscAccPaymentService;
+
+    @Resource(name = "wxNativeRefundPayService")
+    private RefundPayApi wxNativeRefundPayService;
+
+    @Resource(name = "integrationRefundPayService")
+    private RefundPayApi integrationRefundPayService;
+
+    @Resource(name = "alipayRefundService")
+    private RefundPayApi alipayRefundService;
+
+    @Resource(name = "cashPayRefundService")
+    private RefundPayApi cashPayRefundService;
+
+    @Resource(name = "pscPiAccService")
+    private IPscPiAccService iPscPiAccService;
+
+    @RequestMapping(value = Constants.ACCOUNT_BALANCE_REFUND,produces = Constants.CONTENT_TYPE_JSON)
+    @ResponseBody
+    public ServiceResult<String> accountBalanceRefund(HttpServletRequest request, HttpServletResponse response,
+                                                  @RequestParam Map<String, Object> param) {
+        ServiceResult<String> serviceResult = new ServiceResult<>();
+        RpcResult<AccPaymentResult> paymentResultRpcResult = new RpcResult<>();
+        RpcResult<RefundPayResult> refundPayResult = new RpcResult<>();
+        try {
+            Assert.notNull(param.get(BaseParam.USER_ID));
+            Assert.notNull(param.get(BaseParam.ORG_ID));
+            Assert.notNull(param.get(BaseParam.PK_PIACC));//账户主键
+            Assert.notNull(param.get(BaseParam.OUT_TRADE_NO));// 退款订单号
+            Assert.notNull(param.get(BaseParam.REFUND_AMOUNT));// 退款金额
+            String payType = (String) param.get(BaseParam.PAY_TYPE);
+            Assert.notNull(payType);
+            //退款前更新账户为锁定
+            Integer pkPiAcc = Integer.valueOf(String.valueOf(param.get(BaseParam.PK_PIACC)));
+            PscPiAcc pscPiAcc = new PscPiAcc();
+            pscPiAcc.setPkPiacc(pkPiAcc);
+            pscPiAcc.setEuStatus(EnumerateParameter.THREE);//退款过程置为冻结
+            iPscPiAccService.updatePscPiAcc(pscPiAcc);
+            param.put("payAmount", String.valueOf(param.get(BaseParam.REFUND_AMOUNT)));
+
+            //调用相关退款操作
+            if (PaymentType.WECHAT_NATIVE.getPaymentCode().equals(payType)
+                    || PaymentType.WECHAT_JSAPI.getPaymentCode().equals(payType)
+                    || PaymentType.WECHAT_SAOMA.getPaymentCode().equals(payType)
+                    || PaymentType.WECHAT_NATIVE.getPaymentName().equals(payType)
+                    || PaymentType.WECHAT_JSAPI.getPaymentName().equals(payType)
+                    || PaymentType.ALIPAY_SAOMA.getPaymentName().equals(payType)) {
+                // 微信本地扫码支付
+                refundPayResult = wxNativeRefundPayService.refundPay(param);
+            } else if (PaymentType.JUHPAY.getPaymentCode().equals(payType)
+                    || PaymentType.JUHPAY.getPaymentName().equals(payType)) {
+                refundPayResult = integrationRefundPayService.refundPay(param);
+            } else if (PaymentType.ALIPAY.getPaymentCode().equals(payType)
+                    || PaymentType.ALIPAY_SAOMA.getPaymentCode().equals(payType)
+                    || PaymentType.ALIPAY.getPaymentName().equals(payType)
+                    || PaymentType.ALIPAY_SAOMA.getPaymentName().equals(payType)) {
+                refundPayResult = alipayRefundService.refundPay(param);
+            } else if (PaymentType.CASH_PAY.getPaymentCode().equals(payType)
+                    || PaymentType.CASH_PAY.getPaymentName().equals(payType)) {
+                refundPayResult = cashPayRefundService.refundPay(param);
+            }
+            if (!refundPayResult.isSuccess()) {
+                throw new BusinessException(refundPayResult.getMsgInfo());
+            }
+            //调用余额扣除接口
+            paymentResultRpcResult = iPscAccPaymentService.accPay(param);
+            if (!paymentResultRpcResult.isSuccess()) {
+                throw new BusinessException(paymentResultRpcResult.getMsgInfo());
+            }
+            //退款状态恢复为在用
+            pscPiAcc.setEuStatus(EnumerateParameter.ONE);
+            iPscPiAccService.updatePscPiAcc(pscPiAcc);
+
+            serviceResult.setStatus(Constants.SERVICE_RESULT_SUCCESS);
+            serviceResult.setData(EnumerateParameter.ONE);
+        } catch (Exception e) {
+            serviceResult.setStatus(Constants.SERVICE_RESULT_BUS_ERROR);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.SERVER_EXCEPTION.getErrCode().equals(pe.getCode())) {
+                    serviceResult.setErrorMessage(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                } else {
+                    serviceResult.setErrorMessage(e.getMessage());
+                }
+            } else {
+                if (e instanceof UnauthorizedException) {
+                    serviceResult.setErrorMessage(ErrorEnum.UNAUTHORIZED_EXCEPTION.getErrDesc());
+                } else {
+                    e.printStackTrace();
+                    serviceResult.setErrorMessage(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                }
+            }
+        }
+        return serviceResult;
+
+    }
+
+}

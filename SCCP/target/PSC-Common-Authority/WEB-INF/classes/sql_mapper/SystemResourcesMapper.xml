@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.SystemResourcesDao">
+	<resultMap id="SystemResourcesResult" type="SystemResources">
+			<result property="content" column="content" />
+			<result property="createTime" column="create_time" />
+			<result property="id" column="id" />
+			<result property="pid" column="pid" />
+			<result property="resIcon" column="res_icon" />
+			<result property="resId" column="res_id" />
+			<result property="scope" column="scope" />
+			<result property="status" column="status" />
+			<result property="type" column="type" />
+			<result property="url" column="url" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="SystemResourcesResult">
+		select
+			content,
+			create_time,
+			id,
+			pid,
+			res_icon,
+			res_id,
+			scope,
+			status,
+			type,
+			url
+		from system_resources
+		where id = #{id}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from system_resources t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="SystemResources">
+		select 
+			content,
+			create_time,
+			id,
+			pid,
+			res_icon,
+			res_id,
+			scope,
+			status,
+			type,
+			url
+		from system_resources
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="content != null and content !=''"  > 
+			and content= #{content}
+		</if>
+		<if test="createTime != null and createTime !=''"  > 
+			and create_time= #{createTime}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="pid != null and pid !=''"  > 
+			and pid= #{pid}
+		</if>
+		<if test="resIcon != null and resIcon !=''"  > 
+			and res_icon= #{resIcon}
+		</if>
+		<if test="resId != null and resId !=''"  > 
+			and res_id= #{resId}
+		</if>
+		<if test="scope != null and scope !=''"  > 
+			and scope= #{scope}
+		</if>
+		<if test="status != null and status !=''"  > 
+			and status= #{status}
+		</if>
+		<if test="type != null and type !=''"  >
+			and type= #{type}
+		</if>
+		<if test="url != null and url !=''"  > 
+			and url= #{url}
+		</if>
+		<if test="q_content != null and q_content !=''"  >
+			and content like CONCAT('%',#{q_content},'%')
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from system_resources where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="SystemResources">
+        update system_resources
+    	<set>
+			<if test="content != null">content= #{content},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="pid != null">pid= #{pid},</if>
+			<if test="resIcon != null">res_icon= #{resIcon},</if>
+			<if test="resId != null">res_id= #{resId},</if>
+			<if test="scope != null">scope= #{scope},</if>
+			<if test="status != null">status= #{status},</if>
+			<if test="type != null">type= #{type},</if>
+			<if test="url != null">url= #{url}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="SystemResources" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			system_resources
+		(
+			content,
+			create_time,
+			
+			pid,
+			res_icon,
+			res_id,
+			scope,
+			status,
+			type,
+			url
+		)
+		values
+		(
+			#{content},
+			#{createTime},
+			
+			#{pid},
+			#{resIcon},
+			#{resId},
+			#{scope},
+			#{status},
+			#{type},
+			#{url}
+		)
+	</insert>
+	
+	<select id="getTreeList" resultType="SystemResources">
+		SELECT
+			CASE (
+				SELECT
+					COUNT (1)
+				FROM
+					system_resources
+				WHERE
+					pid = t1. ID
+				AND status = 1
+			)
+		WHEN 0 THEN
+			'open'
+		ELSE
+			'closed'
+		END AS state,
+		 ID,
+		 pid,
+		 url,
+		 CONTENT,
+		 create_time,
+		 TYPE,
+		 status,
+		 res_id,
+		 res_icon,
+		 SCOPE
+		FROM
+			system_resources t1
+		WHERE
+			pid = #{pid}
+		AND status = 1
+		ORDER BY
+			ID
+	</select>
+	
+	<select id="getResourceByRoleId" resultType="SystemResources">
+        SELECT
+			*
+		FROM
+			system_resources t1
+		WHERE
+			t1. ID IN (
+				SELECT
+					t2.res_id
+				FROM
+					system_resources_roles t2
+				WHERE
+					t2.role_id = #{roleId}
+			)
+		ORDER BY
+			ID
+    </select>
+    
+    <select id="getResourceByUser" parameterType="Integer" resultType="SystemResources">
+    	SELECT
+			res.* 
+		FROM
+			(
+			SELECT
+				res_id 
+			FROM
+				( SELECT role_id FROM system_user_role WHERE user_id = #{user} ) userrole
+				LEFT JOIN system_resources_roles resrole ON resrole.role_id = userrole.role_id 
+			) resid
+			LEFT JOIN system_resources res ON res.ID = resid.res_id
+    </select>
+</mapper>

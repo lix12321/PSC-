@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.card.CardOperateDao">
+	<resultMap id="CardOperateResult" type="cn.wellcare.card.entity.CardOperate">
+		<result property="cardNo" column="card_no" />
+		<result property="createTime" column="create_time" />
+		<result property="creator" column="creator" />
+		<result property="dateHap" column="date_hap" />
+		<result property="delFlag" column="del_flag" />
+		<result property="euOptype" column="eu_optype" />
+		<result property="modifier" column="modifier" />
+		<result property="modityTime" column="modity_time" />
+		<result property="nameEmpOpera" column="name_emp_opera" />
+		<result property="note" column="note" />
+		<result property="pkEmpOpera" column="pk_emp_opera" />
+		<result property="pkOperateDetail" column="pk_operate_detail" />
+		<result property="pkOrg" column="pk_org" />
+		<result property="pkReginfo" column="pk_reginfo" />
+		<result property="ts" column="ts" />
+	</resultMap>
+
+	<select id="get" parameterType="Integer" resultMap="CardOperateResult">
+		select
+			card_no,
+			create_time,
+			creator,
+			date_hap,
+			del_flag,
+			eu_optype,
+			modifier,
+			modity_time,
+			name_emp_opera,
+			note,
+			pk_emp_opera,
+			pk_operate_detail,
+			pk_org,
+			pk_reginfo,
+			ts
+		from card_operate
+		where pk_operate_detail = #{pkOperateDetail}
+	</select>
+
+	<select id="getCount" parameterType="java.util.Map"
+			resultType="java.lang.Integer">
+		select count(1) from card_operate t1
+		<include refid="whereConditions" />
+	</select>
+
+	<select id="getList" resultType="cn.wellcare.card.entity.CardOperate">
+		select
+		card_no,
+		create_time,
+		creator,
+		date_hap,
+		del_flag,
+		eu_optype,
+		modifier,
+		modity_time,
+		name_emp_opera,
+		note,
+		pk_emp_opera,
+		pk_operate_detail,
+		pk_org,
+		pk_reginfo,
+		ts
+		from card_operate
+		<include refid="whereConditions" />
+	</select>
+
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="cardNo != null and cardNo !=''"  >
+				and card_no= #{cardNo}
+			</if>
+			<if test="createTime != null and createTime !=''"  >
+				and create_time= #{createTime}
+			</if>
+			<if test="creator != null and creator !=''"  >
+				and creator= #{creator}
+			</if>
+			<if test="dateHap != null and dateHap !=''"  >
+				and date_hap= #{dateHap}
+			</if>
+			<if test="delFlag != null and delFlag !=''"  >
+				and del_flag= #{delFlag}
+			</if>
+			<if test="euOptype != null and euOptype !=''"  >
+				and eu_optype= #{euOptype}
+			</if>
+			<if test="modifier != null and modifier !=''"  >
+				and modifier= #{modifier}
+			</if>
+			<if test="modityTime != null and modityTime !=''"  >
+				and modity_time= #{modityTime}
+			</if>
+			<if test="nameEmpOpera != null and nameEmpOpera !=''"  >
+				and name_emp_opera= #{nameEmpOpera}
+			</if>
+			<if test="note != null and note !=''"  >
+				and note= #{note}
+			</if>
+			<if test="pkEmpOpera != null and pkEmpOpera !=''"  >
+				and pk_emp_opera= #{pkEmpOpera}
+			</if>
+			<if test="pkOperateDetail != null and pkOperateDetail !=''"  >
+				and pk_operate_detail= #{pkOperateDetail}
+			</if>
+			<if test="pkOrg != null and pkOrg !=''"  >
+				and pk_org= #{pkOrg}
+			</if>
+			<if test="pkReginfo != null and pkReginfo !=''"  >
+				and pk_reginfo= #{pkReginfo}
+			</if>
+			<if test="ts != null and ts !=''"  >
+				and ts= #{ts}
+			</if>
+		</trim>
+	</sql>
+
+	<delete id="del">
+        delete from card_operate where id = #{id}
+	</delete>
+
+	<update id="update" parameterType="cn.wellcare.card.entity.CardOperate">
+		update card_operate
+		<set>
+			<if test="cardNo != null">card_no= #{cardNo},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="creator != null">creator= #{creator},</if>
+			<if test="dateHap != null">date_hap= #{dateHap},</if>
+			<if test="delFlag != null">del_flag= #{delFlag},</if>
+			<if test="euOptype != null">eu_optype= #{euOptype},</if>
+			<if test="modifier != null">modifier= #{modifier},</if>
+			<if test="modityTime != null">modity_time= #{modityTime},</if>
+			<if test="nameEmpOpera != null">name_emp_opera= #{nameEmpOpera},</if>
+			<if test="note != null">note= #{note},</if>
+			<if test="pkEmpOpera != null">pk_emp_opera= #{pkEmpOpera},</if>
+			<if test="pkOperateDetail != null">pk_operate_detail= #{pkOperateDetail},</if>
+			<if test="pkOrg != null">pk_org= #{pkOrg},</if>
+			<if test="pkReginfo != null">pk_reginfo= #{pkReginfo},</if>
+			<if test="ts != null">ts= #{ts}</if>
+		</set>
+		where pk_operate_detail = #{pkOperateDetail}
+	</update>
+
+	<insert id="save" parameterType="cn.wellcare.card.entity.CardOperate" >
+		insert into 
+			card_operate
+		(
+			pk_operate_detail,
+			card_no,
+			create_time,
+			creator,
+			date_hap,
+			del_flag,
+			eu_optype,
+			modifier,
+			modity_time,
+			name_emp_opera,
+			note,
+			pk_emp_opera,
+			
+			pk_org,
+			pk_reginfo,
+			ts
+		)
+		values
+		(
+			#{pkOperateDetail},
+			#{cardNo},
+			#{createTime},
+			#{creator},
+			#{dateHap},
+			#{delFlag},
+			#{euOptype},
+			#{modifier},
+			#{modityTime},
+			#{nameEmpOpera},
+			#{note},
+			#{pkEmpOpera},
+			
+			#{pkOrg},
+			#{pkReginfo},
+			#{ts}
+		)
+	</insert>
+
+</mapper>

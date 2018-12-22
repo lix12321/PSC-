@@ -1,0 +1,68 @@
+           中国建设银行
+	POS签购单      请妥善保管
+---------------------------------
+商户名称(MERCHANT NAME):
+  卡中心1测试
+商户号(MERCHANT NO):
+  105610153110000 #0003
+终端号(TERMINAL NO):
+  00000815
+操作员号(OPERATOR NO):01
+发卡行名:招商银行
+收单行号:建设银行
+卡号:6214 83** **** 8042 (C)
+交易类型(TRANS TYPE):
+  消费撤销/VOID APPLE PAY
+批次号(BATCH NO):000264  
+凭证号(VOUCHER NO):000115
+参考号(REFER NO):828816873054
+日期时间(DATE TIME):
+  2018-10-15 16:09:37
+有效期(EXP DATE):21/02
+金额(AMOUNT):RMB 0.01
+备注(REFERENCE):
+金额(AMOUNT):RMB 0.01
+原凭证号(ORG VOUCHER):000114
+---------------------------------
+本人确认以上交易,同意将其记入本卡帐户
+I ACKNOWLEDGE SATISFACTORY RECEIPT OF
+ RELATIVE  GOODS/SERVICE
+持卡人签名(SIGNATURE):
+#LDSIGN#
+
+商户存根(MERCHANT COPY)
+终端序列号(S/N):89705999
+终端版本号(Ver):00000601180701
+DLL版本号(Ver):18,8,30,1
+#CUT#
+           中国建设银行     
+	POS签购单      请妥善保管
+---------------------------------
+商户名称(MERCHANT NAME):
+  卡中心1测试
+商户号(MERCHANT NO):
+  105610153110000 #0003
+终端号(TERMINAL NO):
+  00000815
+操作员号(OPERATOR NO):01
+发卡行名:招商银行
+收单行号:建设银行
+卡号(CARD NO):
+  6214 83** **** 8042 (C)
+交易类型(TRANS TYPE):
+  消费撤销/VOID APPLE PAY
+批次号(BATCH NO):000264  
+凭证号(VOUCHER NO):000115
+参考号(REFER NO):828816873054
+日期时间(DATE TIME):
+  2018-10-15 16:09:37
+有效期(EXP DATE):21/02
+金额(AMOUNT):RMB 0.01
+备注(REFERENCE):
+金额(AMOUNT):RMB 0.01
+原凭证号(ORG VOUCHER):000114
+---------------------------------
+持卡人存根(MERCHANT COPY)
+终端序列号(S/N):89705999
+终端版本号(Ver):00000601180701
+DLL版本号(Ver):18,8,30,1

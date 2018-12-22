@@ -1,0 +1,44 @@
+POST http://localhost:8088/refundPay/accountBalanceRefund?userId=67810&pkPiacc=117&orgId=1&outTradeNo=45648945645645646&refundAmount=0.01&payType=001
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-21T035539.200.json
+
+###
+
+POST http://localhost:8088/refundPay/accountBalanceRefund?userId=67810&pkPiacc=117&orgId=1&outTradeNo=576874525678654678&refundAmount=0.01&payType=001
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-21T035206.200.json
+
+###
+
+POST http://localhost:8088/refundPay/accountBalanceRefund?userId=67810&pkPiacc=117&orgId=1&outTradeNo=87897894564564123123&refundAmount=0.01&payType=001
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-21T034924.200.json
+
+###
+
+POST http://localhost:8088/refundPay/accountBalanceRefund?userId=67810&pkPiacc=117&orgId=1&outTradeNo=87897894564564123123&refundAmount=0.01&payType=001
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8088/refundPay/accountBalanceRefund?userId=67810&pkPiacc=117&orgId=1&outTradeNo=87897894564564123123&refundAmount=0.01&payType=001
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8088/refundPay/accountBalanceRefund?userId=67810&pkPiacc=117&orgId=1&outTradeNo=798789789745451231&refundAmount=0.01&payType=001
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-21T031927.200.json
+
+###
+

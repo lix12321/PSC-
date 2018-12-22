@@ -1,0 +1,5 @@
+cn\wellcare\api\acc\IPscPiAccCreditService.class
+cn\wellcare\api\trade\IPscAccRefundService.class
+cn\wellcare\api\acc\IPscPiAccService.class
+cn\wellcare\api\trade\IPscAccPaymentService.class
+cn\wellcare\api\acc\IPscPiAccDetailService.class

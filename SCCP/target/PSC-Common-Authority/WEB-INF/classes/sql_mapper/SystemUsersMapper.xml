@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.SystemUsersDao">
+	<resultMap id="SystemUsersResult" type="cn.wellcare.entity.SystemUsers">
+			<result property="createTime" column="create_time" />
+			<result property="deleted" column="deleted" />
+			<result property="id" column="id" />
+			<result property="loginName" column="login_name" />
+			<result property="orgId" column="org_id" />
+			<result property="pwd" column="pwd" />
+			<result property="remark" column="remark" />
+			<result property="updateTime" column="update_time" />
+	</resultMap>
+	
+	<resultMap id="SystemUsersBO" type="cn.wellcare.bo.SystemUsersBO">
+			<result property="createTime" column="create_time" />
+			<result property="deleted" column="deleted" />
+			<result property="id" column="id" />
+			<result property="loginName" column="login_name" />
+			<result property="orgId" column="org_id" />
+			<result property="pwd" column="pwd" />
+			<result property="remark" column="remark" />
+			<result property="updateTime" column="update_time" />
+			<result property="roleId" column="role_id" />
+			<result property="roleCode" column="role_code" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="SystemUsersResult">
+		select
+			create_time,
+			deleted,
+			id,
+			login_name,
+			org_id,
+			pwd,
+			remark,
+			update_time
+		from system_users
+		where id = #{id}
+	</select>
+	
+	<select id="getByLoginName" parameterType="String" resultMap="SystemUsersBO">
+		SELECT
+			urs.*, sr.role_code
+		FROM
+			(
+				SELECT
+					su. ID,
+					su.create_time,
+					su.deleted,
+					su.login_name,
+					su.org_id,
+					su.pwd,
+					su.remark,
+					su.update_time,
+					sur.role_id
+				FROM
+					system_users su
+				LEFT JOIN (
+					SELECT
+						user_id,
+						role_id
+					FROM
+						system_user_role
+				) sur ON su. ID = sur.user_id
+				WHERE
+					su.login_name = #{username}
+			) urs
+		LEFT JOIN (
+			SELECT
+				ID AS roleid,
+				role_code
+			FROM
+				system_roles
+		) sr ON urs.role_id = sr.roleid
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from system_users t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.SystemUsers">
+		select 
+			create_time,
+			deleted,
+			id,
+			login_name,
+			org_id,
+			pwd,
+			remark,
+			update_time
+		from system_users
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="createTime != null and createTime !=''"  > 
+			and create_time= #{createTime}
+		</if>
+		<if test="deleted != null and deleted !=''"  > 
+			and deleted= #{deleted}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="loginName != null and loginName !=''"  > 
+			and login_name= #{loginName}
+		</if>
+		<if test="orgId != null and orgId !=''"  > 
+			and org_id= #{orgId}
+		</if>
+		<if test="pwd != null and pwd !=''"  > 
+			and pwd= #{pwd}
+		</if>
+		<if test="remark != null and remark !=''"  > 
+			and remark= #{remark}
+		</if>
+		<if test="updateTime != null and updateTime !=''"  > 
+			and update_time= #{updateTime}
+		</if>
+		<if test="q_loginName != null and q_loginName !=''"  >
+			and login_name= #{q_loginName}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from system_users where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.SystemUsers">
+        update system_users
+    	<set>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="deleted != null">deleted= #{deleted},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="loginName != null">login_name= #{loginName},</if>
+			<if test="orgId != null">org_id= #{orgId},</if>
+			<if test="pwd != null">pwd= #{pwd},</if>
+			<if test="remark != null">remark= #{remark},</if>
+			<if test="updateTime != null">update_time= #{updateTime}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.SystemUsers" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			system_users
+		(
+			create_time,
+			deleted,
+			
+			login_name,
+			org_id,
+			pwd,
+			remark,
+			update_time
+		)
+		values
+		(
+			#{createTime},
+			#{deleted},
+			
+			#{loginName},
+			#{orgId},
+			#{pwd},
+			#{remark},
+			#{updateTime}
+		)
+	</insert>
+
+</mapper>

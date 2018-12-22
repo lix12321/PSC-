@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.card.CardChargeDao">
+	<resultMap id="CardChargeResult" type="cn.wellcare.card.entity.CardCharge">
+		<result property="amount" column="amount" />
+		<result property="codeDepartment" column="code_department" />
+		<result property="createTime" column="create_time" />
+		<result property="creator" column="creator" />
+		<result property="delFlag" column="del_flag" />
+		<result property="dtPaymode" column="dt_paymode" />
+		<result property="modifier" column="modifier" />
+		<result property="modityTime" column="modity_time" />
+		<result property="pkCharge" column="pk_charge" />
+		<result property="pkReginfo" column="pk_reginfo" />
+		<result property="ts" column="ts" />
+	</resultMap>
+
+	<select id="get" parameterType="Integer" resultMap="CardChargeResult">
+		select
+			amount,
+			code_department,
+			create_time,
+			creator,
+			del_flag,
+			dt_paymode,
+			modifier,
+			modity_time,
+			pk_charge,
+			pk_reginfo,
+			ts
+		from card_charge
+	</select>
+
+	<select id="getCount" parameterType="java.util.Map"
+			resultType="java.lang.Integer">
+		select count(1) from card_charge t1
+		<include refid="whereConditions" />
+	</select>
+
+	<select id="getList" resultType="cn.wellcare.card.entity.CardCharge">
+		select
+		amount,
+		code_department,
+		create_time,
+		creator,
+		del_flag,
+		dt_paymode,
+		modifier,
+		modity_time,
+		pk_charge,
+		pk_reginfo,
+		ts
+		from card_charge
+		<include refid="whereConditions" />
+	</select>
+
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="amount != null and amount !=''"  >
+				and amount= #{amount}
+			</if>
+			<if test="codeDepartment != null and codeDepartment !=''"  >
+				and code_department= #{codeDepartment}
+			</if>
+			<if test="createTime != null and createTime !=''"  >
+				and create_time= #{createTime}
+			</if>
+			<if test="creator != null and creator !=''"  >
+				and creator= #{creator}
+			</if>
+			<if test="delFlag != null and delFlag !=''"  >
+				and del_flag= #{delFlag}
+			</if>
+			<if test="dtPaymode != null and dtPaymode !=''"  >
+				and dt_paymode= #{dtPaymode}
+			</if>
+			<if test="modifier != null and modifier !=''"  >
+				and modifier= #{modifier}
+			</if>
+			<if test="modityTime != null and modityTime !=''"  >
+				and modity_time= #{modityTime}
+			</if>
+			<if test="pkCharge != null and pkCharge !=''"  >
+				and pk_charge= #{pkCharge}
+			</if>
+			<if test="pkReginfo != null and pkReginfo !=''"  >
+				and pk_reginfo= #{pkReginfo}
+			</if>
+			<if test="ts != null and ts !=''"  >
+				and ts= #{ts}
+			</if>
+		</trim>
+	</sql>
+
+	<delete id="del">
+        delete from card_charge where id = #{id}
+	</delete>
+
+	<insert id="batchSave" parameterType="java.util.List">
+		insert into
+		card_charge
+		(
+		amount,
+		code_department,
+		create_time,
+		creator,
+		del_flag,
+		dt_paymode,
+		modifier,
+		modity_time,
+		pk_charge,
+		pk_reginfo,
+		ts
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.amount},
+			#{item.codeDepartment},
+			#{item.createTime},
+			#{item.creator},
+			#{item.delFlag},
+			#{item.dtPaymode},
+			#{item.modifier},
+			#{item.modityTime},
+			#{item.pkCharge},
+			#{item.pkReginfo},
+			#{item.ts}
+			)
+		</foreach>
+	</insert>
+
+
+</mapper>

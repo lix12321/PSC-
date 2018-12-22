@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.acc.PscPiAccCreditDao">
+	<resultMap id="PscPiAccCreditResult" type="cn.wellcare.acc.entity.PscPiAccCredit">
+			<result property="amtCredit" column="amt_credit" />
+			<result property="chkInfo" column="chk_info" />
+			<result property="createTime" column="create_time" />
+			<result property="creator" column="creator" />
+			<result property="dateChk" column="date_chk" />
+			<result property="dateOpera" column="date_opera" />
+			<result property="delFlag" column="del_flag" />
+			<result property="euDirect" column="eu_direct" />
+			<result property="modifier" column="modifier" />
+			<result property="modityTime" column="modity_time" />
+			<result property="nameEmpChk" column="name_emp_chk" />
+			<result property="nameEmpOpera" column="name_emp_opera" />
+			<result property="note" column="note" />
+			<result property="pkAcccredit" column="pk_acccredit" />
+			<result property="pkEmpChk" column="pk_emp_chk" />
+			<result property="pkEmpOpera" column="pk_emp_opera" />
+			<result property="pkOrg" column="pk_org" />
+			<result property="pkPi" column="pk_pi" />
+			<result property="pkPiacc" column="pk_piacc" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PscPiAccCreditResult">
+		select
+			amt_credit,
+			chk_info,
+			create_time,
+			creator,
+			date_chk,
+			date_opera,
+			del_flag,
+			eu_direct,
+			modifier,
+			modity_time,
+			name_emp_chk,
+			name_emp_opera,
+			note,
+			pk_acccredit,
+			pk_emp_chk,
+			pk_emp_opera,
+			pk_org,
+			pk_pi,
+			pk_piacc
+		from psc_pi_acc_credit
+		where pk_acccredit = #{pkAcccredit}
+	</select>
+	<select id="getCredit" parameterType="Integer" resultMap="PscPiAccCreditResult">
+		select
+			amt_credit,
+			chk_info,
+			create_time,
+			creator,
+			date_chk,
+			date_opera,
+			del_flag,
+			eu_direct,
+			modifier,
+			modity_time,
+			name_emp_chk,
+			name_emp_opera,
+			note,
+			pk_acccredit,
+			pk_emp_chk,
+			pk_emp_opera,
+			pk_org,
+			pk_pi,
+			pk_piacc
+		from psc_pi_acc_credit
+		where pk_piacc = #{pkPiacc}
+	</select>
+
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from psc_pi_acc_credit t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.acc.entity.PscPiAccCredit">
+		select 
+			amt_credit,
+			chk_info,
+			create_time,
+			creator,
+			date_chk,
+			date_opera,
+			del_flag,
+			eu_direct,
+			modifier,
+			modity_time,
+			name_emp_chk,
+			name_emp_opera,
+			note,
+			pk_acccredit,
+			pk_emp_chk,
+			pk_emp_opera,
+			pk_org,
+			pk_pi,
+			pk_piacc
+		from psc_pi_acc_credit
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="amtCredit != null"  > 
+			and amt_credit= #{amtCredit}
+		</if>
+		<if test="chkInfo != null"  > 
+			and chk_info= #{chkInfo}
+		</if>
+		<if test="createTime != null"  > 
+			and create_time= #{createTime}
+		</if>
+		<if test="creator != null"  > 
+			and creator= #{creator}
+		</if>
+		<if test="dateChk != null"  > 
+			and date_chk= #{dateChk}
+		</if>
+		<if test="dateOpera != null"  > 
+			and date_opera= #{dateOpera}
+		</if>
+		<if test="delFlag != null"  > 
+			and del_flag= #{delFlag}
+		</if>
+		<if test="euDirect != null"  > 
+			and eu_direct= #{euDirect}
+		</if>
+		<if test="modifier != null"  > 
+			and modifier= #{modifier}
+		</if>
+		<if test="modityTime != null"  > 
+			and modity_time= #{modityTime}
+		</if>
+		<if test="nameEmpChk != null"  > 
+			and name_emp_chk= #{nameEmpChk}
+		</if>
+		<if test="nameEmpOpera != null"  > 
+			and name_emp_opera= #{nameEmpOpera}
+		</if>
+		<if test="note != null"  > 
+			and note= #{note}
+		</if>
+		<if test="pkAcccredit != null"  > 
+			and pk_acccredit= #{pkAcccredit}
+		</if>
+		<if test="pkEmpChk != null"  > 
+			and pk_emp_chk= #{pkEmpChk}
+		</if>
+		<if test="pkEmpOpera != null"  > 
+			and pk_emp_opera= #{pkEmpOpera}
+		</if>
+		<if test="pkOrg != null"  > 
+			and pk_org= #{pkOrg}
+		</if>
+		<if test="pkPi != null"  > 
+			and pk_pi= #{pkPi}
+		</if>
+		<if test="pkPiacc != null"  > 
+			and pk_piacc= #{pkPiacc}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from psc_pi_acc_credit where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.acc.entity.PscPiAccCredit">
+        update psc_pi_acc_credit
+    	<set>
+			<if test="amtCredit != null">amt_credit= #{amtCredit},</if>
+			<if test="chkInfo != null">chk_info= #{chkInfo},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="creator != null">creator= #{creator},</if>
+			<if test="dateChk != null">date_chk= #{dateChk},</if>
+			<if test="dateOpera != null">date_opera= #{dateOpera},</if>
+			<if test="delFlag != null">del_flag= #{delFlag},</if>
+			<if test="euDirect != null">eu_direct= #{euDirect},</if>
+			<if test="modifier != null">modifier= #{modifier},</if>
+			<if test="modityTime != null">modity_time= #{modityTime},</if>
+			<if test="nameEmpChk != null">name_emp_chk= #{nameEmpChk},</if>
+			<if test="nameEmpOpera != null">name_emp_opera= #{nameEmpOpera},</if>
+			<if test="note != null">note= #{note},</if>
+			<if test="pkAcccredit != null">pk_acccredit= #{pkAcccredit},</if>
+			<if test="pkEmpChk != null">pk_emp_chk= #{pkEmpChk},</if>
+			<if test="pkEmpOpera != null">pk_emp_opera= #{pkEmpOpera},</if>
+			<if test="pkOrg != null">pk_org= #{pkOrg},</if>
+			<if test="pkPi != null">pk_pi= #{pkPi},</if>
+			<if test="pkPiacc != null">pk_piacc= #{pkPiacc},</if>
+	    </set>
+        where pk_acccredit = #{pkAcccredit}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.acc.entity.PscPiAccCredit" useGeneratedKeys="true" keyProperty="pkAcccredit" keyColumn="pk_acccredit">
+		insert into 
+			psc_pi_acc_credit
+		(
+			amt_credit,
+			chk_info,
+			create_time,
+			creator,
+			date_chk,
+			date_opera,
+			del_flag,
+			eu_direct,
+			modifier,
+			modity_time,
+			name_emp_chk,
+			name_emp_opera,
+			note,
+			pk_emp_chk,
+			pk_emp_opera,
+			pk_org,
+			pk_pi,
+			pk_piacc
+		)
+		values
+		(
+			#{amtCredit},
+			#{chkInfo},
+			#{createTime},
+			#{creator},
+			#{dateChk},
+			#{dateOpera},
+			#{delFlag},
+			#{euDirect},
+			#{modifier},
+			#{modityTime},
+			#{nameEmpChk},
+			#{nameEmpOpera},
+			#{note},
+			#{pkEmpChk},
+			#{pkEmpOpera},
+			#{pkOrg},
+			#{pkPi},
+			#{pkPiacc}
+		)
+	</insert>
+	
+</mapper>

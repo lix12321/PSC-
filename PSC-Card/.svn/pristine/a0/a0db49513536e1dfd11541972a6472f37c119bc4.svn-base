@@ -1,0 +1,73 @@
+package cn.wellcare.portal.controller.card;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.wellcare.api.card.ICardEmpolyeeService;
+import cn.wellcare.card.bo.card.EmpolyeeRegInfo;
+import cn.wellcare.pojo.RpcResult;
+import cn.wellcare.pojo.ServiceResult;
+
+@RequestMapping("cardEmpolyee")
+@Controller
+public class CardEmpolyeeController {
+	@Resource
+	private ICardEmpolyeeService cardEmpolyeeService;
+
+    /**
+     * 查询员工信息
+     * @param paramMap
+     * @return
+     */
+    @RequestMapping(value="getEmpolyeeRegInfo",method = RequestMethod.POST)
+    @ResponseBody
+	public ServiceResult<List<EmpolyeeRegInfo>> getEmpolyeeRegInfo(@RequestParam Map<String, Object> paramMap) {
+		ServiceResult<List<EmpolyeeRegInfo>> result = new ServiceResult<>();
+		if (null == paramMap || paramMap.isEmpty()) {
+			return result.failedResult("员工信息为空");
+        }
+		RpcResult<List<EmpolyeeRegInfo>> rpcresult = cardEmpolyeeService.getEmpolyeeRegInfo(paramMap);
+		return result.convert2SR(rpcresult);
+    }
+
+
+    /**
+     * 员工批量发卡
+     * @param paramMap
+     * @return
+     */
+    @RequestMapping(value = "batchSendCard",method = RequestMethod.POST)
+    @ResponseBody
+	public ServiceResult<String> batchSendCard(@RequestParam Map<String, Object> paramMap) {
+		ServiceResult<String> result = new ServiceResult<>();
+        if (null == paramMap || paramMap.isEmpty()){
+			return result.failedResult("员工卡信息为空");
+        }
+		RpcResult<String> rpcresult = cardEmpolyeeService.batchSendCard(paramMap);
+		return result.convert2SR(rpcresult);
+    }
+
+    /**
+     * 批量充值
+     * @param paramMap
+     * @return
+     */
+    @RequestMapping(value = "batchCharge",method = RequestMethod.POST)
+    @ResponseBody
+	public ServiceResult<String> batchCharge(@RequestParam Map<String, Object> paramMap) {
+		ServiceResult<String> result = new ServiceResult<>();
+        if (null == paramMap || paramMap.isEmpty()){
+			return result.failedResult("员工卡信息为空");
+        }
+		RpcResult<String> rpcresult = cardEmpolyeeService.batchCharge(paramMap);
+		return result.convert2SR(rpcresult);
+    }
+}

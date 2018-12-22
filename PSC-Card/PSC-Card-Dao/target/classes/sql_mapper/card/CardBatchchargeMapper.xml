@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.card.CardBatchchargeDao">
+	<resultMap id="CardBatchchargeResult" type="cn.wellcare.card.entity.CardBatchcharge">
+			<result property="applyDatapath" column="apply_datapath" />
+			<result property="codeApplydepartment" column="code_applydepartment" />
+			<result property="codeApplyer" column="code_applyer" />
+			<result property="createTime" column="create_time" />
+			<result property="creator" column="creator" />
+			<result property="datetimeApply" column="datetime_apply" />
+			<result property="delFlag" column="del_flag" />
+			<result property="modifier" column="modifier" />
+			<result property="modityTime" column="modity_time" />
+			<result property="pkBatchcharge" column="pk_batchcharge" />
+			<result property="ts" column="ts" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="CardBatchchargeResult">
+		select
+			apply_datapath,
+			code_applydepartment,
+			code_applyer,
+			create_time,
+			creator,
+			datetime_apply,
+			del_flag,
+			modifier,
+			modity_time,
+			pk_batchcharge,
+			ts
+		from card_batchcharge
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from card_batchcharge t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.card.entity.CardBatchcharge">
+		select 
+			apply_datapath,
+			code_applydepartment,
+			code_applyer,
+			create_time,
+			creator,
+			datetime_apply,
+			del_flag,
+			modifier,
+			modity_time,
+			pk_batchcharge,
+			ts
+		from card_batchcharge
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="applyDatapath != null and applyDatapath !=''"  > 
+			and apply_datapath= #{applyDatapath}
+		</if>
+		<if test="codeApplydepartment != null and codeApplydepartment !=''"  > 
+			and code_applydepartment= #{codeApplydepartment}
+		</if>
+		<if test="codeApplyer != null and codeApplyer !=''"  > 
+			and code_applyer= #{codeApplyer}
+		</if>
+		<if test="createTime != null and createTime !=''"  > 
+			and create_time= #{createTime}
+		</if>
+		<if test="creator != null and creator !=''"  > 
+			and creator= #{creator}
+		</if>
+		<if test="datetimeApply != null and datetimeApply !=''"  > 
+			and datetime_apply= #{datetimeApply}
+		</if>
+		<if test="delFlag != null and delFlag !=''"  > 
+			and del_flag= #{delFlag}
+		</if>
+		<if test="modifier != null and modifier !=''"  > 
+			and modifier= #{modifier}
+		</if>
+		<if test="modityTime != null and modityTime !=''"  > 
+			and modity_time= #{modityTime}
+		</if>
+		<if test="pkBatchcharge != null and pkBatchcharge !=''"  > 
+			and pk_batchcharge= #{pkBatchcharge}
+		</if>
+		<if test="ts != null and ts !=''"  > 
+			and ts= #{ts}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from card_batchcharge where id = #{id}
+	</delete>
+	
+	
+</mapper>

@@ -1,0 +1,10 @@
+package cn.wellcare.api.trade;
+
+import java.util.Map;
+
+import cn.wellcare.pojo.common.PaymentResult;
+import cn.wellcare.pojo.common.RpcResult;
+
+public interface IPscAccRefundService {
+	public RpcResult<PaymentResult> accRefund(Map<String, Object> param);
+}

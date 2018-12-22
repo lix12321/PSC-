@@ -1,0 +1,853 @@
+body {
+    margin: 0;
+    padding: 0;
+    /* background-color: #aa2424; */
+    font-family: Microsoft YaHei;
+    background-image: url(../img/dotted.png);
+}
+
+.m-leftbar > .menus::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.m-leftbar > .menus::-webkit-scrollbar-track-piece {
+    background-color: #272e33;
+    -webkit-border-radius: 6px;
+}
+
+.m-leftbar > .menus::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    background-color: #bfc4c5;
+    -webkit-border-radius: 6px;
+}
+
+.m-leftbar > .menus::-webkit-scrollbar-thumb:horizontal {
+    width: 5px;
+    background-color: #bfc4c5;
+    -webkit-border-radius: 6px;
+}
+
+.m-leftbar > .menus {
+    scrollbar-face-color: #bfc4c5;
+    scrollbar-highlight-color: #272e33;
+    scrollbar-arrow-color: #272e33;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.g-top {
+    height:80px;
+    background-color: #204952;
+    min-width: 1280px;
+}
+
+.g-head {
+    height:80px;
+    margin: 0 auto;
+    background-image: url(../img/logo.png);
+    background-repeat: no-repeat;
+    background-position: 10px 2px;
+    background-size: 200px 80px;
+    position: relative;
+    max-width: 1920px;
+    min-width: 1280px;
+}
+
+.g-head .title {
+    height:80px;
+    line-height:80px;
+    position: absolute;
+    top: 0px;
+    left: 230px;
+    color: white;
+    font-size: 29px;
+}
+
+.m-loguser {
+    width: 180px;
+    height:80px;
+    position: absolute;
+    top: 0px;
+    right:53px;
+}
+
+.m-loguser > li {
+    height:80px;
+    line-height:80px;
+    position: relative;
+    float:right;
+}
+.m-loguser > li span{
+	color:#ddd;
+	font-size:14px;
+	display:block;
+	float:left;
+}
+.m-loguser > li a {
+    display: block;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.m-loguser > li a.name {
+    color: white;
+    float: left;
+    font-size: 14px;
+    text-align: right;
+    position: relative;
+    left:10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height:80px;
+}
+
+.m-loguser > li a.detail {
+    background-image: url(../img/detail.png);
+    width: 17px;
+    height: 12px;
+    float: left;
+    position: relative;
+    top:34px;
+    left:10px;
+}
+
+.m-loguser > li > ul {
+    display: none; 
+    position: absolute;
+    width: 150px;
+    height:60px;
+    line-height:60px;
+    background-color: #18343a;
+    top:80px;
+    left: 0px;
+    z-index: 20;
+}
+
+.m-loguser > li > ul > li {
+	color:#fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.m-loguser > li:active > ul {
+    /*display: block;*/
+}
+
+.g-frame {
+    min-width: 1280px;
+    max-width: 1920px;
+    min-height: 200px;
+    margin: 0 auto;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+
+.m-leftbar {
+    width: 200px;
+    position: fixed;
+    top: 53px;
+    bottom: 0px;
+    z-index: 10;
+    /* border: 1px solid #efefef; */
+    /* background-image: url(../img/dotted.png); */
+    background-color: #e8f2f5;
+    -webkit-box-shadow: 3px 3px 3px #cbd6d6;
+    -moz-box-shadow: 3px 3px 3px #cbd6d6;
+    box-shadow: 3px 3px 3px #cbd6d6;
+}
+
+.m-leftbar .bar {
+    height: 68px;
+    background-color: #e8f2f5;
+    line-height: 68px;
+    text-align: left;
+    font-size: 19px;
+    padding: 0px 20px 0px 14px;
+    color: black;
+}
+
+.m-leftbar .bar .expend {
+    display: inline-block;
+    width: 17px;
+    height: 47px;
+    position: absolute;
+    right: -1px;
+    border: 1px solid #d2e1ec;
+    border-right-color: white;
+    background-color: white;
+    top:9px;
+    background-image: url(../img/narrow.png);
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.m-leftbar .bar .open {
+
+}
+
+.m-leftbar .bar .close {
+    background-position: 0px -56px;
+}
+
+.m-leftbar .menus {
+    position: absolute;
+    top: 68px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    /* background-color: #e8f2f5; */
+    /*overflow-y: auto;*/
+    /*overflow-x: hidden;*/
+}
+
+.m-leftbar .menus .ico-expand {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-image: url(../img/expand.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #22272D;
+    cursor: pointer;
+}
+
+.g-content {
+    position: absolute;
+    left: 45px;
+    min-height: 200px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+}
+
+.m-tablecontent {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    min-height: 200px;
+    top: 0px;
+    bottom: 0px;
+    margin-top:7px;
+}
+
+.m-tablecontent .tableindex {
+    height: 40px;
+    line-height: 43px;
+    background-image: url(../img/home.png);
+    background-repeat: no-repeat;
+    background-position-x: left;
+    background-position-y: center;
+    padding-left: 27px;
+    font-size: 12px;
+    color: #8F9190;
+    background-position: 0px 12px;
+}
+
+.m-tablecontent .tablecontent {
+    /*min-height: 150px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;*/
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-top: 2px;
+}
+
+#main {
+    /*position: absolute;
+    top: 33px;
+    bottom: 4px;
+    left: 0px;
+    right: 0px;
+    z-index: 0 !important;
+    background-color: white;*/
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.u-scollview {
+    width: 100%;
+    height: 100%;
+}
+
+.m-leftmenu {
+    color: #222222;
+    /*display: none;*/
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    z-index: 10;
+    padding: 1px 0px 1px 0px;
+}
+
+.m-leftmenu > li {
+    /*padding-left: 43px;*/
+    height: 33px;
+    line-height: 33px;
+    font-size: 14px;
+    /* background-color: #e8f2f5; */
+    cursor: pointer;
+    /*background-image: url(../img/newup.png);*/
+    background-repeat: no-repeat;
+    position: relative;
+    /*border-top-width:1px;
+    border-bottom-width: 1px;
+    border-color: #e8f2f5;*/
+    border-top: 1px solid #e8f2f5;
+    border-bottom: 1px solid #e8f2f5;
+    border-left: 1px solid #e8f2f5;
+}
+
+.m-leftmenu > li:hover {
+    background-color: #ffffff;
+    border-color: #1388af;
+}
+
+.m-leftmenu > li:hover > div {
+    background-color: #ffffff;
+    z-index:100;
+} 
+
+.m-leftmenu > li:hover > div > a.name {
+    color: black;
+}
+
+.m-leftmenu > li:hover > div > a.ico {
+    color: #1388af;
+}
+
+.m-leftmenu > li:hover > div > a.icopic {
+    background-position: 0px 0px;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg)
+}
+
+.m-leftmenu > li > div > a {
+    display: block;
+    height: 33px;
+    position: absolute;
+}
+
+/*.m-leftmenu > li > a.ico {
+    left: 0px;
+    width: 163px;
+    background-repeat: no-repeat;
+    z-index: 10;
+}*/
+
+/*.m-leftmenu > li > a.ico:hover + a + a + ul {
+    display:block;
+}*/
+
+.m-leftmenu > li > ul:hover {
+    display:block;
+}
+
+.m-leftmenu > li:hover > ul {
+    display: block;
+}
+
+.m-leftmenu > li:hover > .expend {
+    display: block;
+}
+
+.m-leftmenu > li > div > a.name {
+    padding-left: 37px;
+    width: 127px;
+    display: block;
+    /*width: 128px;*/
+    /*height: 41px;*/
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    font-family: simsum;
+    left: 0px;
+    z-index: 20;
+    color: black;
+}
+
+.m-leftmenu > li > div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+}
+
+.m-leftmenu > li > div > a.up {
+    background-image: url(../img/newup.png);
+    left: 43px;
+    width: 115px;
+    background-repeat: no-repeat;
+    z-index: 10;
+    background-position: 88px 0px;
+}
+
+.m-leftmenu > li > div > a.icopic {
+    position: absolute;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    top: 9px;
+    left: 14px;
+    background-position: -14px 0px;
+
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: -webkit-transform .9s;
+    transition: -webkit-transform .9s;
+    transition: transform .9s;
+    transition: transform .9s,-webkit-transform .9s;
+}
+
+.m-leftmenu > li > div > a.down {
+    /*background-image: url(../img/expand.jpg);*/
+    left: 37px;
+    width: 136px;
+    background-repeat: no-repeat;
+    z-index: 10;
+    background-position: 88px 0px;
+    padding-right: 21px;
+    text-align: right;
+    font-size: 13px;
+    display: none;
+
+}
+
+.m-leftmenu > li > ul {
+    /*padding-left: 30px;*/
+    background-color: #ffffff;
+    display: none;
+
+    position: absolute;
+    /*width: 161px;*/
+    left: 198px;
+    z-index: 30;
+    border: 1px solid #1388af;
+    top:-1px;
+    /*bottom: 0px;*/
+    /*overflow-y: auto;*/
+}
+
+.m-leftmenu > li  .moduletitle {
+    height: 52px;
+    font-size: 19px;
+    line-height: 52px;
+    text-indent: 35px;
+}
+
+.m-leftmenu > li > ul > ul {
+    float: left;
+}
+
+.m-leftmenu > li > ul > ul > li {
+    padding-left: 35px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 13px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    /*min-width: 201px;*/
+    color: #777777;
+}
+
+.m-leftmenu > li > ul > ul > li > a.ico {
+    display: inline;
+    width: 4px;
+    height: 4px;
+    background-image: url(../img/shine-ico.png);
+    position: absolute;
+    left: 37px;
+    top: 14px;
+    background-position: -1px -1px;
+    overflow: hidden;
+}
+
+.m-leftmenu > li > ul > ul > li > a.title {
+    display: inline-block;
+    /*width: 128px;*/
+    height: 41px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /*color: #222222;*/
+    /*position: absolute;
+    left: 30px;
+    top: 0px;*/
+    padding-right: 40px;
+    font-size: 15px;
+    min-width: 161px;
+    font-family: simsum;
+} 
+
+.m-leftmenu > li > ul > ul > li:hover {
+    background-color: #e8f2f5;
+    color: #1388af;
+}
+
+.m-leftmenu > li > ul > ul > li:hover > a.ico {
+    background-position: 5px -1px;
+}
+
+#nav4 > ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+#nav4 > ul > li {
+    list-style: none;
+    display: inline-block;
+    margin: 0px;
+    padding: 0 15px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    background-color: #D9DEE4;
+}
+
+#nav4 > ul > li.active {
+    background-color: white;
+    border-top: 3px rgb(0, 153, 204) solid;
+    color: #0099CC;
+}
+
+#nav4 > ul > li.active a {
+    color: #0099CC;
+    position: relative;
+    top: -3px;
+}
+
+#nav4 > ul > li.active {
+    height: 27px;
+    line-height: 27px;
+    position: relative;
+    top: 3px;
+}
+
+#nav4 > ul >li > a {
+    display: block;
+    text-decoration: none;
+    height: 30px;
+    line-height: 30px;
+    color: #000000;
+}
+
+#nav4 > ul > li:focus {
+    background-color: #EEE;
+}
+
+.g-outframe {
+    position: absolute;
+    top: 53px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.g-shadow {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 202px;
+    z-index: 5;
+}
+
+.m-tablecontent .returnhome {
+    position: absolute;
+    right: 24px;
+    top: 0px;
+    height: 40px;
+    line-height: 43px;
+    font-size: 12px;
+    color: #878787;
+    cursor: pointer;
+}
+
+.m-tablecontent .mainmenu {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 40px;
+    line-height: 43px;
+    font-size: 14px;
+    color: #0099cc;
+    cursor: pointer;
+    font-family: SimSun;
+    font-weight: bold;
+    background-image: url(../img/back.png);
+    background-repeat: no-repeat;
+    background-position: 0px 13px;
+    width: 100px;
+    text-align: right;
+}
+
+.m-tablecontent .mainmenu:hover {
+    color:#1baada;
+}
+
+.f-glzb {
+    position: absolute;
+    top: 40px;
+    font-size: 11px;
+    color: #5c5c4c;
+    cursor: pointer;
+    right: 24px;
+    height: 33px;
+    line-height: 33px;
+    z-index: 10;
+}
+
+.m-glzbdialog {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 191px;
+    bottom: 0px;
+    z-index: 15;
+    display: none;
+}
+
+.m-glzbdialog > .bar {
+    height: 30px;
+    line-height: 30px;
+    background-image: url(../img/whiteclosebar.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #BEC2CB;
+    cursor: pointer;
+}
+
+.m-glzbdialog > .menus {
+    position: absolute;
+    top: 30px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: #EAEAEA;
+}
+
+.m-glzbdialog > .menus > ul {
+    position: relative;
+    top: 15px;
+}
+
+.m-glzbdialog > .menus > ul > li {
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 16px;
+}
+
+.m-glzbdialog > .menus > ul > ul {}
+
+.m-glzbdialog > .menus > ul > ul > li {
+    height: 39px;
+    line-height: 39px;
+    font-size: 12px;
+    padding-left: 40px;
+    cursor: pointer;
+}
+
+.m-glzbdialog > .menus > ul > ul > li:hover {
+    background-color: white;
+}
+
+
+
+.g-bottom {
+    min-width: 1000px;
+    /*min-height: 696px;*/
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.g-bottom .copyright {
+    position: absolute;
+    bottom: 9px;
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    font-family: SimSun;
+}
+
+.g-bottom .copyright a {
+    color: #0099CC;
+}
+
+/*.m-outmenu {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 0;
+}*/
+
+.m-maxmenu {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    min-height: 200px;
+    top: 0px;
+    bottom: 0px;
+    background-color: #EAEDF1;
+}
+
+.m-maxmenu > .content {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    bottom: 0px;
+    right: 0px;
+    background-color: #EAEDF1;
+    overflow-y: auto;
+}
+
+.u-bigmenu {
+    position: absolute;
+    left: 0px;
+    top: -20px;
+    right: 20px;
+    bottom: 0px;
+}
+
+.u-bigmenu > li {
+    margin: 20px 0px 0px 0px;
+    /*border: 1px solid #d6d6d6;*/
+    background-color: white;
+    /* box-shadow: 0 2px 3px #cccccc; */
+    border: 1px solid #8ab4c2;
+}
+
+.u-bigmenu > li > a {
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    border-left: 4px solid #0078A0;
+    padding-left: 10px;
+    font-family: Microsoft YaHei;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    background-color: #dcecf1;
+}
+
+.u-bigmenu > li > a.hover:hover {
+   cursor:pointer;
+}
+
+.u-bigmenu > li > ul {
+    zoom:1;
+    overflow: hidden;
+    /* border: 1px solid #0099CC; */
+}
+
+.u-bigmenu > li > ul:after {
+    clear: both;
+}
+
+.u-bigmenu > li > ul > li {
+    height: 35px;
+    line-height: 28px;
+    width: 25%;
+    cursor: pointer;
+    float: left;
+
+}
+
+.u-bigmenu > li > ul > li:nth-child(8n+5),
+.u-bigmenu > li > ul > li:nth-child(8n+6),
+.u-bigmenu > li > ul > li:nth-child(8n+7),
+.u-bigmenu > li > ul > li:nth-child(8n+8) {
+    /* background-color: #4EB1D2; */
+}
+
+
+
+.u-bigmenu > li > ul > li > a {
+    font-family: arial;
+    color: #5d5d5d;
+    font-size: 14px;
+    position: relative;
+    left: 20px;
+}
+
+.u-bigmenu > li > ul > li:hover {
+/*     border:1px solid red; */
+/* background-color:#4EB1D2; */
+}
+
+.u-bigmenu > li > ul > li:hover > a {
+    color: #0099CC;
+/*     background-color:red; */
+/*     left: 21px; */
+/*     top:1px; */
+    font-weight: bold;
+/*     font-size: 14px; */
+    /*top:10px;*/
+}
+
+.u-welcome {
+    /*width: 100%;*/
+    /*height: 100%;*/
+    background-image: url(../img/dotted.png);
+    position: absolute;
+    /*background-size: 100% auto;*/
+    filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size: 100% 100%;
+    display: block;
+    top: 0px;
+    bottom: 0px;
+    left: 45px;
+    right: 0px;
+    /*background-repeat: no-repeat;*/
+    background-position: center;
+    background-color: white;
+}
+
+.panel-body {
+    overflow:hidden;
+}
+
+.u-line {
+    display:block;
+    height: 1px;
+    background-color: #cedfea;
+    position: relative;
+    z-index: 10;
+}
+.m-leftmenu > li+li+li+li> div > a.icopic{
+	background-image: url(../img/guanli.png);!important;
+}
+.m-leftmenu > li+li+li> div > a.icopic{
+	background-image: url(../img/rzhi.png);!important;
+}
+.m-leftmenu > li> div > a.icopic{
+	background-image: url(../img/suoy.png);!important;
+}
+.m-leftmenu > li+li> div > a.icopic{
+	background-image: url(../img/guanli.png);!important;
+}

@@ -1,0 +1,196 @@
+package cn.wellcare.portal.controller.pay;
+
+
+import cn.wellcare.acc.entity.PscPiAccDetail;
+import cn.wellcare.api.acc.IPscPiAccDetailService;
+import cn.wellcare.card.bo.card.RefundInfo;
+import cn.wellcare.card.bo.card.RefundTypeInfo;
+import cn.wellcare.core.constant.BaseParam;
+import cn.wellcare.core.constant.Constants;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.utils.EnumerateParameter;
+import cn.wellcare.core.utils.StringUtil;
+import cn.wellcare.entity.order.PayOrder;
+import cn.wellcare.payment.modules.order.IPayOrderService;
+import cn.wellcare.pojo.ServiceResult;
+import cn.wellcare.pojo.common.RpcResult;
+import com.alibaba.dubbo.common.utils.CollectionUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
+import java.util.*;
+
+/**
+ *卡退款操作
+ * 流程：根据所勾选的退款类型进行计算，计算本次可退款金额，后台根据相关交易流水，查询出对应订单，进行退款
+ * （账户余额-已勾选其他退款金额)前台计算后传过来可退金额 >= 本次所勾选金额  -->将相关充值订单逐条退款    注：*异常捕获后不处理
+ * （账户余额-已勾选其他退款金额)前台计算后传过来可退金额 < 本次所勾选金额   -->根据付款顺序一次退款，最后一条要退款的订单可能为部分退款
+ */
+@Controller
+@RequestMapping(value = Constants.REFUNDPAY)
+public class CardRefundController {
+    /**
+     * 根据选择的退款类型返回可退金额
+     * 入参：1.当前可退余额、2账户id、3.退款类型
+     */
+    @Resource(name = "payOrderService")
+    private IPayOrderService iPayOrderService;
+    @Resource(name = "pscPiAccDetailService")
+    private IPscPiAccDetailService piAccDetailService;
+
+    @RequestMapping(value = Constants.QUERY_REFUND_INFO)
+    @ResponseBody
+	public ServiceResult<List<RefundInfo>> getRefundInfo(HttpServletRequest request,
+                                                      HttpServletResponse response,
+                                                     @RequestParam Map<String, Object> param) {
+		ServiceResult<List<RefundInfo>> jsonResult = new ServiceResult<>();
+
+        String refundAmount = String.valueOf(param.get(BaseParam.REFUND_AMOUNT));//当前可退金额（业务端计算所得）
+        String payType = String.valueOf(param.get(BaseParam.PAY_TYPE));
+
+        List<PayOrder> payOrderList = getPayOrders(param);
+        List<PayOrder> payOrders =  new ArrayList<>();
+        for (PayOrder payOrder:payOrderList) {
+
+            if (payType.equals(EnumerateParameter.ONE)) {
+                if (payOrder.getPaymentCode().equals("008")) {
+                    payOrders.add(payOrder);
+                }
+            }else if (payType.equals(EnumerateParameter.TWO)){
+                if (payOrder.getPaymentCode().equals("001") || payOrder.getPaymentCode().equals("002") || payOrder.getPaymentCode().equals("006")) {
+                    payOrders.add(payOrder);
+                }
+            } else if (payType.equals(EnumerateParameter.THREE)) {
+                if (payOrder.getPaymentCode().equals("003") || payOrder.getPaymentCode().equals("004")) {
+                    payOrders.add(payOrder);
+                }
+            } else {
+                if (payOrder.getPaymentCode().equals("007")) {
+                    payOrders.add(payOrder);
+                }
+            }
+        }
+
+        List<RefundInfo> refundInfos = new ArrayList<>();
+        RefundInfo refundInfo = null;
+        BigDecimal refundAmt = new BigDecimal(refundAmount);
+        BigDecimal amt = BigDecimal.ZERO;
+        for (PayOrder payOrder : payOrders) {
+            refundInfo = new RefundInfo();
+                if (refundAmt.compareTo(payOrder.getMoneyOrder()) < 0) {
+                    refundInfo.setOutTradeNo(payOrder.getPaySn());
+                    refundInfo.setPayType(payOrder.getOrderType());
+                    refundInfo.setRefundAmount(refundAmt);
+                    refundInfos.add(refundInfo);
+                    break;
+                }
+                refundInfo.setOutTradeNo(payOrder.getPaySn());
+                refundInfo.setPayType(payOrder.getOrderType());
+                refundInfo.setRefundAmount(payOrder.getMoneyOrder());
+                refundAmt = refundAmt.subtract(payOrder.getMoneyOrder());
+            refundInfos.add(refundInfo);
+        }
+        jsonResult.setData(refundInfos);
+        return jsonResult;
+    }
+    @RequestMapping(value = Constants.QUERY_REFUNDTYPE_INFO, produces = Constants.CONTENT_TYPE_JSON)
+    @ResponseBody
+	public ServiceResult<RefundTypeInfo> getRefundTypeInfo(HttpServletRequest request,
+                                                         HttpServletResponse response,
+                                                         @RequestParam Map<String,Object> param){
+
+        RefundTypeInfo refundTypeInfo = new RefundTypeInfo();
+		ServiceResult<RefundTypeInfo> jsonResult = new ServiceResult<>();
+        BigDecimal cash = BigDecimal.ZERO;
+        BigDecimal weChat= BigDecimal.ZERO;
+        BigDecimal alipay= BigDecimal.ZERO;
+        BigDecimal unionPay= BigDecimal.ZERO;
+        List<PayOrder> payOrderList = getPayOrders(param);
+
+        //筛选出对应的订单类别信息
+        for (PayOrder payOrder:payOrderList) {
+            if (StringUtil.isEmpty(payOrder.getPaymentCode())) {
+                throw new BusinessException("支付类型为空");
+            }
+            if (payOrder.getPaymentCode().equals("001")||payOrder.getPaymentCode().equals("002")||payOrder.getPaymentCode().equals("006")){
+                weChat = weChat.add(payOrder.getMoneyOrder());
+            } else if (payOrder.getPaymentCode().equals("003")||payOrder.getPaymentCode().equals("004")) {
+                alipay = alipay.add(payOrder.getMoneyOrder());
+            } else if (payOrder.getPaymentCode().equals("008")) {
+                cash = cash.add(payOrder.getMoneyOrder());
+            } else if (payOrder.getPaymentCode().equals("007")) {
+                unionPay = unionPay.add(payOrder.getMoneyOrder());
+            }
+
+        }
+        refundTypeInfo.setAlipay(alipay);
+        refundTypeInfo.setWeChat(weChat);
+        refundTypeInfo.setCash(cash);
+        refundTypeInfo.setUnionPay(unionPay);
+        jsonResult.setData(refundTypeInfo);
+        return jsonResult;
+    }
+
+    /**
+     *根据账户id查询出对应的充值记录订单信息
+     * @param param
+     * @return
+     */
+    private List<PayOrder> getPayOrders( Map<String, Object> param) {
+
+        Map<String, List<String>> listMap = new HashMap<>();
+        String pkPiacc = String.valueOf(param.get(BaseParam.PK_PIACC));
+
+        /*Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        String piaccDetail = HttpClientUtil.doPost("http://localhost:8088/pscPiAccDetail/queryDetail",map);
+		RpcResult<List<PscPiAccDetail>> list = gson.fromJson(piaccDetail,
+				new TypeToken<RpcResult<List<PscPiAccDetail>>>() {
+        }.getType());
+        List<PscPiAccDetail> detailList = list.getData();//获取账户流水*/
+
+        List<PscPiAccDetail> detailList = piAccDetailService.queryPscPiAccDetailByeuType(Integer.valueOf(pkPiacc),EnumerateParameter.ONE).getData();
+        if (CollectionUtils.isEmpty(detailList)) {
+            throw new BusinessException("未查询到账户流水");
+        }
+        //筛选出有效充值记录
+        Iterator<PscPiAccDetail> it = detailList.iterator();
+        List<String> orderNo = new ArrayList<>();
+        while(it.hasNext()){
+            PscPiAccDetail piAccDetail = it.next();
+            if (!(String.valueOf(piAccDetail.getEuDirect()).equals(EnumerateParameter.ONE) && piAccDetail.getEuOptype().equals(EnumerateParameter.ONE))) {
+                it.remove();
+                continue;
+            }
+            orderNo.add(piAccDetail.getOrderId().toString());//添加充值对应的订单id
+        }
+        if (CollectionUtils.isEmpty(orderNo)) {
+            throw new BusinessException("未查询到账户充值流水");
+        }
+
+        listMap.put("ids", orderNo);
+        listMap.put("orderStates", Arrays.asList(EnumerateParameter.SIX));
+       /* //调用支付中心批量查询订单接口 传入订单id集合、类型
+       */
+      RpcResult<List<PayOrder>> orderList = iPayOrderService.getPayOrderByOrderIdAndDate(listMap);
+      List<PayOrder> payOrderlist = orderList.getData();
+
+        /*List<PayOrder> orderList = new ArrayList<>();
+        PayOrder payOrder = null;
+        for (int i = 0;i < 10;i++){
+            payOrder = new PayOrder();
+            payOrder.setMoneyOrder(new BigDecimal(RandomUtil.randomNumberic(2)));
+            payOrder.setOrderType("00"+RandomUtil.randomNumberic(1));
+            payOrder.setPaymentCode(payOrder.getOrderType());
+            payOrder.setPaySn(RandomUtil.randomNumberic(13));
+            orderList.add(payOrder);
+        }*/
+        return payOrderlist;
+    }
+
+}

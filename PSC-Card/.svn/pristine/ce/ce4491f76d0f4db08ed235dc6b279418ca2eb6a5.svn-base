@@ -1,0 +1,61 @@
+package cn.wellcare.portal.controller.card;
+
+
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import cn.wellcare.api.card.ICardRegInfoService;
+import cn.wellcare.card.bo.card.CardRegInfoBo;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.exception.UnauthorizedException;
+import cn.wellcare.pojo.RpcResult;
+import cn.wellcare.pojo.ServiceResult;
+
+@RestController
+@RequestMapping("cardRegInfo")
+public class CardRegInfoController {
+
+    @Resource
+    private ICardRegInfoService cardRegInfoService;
+
+    /**
+     * 获取发卡登记信息
+     * @return
+     */
+    @RequestMapping(value = "getCardRegInfo",method = RequestMethod.POST)
+	public ServiceResult<List<CardRegInfoBo>> getCardRegInfo(@RequestParam Map<String, Object> paramMap) {
+		RpcResult<List<CardRegInfoBo>> result = null;
+		try {
+			if (null == paramMap || paramMap.isEmpty()){
+				throw new BusinessException("卡信息为空");
+			}
+			result = cardRegInfoService.getCardRegInfo(paramMap);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					result.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					result.setMsgInfo(e.getMessage());
+				result.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				if (e instanceof UnauthorizedException) {
+					result.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+				} else {
+					e.printStackTrace();
+					result.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+				}
+			}
+		}
+		return new ServiceResult<List<CardRegInfoBo>>().convert2SR(result);
+    }
+}

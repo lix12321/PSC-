@@ -1,0 +1,8 @@
+cn\wellcare\service\acc\PscPiAccDetailService.class
+cn\wellcare\service\acc\AccountPayService.class
+cn\wellcare\service\acc\PscPiAccService.class
+cn\wellcare\rpc\filter\PscDubboExceptionFilter.class
+cn\wellcare\service\acc\PscPiAccService$1.class
+cn\wellcare\service\acc\PscPiAccCreditService.class
+cn\wellcare\service\acc\AccountRefundService.class
+cn\wellcare\service\acc\PscPiAccService$2.class

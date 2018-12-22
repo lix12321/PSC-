@@ -1,0 +1,57 @@
+package cn.wellcare.controller.acc.refundpay;
+
+import cn.wellcare.api.trade.IPscAccRefundService;
+import cn.wellcare.core.constant.BaseParam;
+import cn.wellcare.core.constant.Constants;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.exception.UnauthorizedException;
+import cn.wellcare.pojo.common.PaymentResult;
+import cn.wellcare.pojo.common.RpcResult;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
+
+@RequestMapping(Constants.REFUND_PAY)
+@Controller
+public class AccountRefundPayController  {
+    @Resource(name = "refundService")
+    private IPscAccRefundService iPscAccRefundService;
+    @RequestMapping(value = Constants.ACCOUNT_REFUNDPAY,produces = Constants.CONTENT_TYPE_JSON)
+    @ResponseBody
+    public RpcResult<PaymentResult> accountPayRefund(HttpServletRequest request, HttpServletResponse response,
+                                                         @RequestParam Map<String, Object> param) {
+        RpcResult<PaymentResult> refundPayResult = new RpcResult<>();
+        try {
+            Assert.notNull(param.get(BaseParam.USER_ID));
+            Assert.notNull(param.get(BaseParam.ORG_ID));
+            Assert.notNull(param.get(BaseParam.REFUND_AMOUNT));//退款金额
+            refundPayResult =  iPscAccRefundService.accRefund(param);
+        } catch (Exception e) {
+            refundPayResult.setSuccess(false);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.SERVER_EXCEPTION.getErrCode().equals(pe.getCode())) {
+                    refundPayResult.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                } else {
+                    refundPayResult.setMsgInfo(e.getMessage());
+                }
+            } else {
+                if (e instanceof UnauthorizedException) {
+                    refundPayResult.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+                } else {
+                    e.printStackTrace();
+                    refundPayResult.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                }
+            }
+        }
+        return refundPayResult;
+    }
+}

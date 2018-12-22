@@ -1,0 +1,60 @@
+package cn.wellcare.controller.acc.payment;
+
+import cn.wellcare.api.trade.IPscAccPaymentService;
+import cn.wellcare.core.constant.BaseParam;
+import cn.wellcare.core.constant.Constants;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.exception.UnauthorizedException;
+import cn.wellcare.core.utils.CommonUtils;
+import cn.wellcare.pojo.common.PaymentResult;
+import cn.wellcare.pojo.common.RpcResult;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
+
+    @RequestMapping(Constants.UNIFY_PAY_CONTEXT)
+    @Controller
+    public class AccountPaymentController  {
+        @Resource
+        private IPscAccPaymentService iPscAccPaymentService;
+        @RequestMapping(value = Constants.DO_ACCPAY, produces = Constants.CONTENT_TYPE_JSON)
+        @ResponseBody
+        public RpcResult<PaymentResult> accountPayPayment(HttpServletRequest request, HttpServletResponse response,
+                                                              @RequestParam Map<String, Object> param) {
+            RpcResult<PaymentResult> paymentResult = new RpcResult<>();
+            try {
+                param.put(BaseParam.CLIENT_IP, CommonUtils.getRemoteIpAddr(request));
+                Assert.notNull(param.get(BaseParam.PAY_AMOUNT));
+                Assert.notNull(param.get(BaseParam.USER_ID));
+                Assert.notNull(param.get(BaseParam.ORG_ID));
+                paymentResult = iPscAccPaymentService.accPay(param);
+            } catch (Exception e) {
+                paymentResult.setSuccess(false);
+                if (e instanceof BusinessException) {
+                    BusinessException pe = (BusinessException) e;
+                    if (pe.getCode() != null && ErrorEnum.SERVER_EXCEPTION.getErrCode().equals(pe.getCode())) {
+                        paymentResult.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                    } else {
+                        paymentResult.setMsgInfo(e.getMessage());
+                    }
+                } else {
+                    if (e instanceof UnauthorizedException) {
+                        paymentResult.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+                    } else {
+                        e.printStackTrace();
+                        paymentResult.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                    }
+                }
+            }
+            return paymentResult;
+        }
+
+}

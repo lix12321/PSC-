@@ -1,0 +1,12 @@
+package cn.wellcare.api.trade;
+
+import java.util.Map;
+
+import cn.wellcare.pojo.common.PaymentResult;
+import cn.wellcare.pojo.common.RpcResult;
+
+public interface IPscAccPaymentService {
+	public RpcResult<PaymentResult> accPay(Map<String, Object> param);
+
+	public RpcResult<PaymentResult> accRecharge(Map<String, Object> param);
+}

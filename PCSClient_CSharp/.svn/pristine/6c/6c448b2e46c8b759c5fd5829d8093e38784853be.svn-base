@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wellcare.PCS.ClientPortal", "Wellcare.PCS.ClientPortal\Wellcare.PCS.ClientPortal.csproj", "{7C8BC55B-9354-4AAE-9471-2A6B88614015}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wellcare.PCS.MisPOSPayer", "Wellcare.PCS.MisPOSPayer\Wellcare.PCS.MisPOSPayer.csproj", "{425C3431-760C-4308-83F0-0673F2A9F1CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zebone", "Zebone\Zebone.csproj", "{59AD1F80-9FC6-4140-8010-2F692A8838FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zebone.JavaService", "Zebone.JavaService\Zebone.JavaService.csproj", "{A42B62C4-EA51-4E06-892F-803CD5C6094C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wellcare.PCS.App", "Wellcare.PCS.App\Wellcare.PCS.App.csproj", "{8D0CC8DB-C1B2-4901-B735-9CA856E35F1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C8BC55B-9354-4AAE-9471-2A6B88614015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8BC55B-9354-4AAE-9471-2A6B88614015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8BC55B-9354-4AAE-9471-2A6B88614015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8BC55B-9354-4AAE-9471-2A6B88614015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425C3431-760C-4308-83F0-0673F2A9F1CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425C3431-760C-4308-83F0-0673F2A9F1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425C3431-760C-4308-83F0-0673F2A9F1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425C3431-760C-4308-83F0-0673F2A9F1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59AD1F80-9FC6-4140-8010-2F692A8838FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59AD1F80-9FC6-4140-8010-2F692A8838FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59AD1F80-9FC6-4140-8010-2F692A8838FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59AD1F80-9FC6-4140-8010-2F692A8838FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A42B62C4-EA51-4E06-892F-803CD5C6094C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A42B62C4-EA51-4E06-892F-803CD5C6094C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A42B62C4-EA51-4E06-892F-803CD5C6094C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A42B62C4-EA51-4E06-892F-803CD5C6094C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D0CC8DB-C1B2-4901-B735-9CA856E35F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D0CC8DB-C1B2-4901-B735-9CA856E35F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D0CC8DB-C1B2-4901-B735-9CA856E35F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D0CC8DB-C1B2-4901-B735-9CA856E35F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

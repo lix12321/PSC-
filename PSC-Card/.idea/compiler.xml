@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="PSC-Card-Api" />
+        <module name="PSC-Card-Codegenerator" />
+        <module name="PSC-Card-Common" />
+        <module name="PSC-Card-Core" />
+        <module name="PSC-Card-Dao" />
+        <module name="PSC-Card-Model" />
+        <module name="PSC-Card-Pojo" />
+        <module name="PSC-Card-Portal" />
+        <module name="PSC-Card-Service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

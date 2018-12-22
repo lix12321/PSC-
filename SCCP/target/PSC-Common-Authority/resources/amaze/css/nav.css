@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* 以下实际使用若已初始化可删除 .nav height父级需逐级设置为100%*/
+body,html{height: 100%;}
+body,ul{margin:0;padding:0}
+body{font:16px "微软雅黑","宋体","Arial Narrow",HELVETICA;-webkit-text-size-adjust:100%;} 
+li{list-style:none} 
+a{text-decoration:none;}
+/* 以上实际使用若已初始化可删除 */
+
+/* nav */
+.nav{width: 200px;height: 100%;background: #204952;transition: all .3s;}
+.nav a{display: block;overflow: hidden;padding-left: 20px;line-height:60px;max-height:60px;color: #fff;transition: all .3s;}
+.nav a span{margin-left: 30px;}
+.nav-top{height:60px;background:#2C5A64;text-align:center;}
+.nav-top div{height:60px;cursor:pointer;}
+.nav-top img{margin-top:20px;}
+.nav-item{position: relative;}
+.nav-item.nav-show{border-bottom: none;}
+.nav-item ul{display: none;background: #18343A;margin:0;}
+.nav-item.nav-show ul{display: block;}
+.on{background: url(../../img/navicon/nav_bg.png) no-repeat;}
+.nav .nav-icon{font-size: 20px;position: absolute;margin-left:-1px;margin-top:22px;}
+/* 此处修改导航图标 可自定义iconfont 替换*/
+.icon_0::after{content: url(../../img/navicon/home.png);}
+.icon_1::after{content: url(../../img/navicon/indexes.png);}
+.icon_2::after{content: url(../../img/navicon/field.png);}
+.icon_3::after{content: url(../../img/navicon/mainindex.png);}
+.icon_4::after{content: url(../../img/navicon/Dictionaries.png);}
+.icon_5::after{content: url(../../img/navicon/external.png);}
+.icon_6::after{content: url(../../img/navicon/Identification.png);}
+.icon_7::after{content: url(../../img/navicon/system.png);}
+.icon_8::after{content: url(../../img/navicon/split.png);}
+.icon_9::after{content: url(../../img/navicon/merge.png);}
+/*---------------------*/
+.nav-more{float:right;margin-right:10px;font-size:20px;transition: transform .3s;}
+/* 此处为导航右侧箭头 如果自定义iconfont 也需要替换*/
+.nav-more::after{content: "\e621";}
+/*---------------------*/
+.nav-show .nav-more{transform:rotate(90deg);}
+.nav-show,.nav-item>a:hover{color: #FFF;background: url(../../img/navicon/nav_bg.png) no-repeat;}
+.nav-show>a:before,.nav-item>a:hover:before{opacity:1;}
+.nav-item li:hover a{color: #FFF;background: rgba(0, 0, 0,.1);}
+
+/* nav-mini */
+.nav-mini.nav{width: 60px;}
+.nav-mini.nav .nav-icon{/* margin-left:-2px; */}
+.nav-mini.nav .nav-item>a span{display: none;}
+.nav-mini.nav .nav-more{margin-right: -20px;}
+.nav-mini.nav .nav-item ul{position: absolute;top:0px;left:60px;width: 180px;z-index: 99;background:#18343A;overflow: hidden;}
+.nav-mini.nav .nav-item:hover{background:rgba(255,255,255,.1);}
+.nav-mini.nav .nav-item:hover .nav-item a{color:#FFF;}
+.nav-mini.nav .nav-item:hover a:before{opacity:1;}
+.nav-mini.nav .nav-item:hover ul{display: block;}
+
+
+
+
+

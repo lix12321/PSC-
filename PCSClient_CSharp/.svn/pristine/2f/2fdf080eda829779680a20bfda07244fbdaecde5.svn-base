@@ -1,0 +1,632 @@
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:04:04 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:04:04 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:04:04 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:04:04 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:04:04 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:04:04 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:04:04 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:04:04 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:04:04 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:04:04 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:04:04 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:04:04 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:04:14 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:04:14 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:04:14 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:04:14 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:04:14 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:04:14 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:04:14 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:04:14 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:04:14 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:04:14 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:04:47 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:04:47 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:04:47 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:04:47 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:04:47 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:04:51 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:04:51 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:04:51 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:04:51 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:04:51 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:04:51 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:04:51 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:04:51 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:04:51 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:04:51 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:06:48 [TRACE] CardMisDll.cpp(94): 析构释放tlvmap...
+2018-10-26 18:06:48 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:06:48 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:06:48 [INFO] CardMisDll.cpp(97): 动态库释放成功
+
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:08:57 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:08:57 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:08:57 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:08:57 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:08:57 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:08:57 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:08:57 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:08:57 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:08:57 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:08:57 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:08:57 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:08:57 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:09:02 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:09:02 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:09:02 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:09:02 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:09:02 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:09:02 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:09:02 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:09:02 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:09:02 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:09:02 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:09:56 [TRACE] CardMisDll.cpp(94): 析构释放tlvmap...
+2018-10-26 18:09:56 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:09:56 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:09:56 [INFO] CardMisDll.cpp(97): 动态库释放成功
+
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:15:12 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:15:12 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:15:12 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:15:12 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:15:12 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:15:12 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:15:12 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:15:12 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:15:12 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:15:12 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:15:12 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:15:12 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:15:15 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:15:15 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:15:15 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:15:15 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:15:15 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:15:15 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:15:15 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:15:15 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:15:15 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:15:15 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:16:13 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:16:13 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:16:13 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:16:13 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:16:13 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:16:13 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:16:14 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:16:14 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:16:14 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:16:14 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:16:14 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:16:14 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:16:14 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:16:14 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:16:14 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:16:14 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:16:17 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:16:17 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:16:17 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:16:17 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:16:17 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:16:17 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:16:17 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:16:17 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:16:17 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:16:17 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:32:31 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:32:31 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:32:31 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:32:31 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:32:31 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:32:31 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:32:31 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:32:31 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:32:31 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:32:31 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:32:31 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:32:31 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:32:34 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:32:34 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:32:34 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:32:34 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:32:35 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:32:35 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:32:35 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:32:35 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:32:35 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:32:35 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:39:38 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:39:38 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:39:38 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:39:38 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:39:38 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:39:38 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:39:38 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:39:38 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:39:38 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:39:38 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:39:39 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:39:39 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:39:50 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:39:50 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:39:50 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:39:50 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:39:50 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:39:50 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:39:50 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:39:50 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:39:50 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:39:50 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:40:18 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:40:18 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:40:18 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:40:18 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:40:18 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:40:22 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:40:22 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:40:22 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:40:22 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:40:22 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:40:22 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:40:22 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:40:22 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:40:22 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:40:22 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:41:14 [TRACE] CardMisDll.cpp(94): 析构释放tlvmap...
+2018-10-26 18:41:14 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:41:14 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:41:14 [INFO] CardMisDll.cpp(97): 动态库释放成功
+
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:48:42 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:48:42 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:48:42 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:48:42 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:48:42 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:48:42 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:48:42 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:48:42 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:48:42 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:48:42 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:48:42 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:48:42 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:48:47 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:48:47 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:48:47 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:48:47 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:48:47 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:48:47 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:48:47 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:48:47 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:48:47 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:48:47 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:49:29 [TRACE] CardMisDll.cpp(94): 析构释放tlvmap...
+2018-10-26 18:49:29 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:49:29 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:49:29 [INFO] CardMisDll.cpp(97): 动态库释放成功
+
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:49:41 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:49:41 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:49:41 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:49:41 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:49:41 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:49:41 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:49:41 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:49:41 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:49:41 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:49:41 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:49:41 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:49:41 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:49:44 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:49:44 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:49:45 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:49:45 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:49:45 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:49:45 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:49:45 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:49:45 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:49:45 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:49:45 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(200): 日志保存路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\mislog\
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(201): 日志级别:0
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(202): 日志最大保存文件数:365
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(203): 日志是否包含头:1
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(204): 配置文件路径:D:\project\PCSClient_CSharp\bin\landiccbmispos\log.ini
+2018-10-26 18:58:15 [WARN] CardMisDll.cpp(323): 未配置SSL连接超时,默认10s
+2018-10-26 18:58:15 [WARN] CardMisDll.cpp(335): 未配置SSL超时,默认10s
+2018-10-26 18:58:15 [WARN] CardMisDll.cpp(420): 慧兜圈证书地址未配置
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(531): SocketTimeout=90s
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(532): FirstComTimeout=120s
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(533): SecondComTimeout=75s
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(534): GetPrintDataTimeout=80s
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(535): GetSummDataTimeout=60s
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(536): PrintServerPacket=1
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(537): RecvServerCheck=1
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(538): SSLEnable=1
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(539): SSLConnTimeout=10s
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(540): SSLTimeout=10
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(541): SSLUrl_1=ibsbjstar.ccb.com.cn
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(542): SSLPort_1=443
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(543): SSLUrl_2=ea.ccb.com
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(544): SSLPort_2=442
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(545): 慧兜圈Url=hdq.uncentury.com
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(546): 慧兜圈Port=443
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(547): 二维码放大倍数=10
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(548): 条码放大倍数=50
+2018-10-26 18:58:15 [WARN] CardMisDll.cpp(718): 未配置退货异常返回成功 采用1开启
+2018-10-26 18:58:15 [WARN] CardMisDll.cpp(742): 未配置扫码异常订单查询最大次数 采用3次
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(751): retry.SocketTime=3s
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(752): retry.LoopSleep=500ms
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(753): retry.LoopTimes=1
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(754): ServerFlag=0
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(755): iShowDlg=0
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(756): iSelectDlg=0
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(757): iScanCodeMode=0
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(758): 是否开启集中式=0
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(759): 是否开启集中式=0
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(760): 是否开启扫码异常订单查询=0
+2018-10-26 18:58:15 [DEBUG] CardMisDll.cpp(761): 扫码异常订单查询最大次数=3
+2018-10-26 18:58:15 [INFO] CardMisDll.cpp(89): 动态库加载成功
+2018-10-26 18:58:15 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 18:58:15 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 18:58:15 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 18:58:15 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 18:58:15 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 18:58:19 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 18:58:19 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 18:58:19 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 18:58:19 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 18:58:19 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 18:58:19 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 18:58:19 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 18:58:19 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 18:58:19 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 18:58:19 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 19:03:31 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 19:03:31 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 19:03:31 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 19:03:31 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 19:03:31 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 19:03:35 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 19:03:35 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 19:03:35 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 19:03:35 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 19:03:35 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 19:03:35 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 19:03:35 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 19:03:35 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 19:03:35 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 19:03:35 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 19:04:52 [INFO] LD_PosMain.cpp(957): 传入参数1[1682]:
+[        |        |00|000000000100|        |            |000000|                    |                    |  |                                        |                                        | |           |    |        |    |                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |                                                                                                                                                                                                                                                                                                            |]
+2018-10-26 19:04:52 [TRACE] LD_PosMain.cpp(960): 解析传入参数|个数为26
+2018-10-26 19:04:52 [TRACE] LD_PosMain.cpp(972): f_order[20]=[                    ]
+2018-10-26 19:04:52 [INFO] LD_PosMain.cpp(1138): REQUEST.len=1836,RESPONSE.len=964
+2018-10-26 19:04:52 [INFO] LD_PosMain.cpp(1139): 传入参数[1836]:
+                00000000000100                    000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+2018-10-26 19:04:55 [ERROR] LD_PosMain.cpp(3612): TransProcess测试串口失败T5,Test_PinPad=-2
+2018-10-26 19:04:55 [TRACE] LD_PosMain.cpp(2691): TransProcess准备释放tlvmap...
+2018-10-26 19:04:55 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 19:04:55 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 19:04:56 [WARN] LD_PosMain.cpp(5489): 要解密的卡号长度为0,不进行解密
+2018-10-26 19:04:56 [TRACE] LD_PosMain.cpp(8350): 格式后卡号[len=0]=[]
+2018-10-26 19:04:56 [WARN] LD_PosMain.cpp(2360): 解密卡号失败,返回pos上送的卡号
+2018-10-26 19:04:56 [WARN] LD_PosMain.cpp(2560): 卡号为[]
+2018-10-26 19:04:56 [INFO] LD_PosMain.cpp(2608): 传出参数[964]:
+T5                                                                                2018                                         与密码键盘通讯失败                                                                                  00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+2018-10-26 19:04:56 [INFO] LD_PosMain.cpp(1074): 传出参数1[801]:
+[T5|    |                              |    |            |      |            |      |      |2018          |               |        |        |                    |与密码键盘通讯失败                                |  |                                        |                                        | |        |    |                                                                                                    |           |    |  |            |                                                                                                    |                                                                                                    |                                                                                                    |                                                  |]
+2018-10-26 19:05:10 [TRACE] CardMisDll.cpp(94): 析构释放tlvmap...
+2018-10-26 19:05:10 [TRACE] CardMisDll.cpp(767): tlvMap items=0, begin clear...
+2018-10-26 19:05:10 [TRACE] CardMisDll.cpp(782): tlvMap is empty.
+2018-10-26 19:05:10 [INFO] CardMisDll.cpp(97): 动态库释放成功
+

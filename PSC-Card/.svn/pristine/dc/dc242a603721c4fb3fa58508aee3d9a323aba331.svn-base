@@ -1,0 +1,17 @@
+package cn.wellcare.api.card;
+
+import java.util.List;
+import java.util.Map;
+
+import cn.wellcare.card.bo.card.CardRegInfoBo;
+import cn.wellcare.pojo.RpcResult;
+
+public interface ICardRegInfoService {
+
+    /**
+     * 获取发卡登记信息
+     * @param paramMap
+     * @return
+     */
+	RpcResult<List<CardRegInfoBo>> getCardRegInfo(Map<String, Object> paramMap);
+}

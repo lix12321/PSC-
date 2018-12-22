@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.card.CardCardinfoDao">
+	<resultMap id="CardCardinfoResult" type="cn.wellcare.card.entity.CardCardinfo">
+		<result property="cardNo" column="card_no" />
+		<result property="createTime" column="create_time" />
+		<result property="creator" column="creator" />
+		<result property="dateBegin" column="date_begin" />
+		<result property="dateEnd" column="date_end" />
+		<result property="delFlag" column="del_flag" />
+		<result property="dtCardtype" column="dt_cardtype" />
+		<result property="euStatus" column="eu_status" />
+		<result property="flagActive" column="flag_active" />
+		<result property="innerNo" column="inner_no" />
+		<result property="modifier" column="modifier" />
+		<result property="modityTime" column="modity_time" />
+		<result property="paySerialid" column="pay_serialid" />
+		<result property="pkCardinfo" column="pk_cardinfo" />
+		<result property="pkOrg" column="pk_org" />
+		<result property="pkReginfo" column="pk_reginfo" />
+		<result property="refundSerialid" column="refund_serialid" />
+		<result property="sortNo" column="sort_no" />
+		<result property="ts" column="ts" />
+	</resultMap>
+
+	<select id="get" parameterType="Integer" resultMap="CardCardinfoResult">
+		select
+			card_no,
+			create_time,
+			creator,
+			date_begin,
+			date_end,
+			del_flag,
+			dt_cardtype,
+			eu_status,
+			flag_active,
+			inner_no,
+			modifier,
+			modity_time,
+			pay_serialid,
+			pk_cardinfo,
+			pk_org,
+			pk_reginfo,
+			refund_serialid,
+			sort_no,
+			ts
+		from card_cardinfo
+		where pk_cardinfo = #{pkCardinfo}
+	</select>
+
+	<select id="getCount" parameterType="java.util.Map"
+			resultType="java.lang.Integer">
+		select count(1) from card_cardinfo t1
+		<include refid="whereConditions" />
+	</select>
+
+	<select id="getList" resultType="cn.wellcare.card.entity.CardCardinfo">
+		select
+		card_no,
+		create_time,
+		creator,
+		date_begin,
+		date_end,
+		del_flag,
+		dt_cardtype,
+		eu_status,
+		flag_active,
+		inner_no,
+		modifier,
+		modity_time,
+		pay_serialid,
+		pk_cardinfo,
+		pk_org,
+		pk_reginfo,
+		refund_serialid,
+		sort_no,
+		ts
+		from card_cardinfo
+		<include refid="whereConditions" />
+	</select>
+
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="cardNo != null and cardNo !=''"  >
+				and card_no= #{cardNo}
+			</if>
+			<if test="createTime != null and createTime !=''"  >
+				and create_time= #{createTime}
+			</if>
+			<if test="creator != null and creator !=''"  >
+				and creator= #{creator}
+			</if>
+			<if test="dateBegin != null and dateBegin !=''"  >
+				and date_begin= #{dateBegin}
+			</if>
+			<if test="dateEnd != null and dateEnd !=''"  >
+				and date_end= #{dateEnd}
+			</if>
+			<if test="delFlag != null and delFlag !=''"  >
+				and del_flag= #{delFlag}
+			</if>
+			<if test="dtCardtype != null and dtCardtype !=''"  >
+				and dt_cardtype= #{dtCardtype}
+			</if>
+			<if test="euStatus != null and euStatus !=''"  >
+				and eu_status= #{euStatus}
+			</if>
+			<if test="flagActive != null and flagActive !=''"  >
+				and flag_active= #{flagActive}
+			</if>
+			<if test="innerNo != null and innerNo !=''"  >
+				and inner_no= #{innerNo}
+			</if>
+			<if test="modifier != null and modifier !=''"  >
+				and modifier= #{modifier}
+			</if>
+			<if test="modityTime != null and modityTime !=''"  >
+				and modity_time= #{modityTime}
+			</if>
+			<if test="paySerialid != null and paySerialid !=''"  >
+				and pay_serialid= #{paySerialid}
+			</if>
+			<if test="pkCardinfo != null and pkCardinfo !=''"  >
+				and pk_cardinfo= #{pkCardinfo}
+			</if>
+			<if test="pkOrg != null and pkOrg !=''"  >
+				and pk_org= #{pkOrg}
+			</if>
+			<if test="pkReginfo != null and pkReginfo !=''"  >
+				and pk_reginfo= #{pkReginfo}
+			</if>
+			<if test="refundSerialid != null and refundSerialid !=''"  >
+				and refund_serialid= #{refundSerialid}
+			</if>
+			<if test="sortNo != null and sortNo !=''"  >
+				and sort_no= #{sortNo}
+			</if>
+			<if test="ts != null and ts !=''"  >
+				and ts= #{ts}
+			</if>
+		</trim>
+	</sql>
+
+	<delete id="del">
+        delete from card_cardinfo where id = #{id}
+	</delete>
+
+	<update id="update" parameterType="cn.wellcare.card.entity.CardCardinfo">
+		update card_cardinfo
+		<set>
+			<if test="cardNo != null">card_no= #{cardNo},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="creator != null">creator= #{creator},</if>
+			<if test="dateBegin != null">date_begin= #{dateBegin},</if>
+			<if test="dateEnd != null">date_end= #{dateEnd},</if>
+			<if test="delFlag != null">del_flag= #{delFlag},</if>
+			<if test="dtCardtype != null">dt_cardtype= #{dtCardtype},</if>
+			<if test="euStatus != null">eu_status= #{euStatus},</if>
+			<if test="flagActive != null">flag_active= #{flagActive},</if>
+			<if test="innerNo != null">inner_no= #{innerNo},</if>
+			<if test="modifier != null">modifier= #{modifier},</if>
+			<if test="modityTime != null">modity_time= #{modityTime},</if>
+			<if test="paySerialid != null">pay_serialid= #{paySerialid},</if>
+			<if test="pkCardinfo != null">pk_cardinfo= #{pkCardinfo},</if>
+			<if test="pkOrg != null">pk_org= #{pkOrg},</if>
+			<if test="pkReginfo != null">pk_reginfo= #{pkReginfo},</if>
+			<if test="refundSerialid != null">refund_serialid= #{refundSerialid},</if>
+			<if test="sortNo != null">sort_no= #{sortNo},</if>
+			<if test="ts != null">ts= #{ts}</if>
+		</set>
+		where pk_cardinfo = #{pkCardinfo}
+	</update>
+
+	<insert id="save" parameterType="cn.wellcare.card.entity.CardCardinfo">
+		insert into 
+			card_cardinfo
+		(
+			pk_cardinfo,
+			card_no,
+			create_time,
+			creator,
+			date_begin,
+			date_end,
+			del_flag,
+			dt_cardtype,
+			eu_status,
+			flag_active,
+			inner_no,
+			modifier,
+			modity_time,
+			pay_serialid,
+			
+			pk_org,
+			pk_reginfo,
+			refund_serialid,
+			sort_no,
+			ts
+		)
+		values
+		(
+			#{pkCardinfo},
+			#{cardNo},
+			#{createTime},
+			#{creator},
+			#{dateBegin},
+			#{dateEnd},
+			#{delFlag},
+			#{dtCardtype},
+			#{euStatus},
+			#{flagActive},
+			#{innerNo},
+			#{modifier},
+			#{modityTime},
+			#{paySerialid},
+			
+			#{pkOrg},
+			#{pkReginfo},
+			#{refundSerialid},
+			#{sortNo},
+			#{ts}
+		)
+	</insert>
+
+	<select id="getCardCardinfByCardNo" parameterType="String" resultMap="CardCardinfoResult">
+		select
+			pk_cardinfo,
+			card_no,
+			create_time,
+			creator,
+			date_begin,
+			date_end,
+			del_flag,
+			dt_cardtype,
+			eu_status,
+			flag_active,
+			inner_no,
+			modifier,
+			modity_time,
+			pay_serialid,
+			pk_cardinfo,
+			pk_org,
+			pk_reginfo,
+			refund_serialid,
+			sort_no,
+			ts
+		from card_cardinfo
+		where card_no = #{cardNo}
+		and del_flag = '0'
+	</select>
+	<select id="getCardCardinfByPkCardinfo" parameterType="String" resultMap="CardCardinfoResult">
+		select
+			pk_cardinfo,
+			card_no,
+			create_time,
+			creator,
+			date_begin,
+			date_end,
+			del_flag,
+			dt_cardtype,
+			eu_status,
+			flag_active,
+			inner_no,
+			modifier,
+			modity_time,
+			pay_serialid,
+			pk_cardinfo,
+			pk_org,
+			pk_reginfo,
+			refund_serialid,
+			sort_no,
+			ts
+		from card_cardinfo
+		where pk_regInfo = #{pkReginfo}
+		order by create_time desc limit 1
+	</select>
+
+
+	<insert id="batchSave" parameterType="java.util.List">
+		insert into
+		card_cardinfo
+		(
+		pk_cardinfo,
+		card_no,
+		create_time,
+		creator,
+		date_begin,
+		date_end,
+		del_flag,
+		dt_cardtype,
+		eu_status,
+		flag_active,
+		inner_no,
+		modifier,
+		modity_time,
+		pay_serialid,
+
+		pk_org,
+		pk_reginfo,
+		refund_serialid,
+		sort_no,
+		ts
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.pkCardinfo},
+			#{item.cardNo},
+			#{item.createTime},
+			#{item.creator},
+			#{item.dateBegin},
+			#{item.dateEnd},
+			#{item.delFlag},
+			#{item.dtCardtype},
+			#{item.euStatus},
+			#{item.flagActive},
+			#{item.innerNo},
+			#{item.modifier},
+			#{item.modityTime},
+			#{item.paySerialid},
+
+			#{item.pkOrg},
+			#{item.pkReginfo},
+			#{item.refundSerialid},
+			#{item.sortNo},
+			#{item.ts}
+			)
+		</foreach>
+	</insert>
+
+</mapper>

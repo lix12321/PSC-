@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.wellcare</groupId>
+	<artifactId>PSC-Account</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>PSC-ACC-Parent</module>
+		<module>PSC-ACC-Api</module>
+		<module>PSC-ACC-Common</module>
+		<module>PSC-ACC-Core</module>
+		<module>PSC-ACC-Dao</module>
+		<module>PSC-ACC-Model</module>
+		<module>PSC-ACC-Service</module>
+		<module>PSC-ACC-Portal</module>
+		<module>PSC-ACC-Codegenerator</module>
+		<module>PSC-ACC-Pojo</module>
+	</modules>
+</project>

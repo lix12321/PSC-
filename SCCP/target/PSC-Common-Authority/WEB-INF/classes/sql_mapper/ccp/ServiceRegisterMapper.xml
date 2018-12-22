@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.ccp.ServiceRegisterDao">
+	<resultMap id="ServiceRegisterResult" type="cn.wellcare.entity.ccp.ServiceRegister">
+			<result property="cache" column="cache" />
+			<result property="cacheDuration" column="cache_duration" />
+			<result property="dataType" column="data_type" />
+			<result property="enable" column="enable" />
+			<result property="id" column="id" />
+			<result property="inFormat" column="in_format" />
+			<result property="outFormat" column="out_format" />
+			<result property="requestDomain" column="request_domain" />
+			<result property="requestMethod" column="request_method" />
+			<result property="requestPort" column="request_port" />
+			<result property="requestType" column="request_type" />
+			<result property="serverCode" column="server_code" />
+			<result property="timeOut" column="time_out" />
+			<result property="transCode" column="trans_code" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="ServiceRegisterResult">
+		select
+			cache,
+			cache_duration,
+			data_type,
+			enable,
+			id,
+			in_format,
+			out_format,
+			request_domain,
+			request_method,
+			request_port,
+			request_type,
+			server_code,
+			time_out,
+			trans_code
+		from service_register
+		where id = #{id}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from service_register t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.ccp.ServiceRegister">
+		select 
+			cache,
+			cache_duration,
+			data_type,
+			enable,
+			id,
+			in_format,
+			out_format,
+			request_domain,
+			request_method,
+			request_port,
+			request_type,
+			server_code,
+			time_out,
+			trans_code
+		from service_register
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getByTranscode" resultType="cn.wellcare.entity.ccp.ServiceRegister">
+		select 
+			cache,
+			cache_duration,
+			data_type,
+			enable,
+			id,
+			in_format,
+			out_format,
+			request_domain,
+			request_method,
+			request_port,
+			request_type,
+			server_code,
+			time_out,
+			trans_code
+		from service_register
+		where trans_code=#{transCode} limit 1
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="cache != null and cache !=''"  > 
+			and cache= #{cache}
+		</if>
+		<if test="cacheDuration != null and cacheDuration !=''"  > 
+			and cache_duration= #{cacheDuration}
+		</if>
+		<if test="dataType != null and dataType !=''"  > 
+			and data_type= #{dataType}
+		</if>
+		<if test="enable != null and enable !=''"  > 
+			and enable= #{enable}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="inFormat != null and inFormat !=''"  > 
+			and in_format= #{inFormat}
+		</if>
+		<if test="outFormat != null and outFormat !=''"  > 
+			and out_format= #{outFormat}
+		</if>
+		<if test="requestDomain != null and requestDomain !=''"  > 
+			and request_domain= #{requestDomain}
+		</if>
+		<if test="requestMethod != null and requestMethod !=''"  > 
+			and request_method= #{requestMethod}
+		</if>
+		<if test="requestPort != null and requestPort !=''"  > 
+			and request_port= #{requestPort}
+		</if>
+		<if test="requestType != null and requestType !=''"  > 
+			and request_type= #{requestType}
+		</if>
+		<if test="serverCode != null and serverCode !=''"  > 
+			and server_code= #{serverCode}
+		</if>
+		<if test="timeOut != null and timeOut !=''"  > 
+			and time_out= #{timeOut}
+		</if>
+		<if test="transCode != null and transCode !=''"  > 
+			and trans_code= #{transCode}
+		</if>
+		<if test="size != null">limit #{size} offset #{start}</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from service_register where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.ccp.ServiceRegister">
+        update service_register
+    	<set>
+			<if test="cache != null">cache= #{cache},</if>
+			<if test="cacheDuration != null">cache_duration= #{cacheDuration},</if>
+			<if test="dataType != null">data_type= #{dataType},</if>
+			<if test="enable != null">enable= #{enable},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="inFormat != null">in_format= #{inFormat},</if>
+			<if test="outFormat != null">out_format= #{outFormat},</if>
+			<if test="requestDomain != null">request_domain= #{requestDomain},</if>
+			<if test="requestMethod != null">request_method= #{requestMethod},</if>
+			<if test="requestPort != null">request_port= #{requestPort},</if>
+			<if test="requestType != null">request_type= #{requestType},</if>
+			<if test="serverCode != null">server_code= #{serverCode},</if>
+			<if test="timeOut != null">time_out= #{timeOut},</if>
+			<if test="transCode != null">trans_code= #{transCode}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.ccp.ServiceRegister" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			service_register
+		(
+			cache,
+			cache_duration,
+			data_type,
+			enable,
+			
+			in_format,
+			out_format,
+			request_domain,
+			request_method,
+			request_port,
+			request_type,
+			server_code,
+			time_out,
+			trans_code
+		)
+		values
+		(
+			#{cache},
+			#{cacheDuration},
+			#{dataType},
+			#{enable},
+			
+			#{inFormat},
+			#{outFormat},
+			#{requestDomain},
+			#{requestMethod},
+			#{requestPort},
+			#{requestType},
+			#{serverCode},
+			#{timeOut},
+			#{transCode}
+		)
+	</insert>
+	
+</mapper>

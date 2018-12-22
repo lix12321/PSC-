@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Codegenerator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Portal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PSC-ACC-Service" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

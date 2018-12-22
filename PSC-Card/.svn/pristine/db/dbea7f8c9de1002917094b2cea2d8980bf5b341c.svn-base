@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.card.CardReginfoDao">
+	<resultMap id="CardReginfoResult" type="cn.wellcare.card.entity.CardReginfo">
+		<result property="addressCode" column="address_code" />
+		<result property="birthDay" column="birth_day" />
+		<result property="codeReg" column="code_reg" />
+		<result property="createTime" column="create_time" />
+		<result property="creator" column="creator" />
+		<result property="delFlag" column="del_flag" />
+		<result property="detailedAddress" column="detailed_address" />
+		<result property="dtNation" column="dt_nation" />
+		<result property="dtSex" column="dt_sex" />
+		<result property="idNo" column="id_no" />
+		<result property="modifier" column="modifier" />
+		<result property="modityTime" column="modity_time" />
+		<result property="mpi" column="mpi" />
+		<result property="nameReg" column="name_reg" />
+		<result property="pkOrg" column="pk_org" />
+		<result property="pkReginfo" column="pk_reginfo" />
+		<result property="postcode" column="postcode" />
+		<result property="telNo" column="tel_no" />
+		<result property="ts" column="ts" />
+	</resultMap>
+
+	<select id="get" parameterType="Integer" resultMap="CardReginfoResult">
+		select
+			address_code,
+			birth_day,
+			code_reg,
+			create_time,
+			creator,
+			del_flag,
+			detailed_address,
+			dt_nation,
+			dt_sex,
+			id_no,
+			modifier,
+			modity_time,
+			mpi,
+			name_reg,
+			pk_org,
+			pk_reginfo,
+			postcode,
+			tel_no,
+			ts
+		from card_reginfo
+		where pk_reginfo = #{pkReginfo}
+	</select>
+
+	<select id="getCount" parameterType="java.util.Map"
+			resultType="java.lang.Integer">
+		select count(1) from card_reginfo t1
+		<include refid="whereConditions" />
+	</select>
+
+	<select id="getList" resultType="cn.wellcare.card.entity.CardReginfo">
+		select
+		address_code,
+		birth_day,
+		code_reg,
+		create_time,
+		creator,
+		del_flag,
+		detailed_address,
+		dt_nation,
+		dt_sex,
+		id_no,
+		modifier,
+		modity_time,
+		mpi,
+		name_reg,
+		pk_org,
+		pk_reginfo,
+		postcode,
+		tel_no,
+		ts
+		from card_reginfo
+		<include refid="whereConditions" />
+	</select>
+
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="addressCode != null and addressCode !=''"  >
+				and address_code= #{addressCode}
+			</if>
+			<if test="birthDay != null and birthDay !=''"  >
+				and birth_day= #{birthDay}
+			</if>
+			<if test="codeReg != null and codeReg !=''"  >
+				and code_reg= #{codeReg}
+			</if>
+			<if test="createTime != null and createTime !=''"  >
+				and create_time= #{createTime}
+			</if>
+			<if test="creator != null and creator !=''"  >
+				and creator= #{creator}
+			</if>
+			<if test="delFlag != null and delFlag !=''"  >
+				and del_flag= #{delFlag}
+			</if>
+			<if test="detailedAddress != null and detailedAddress !=''"  >
+				and detailed_address= #{detailedAddress}
+			</if>
+			<if test="dtNation != null and dtNation !=''"  >
+				and dt_nation= #{dtNation}
+			</if>
+			<if test="dtSex != null and dtSex !=''"  >
+				and dt_sex= #{dtSex}
+			</if>
+			<if test="idNo != null and idNo !=''"  >
+				and id_no= #{idNo}
+			</if>
+			<if test="modifier != null and modifier !=''"  >
+				and modifier= #{modifier}
+			</if>
+			<if test="modityTime != null and modityTime !=''"  >
+				and modity_time= #{modityTime}
+			</if>
+			<if test="mpi != null and mpi !=''"  >
+				and mpi= #{mpi}
+			</if>
+			<if test="nameReg != null and nameReg !=''"  >
+				and name_reg= #{nameReg}
+			</if>
+			<if test="pkOrg != null and pkOrg !=''"  >
+				and pk_org= #{pkOrg}
+			</if>
+			<if test="pkReginfo != null and pkReginfo !=''"  >
+				and pk_reginfo= #{pkReginfo}
+			</if>
+			<if test="postcode != null and postcode !=''"  >
+				and postcode= #{postcode}
+			</if>
+			<if test="telNo != null and telNo !=''"  >
+				and tel_no= #{telNo}
+			</if>
+			<if test="ts != null and ts !=''"  >
+				and ts= #{ts}
+			</if>
+		</trim>
+	</sql>
+
+	<delete id="del">
+        delete from card_reginfo where id = #{id}
+	</delete>
+
+	<update id="update" parameterType="cn.wellcare.card.entity.CardReginfo">
+		update card_reginfo
+		<set>
+			<if test="addressCode != null">address_code= #{addressCode},</if>
+			<if test="birthDay != null">birth_day= #{birthDay},</if>
+			<if test="codeReg != null">code_reg= #{codeReg},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="creator != null">creator= #{creator},</if>
+			<if test="delFlag != null">del_flag= #{delFlag},</if>
+			<if test="detailedAddress != null">detailed_address= #{detailedAddress},</if>
+			<if test="dtNation != null">dt_nation= #{dtNation},</if>
+			<if test="dtSex != null">dt_sex= #{dtSex},</if>
+			<if test="idNo != null">id_no= #{idNo},</if>
+			<if test="modifier != null">modifier= #{modifier},</if>
+			<if test="modityTime != null">modity_time= #{modityTime},</if>
+			<if test="mpi != null">mpi= #{mpi},</if>
+			<if test="nameReg != null">name_reg= #{nameReg},</if>
+			<if test="pkOrg != null">pk_org= #{pkOrg},</if>
+			<if test="pkReginfo != null">pk_reginfo= #{pkReginfo},</if>
+			<if test="postcode != null">postcode= #{postcode},</if>
+			<if test="telNo != null">tel_no= #{telNo},</if>
+			<if test="ts != null">ts= #{ts}</if>
+		</set>
+		where pk_reginfo = #{pkReginfo}
+	</update>
+
+	<insert id="save" parameterType="cn.wellcare.card.entity.CardReginfo">
+		insert into 
+			card_reginfo
+		(
+			pk_reginfo,
+			address_code,
+			birth_day,
+			code_reg,
+			create_time,
+			creator,
+			del_flag,
+			detailed_address,
+			dt_nation,
+			dt_sex,
+			id_no,
+			modifier,
+			modity_time,
+			mpi,
+			name_reg,
+			pk_org,
+			
+			postcode,
+			tel_no,
+			ts
+		)
+		values
+		(
+			#{pkReginfo},
+			#{addressCode},
+			#{birthDay},
+			#{codeReg},
+			#{createTime},
+			#{creator},
+			#{delFlag},
+			#{detailedAddress},
+			#{dtNation},
+			#{dtSex},
+			#{idNo},
+			#{modifier},
+			#{modityTime},
+			#{mpi},
+			#{nameReg},
+			#{pkOrg},
+			
+			#{postcode},
+			#{telNo},
+			#{ts}
+		)
+	</insert>
+
+	<select id="getCardRegInfo" resultType="cn.wellcare.card.bo.card.CardRegInfoBo">
+		SELECT
+		cr.code_reg cardRegCode,
+		cr.id_no credentialNo,
+		cr.name_reg regName,
+		cr.dt_sex sex,
+		cr.birth_day birthDay,
+		cr.tel_no teleNo,
+		cr.mpi mpi,
+		cr.address_code addressCode,
+		cr.detailed_address detailedAddress,
+		cr.postcode postCode,
+		cc.dt_cardtype cardType,
+		cc.card_no cardNo,
+		cc.eu_status cardStatus,
+		ce.code_department codeDepartment,
+		ce.code_employee codeEmployee
+		FROM card_reginfo cr
+		left join card_cardinfo cc on cr.pk_reginfo = cc.pk_reginfo and cc.del_flag = '0'
+		left join card_empolyeeinfo ce on cr.pk_reginfo = ce.pk_reginfo
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="cardRegCode != null and cardRegCode !=''and cardRegCode !='null'"  >
+				and cr.code_reg = #{cardRegCode}
+			</if>
+			<if test="codeDepartment != null and codeDepartment !=''and codeDepartment !='null'"  >
+				and ce.code_department = #{codeDepartment}
+			</if>
+			<if test="credentialNo != null and credentialNo !='' and credentialNo !='null'"  >
+				and cr.id_no = #{credentialNo}
+			</if>
+			<if test="cardNo != null and cardNo !='' and cardNo !='null' "  >
+				and cc.card_no = #{cardNo}
+			</if>
+			<if test="regName != null and regName !='' and regName !='null'"  >
+				and cr.name_reg = #{regName}
+			</if>
+			<if test="teleNo != null and teleNo !='' and teleNo !='null'"  >
+				and cr.tel_no = #{teleNo}
+			</if>
+			<if test="cardTypes != null and cardTypes !='' and cardTypes !='null'"  >
+				and cc.dt_cardtype in
+				<foreach collection="cardTypes" item="type" open="(" close=")" separator=",">
+					#{type}
+				</foreach>
+			</if>
+		</trim>
+	</select>
+
+	<select id="getCardRegInfoByIdNo" parameterType="String" resultMap="CardReginfoResult">
+		select
+			address_code,
+			birth_day,
+			code_reg,
+			create_time,
+			creator,
+			del_flag,
+			detailed_address,
+			dt_nation,
+			dt_sex,
+			id_no,
+			modifier,
+			modity_time,
+			mpi,
+			name_reg,
+			pk_org,
+			pk_reginfo,
+			postcode,
+			tel_no,
+			ts
+		from card_reginfo
+		where id_no = #{idNo}
+	</select>
+
+	<update id="updateByIdNo" parameterType="cn.wellcare.card.entity.CardReginfo">
+		update card_reginfo
+		<set>
+			<if test="addressCode != null">address_code= #{addressCode},</if>
+			<if test="birthDay != null">birth_day= #{birthDay},</if>
+			<if test="codeReg != null">code_reg= #{codeReg},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="creator != null">creator= #{creator},</if>
+			<if test="delFlag != null">del_flag= #{delFlag},</if>
+			<if test="detailedAddress != null">detailed_address= #{detailedAddress},</if>
+			<if test="dtNation != null">dt_nation= #{dtNation},</if>
+			<if test="dtSex != null">dt_sex= #{dtSex},</if>
+			<if test="modifier != null">modifier= #{modifier},</if>
+			<if test="modityTime != null">modity_time= #{modityTime},</if>
+			<if test="mpi != null">mpi= #{mpi},</if>
+			<if test="nameReg != null">name_reg= #{nameReg},</if>
+			<if test="pkOrg != null">pk_org= #{pkOrg},</if>
+			<if test="pkReginfo != null">pk_reginfo= #{pkReginfo},</if>
+			<if test="postcode != null">postcode= #{postcode},</if>
+			<if test="telNo != null">tel_no= #{telNo},</if>
+			<if test="ts != null">ts= #{ts}</if>
+		</set>
+		where id_no = #{idNo}
+	</update>
+
+	<select id="getCardRegInfoByRegCode" parameterType="String" resultMap="CardReginfoResult">
+		select
+			address_code,
+			birth_day,
+			code_reg,
+			create_time,
+			creator,
+			del_flag,
+			detailed_address,
+			dt_nation,
+			dt_sex,
+			id_no,
+			modifier,
+			modity_time,
+			mpi,
+			name_reg,
+			pk_org,
+			pk_reginfo,
+			postcode,
+			tel_no,
+			ts
+		from card_reginfo
+		where code_reg= #{codeReg}
+	</select>
+
+	<insert id="batchSave" parameterType="java.util.List">
+		insert into
+		card_reginfo
+		(
+		pk_reginfo,
+		address_code,
+		birth_day,
+		code_reg,
+		create_time,
+		creator,
+		del_flag,
+		detailed_address,
+		dt_nation,
+		dt_sex,
+		id_no,
+		modifier,
+		modity_time,
+		mpi,
+		name_reg,
+		pk_org,
+
+		postcode,
+		tel_no,
+		ts
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.pkReginfo},
+			#{item.addressCode},
+			#{item.birthDay},
+			#{item.codeReg},
+			#{item.createTime},
+			#{item.creator},
+			#{item.delFlag},
+			#{item.detailedAddress},
+			#{item.dtNation},
+			#{item.dtSex},
+			#{item.idNo},
+			#{item.modifier},
+			#{item.modityTime},
+			#{item.mpi},
+			#{item.nameReg},
+			#{item.pkOrg},
+			#{item.postcode},
+			#{item.telNo},
+			#{item.ts}
+			)
+		</foreach>
+	</insert>
+
+	<select id="getCardRegInfoByCardNo" parameterType="String" resultMap="CardReginfoResult">
+		select
+			cr.address_code,
+			cr.birth_day,
+			cr.code_reg,
+			cr.create_time,
+			cr.creator,
+			cr.del_flag,
+			cr.detailed_address,
+			cr.dt_nation,
+			cr.dt_sex,
+			cr.id_no,
+			cr.modifier,
+			cr.modity_time,
+			cr.mpi,
+			cr.name_reg,
+			cr.pk_org,
+			cr.pk_reginfo,
+			cr.postcode,
+			cr.tel_no,
+			cr.ts
+		from card_reginfo cr
+ 			left join card_cardinfo cc on cr.pk_reginfo = cc.pk_reginfo
+		where cc.card_no = #{cardNo};
+	</select>
+</mapper>

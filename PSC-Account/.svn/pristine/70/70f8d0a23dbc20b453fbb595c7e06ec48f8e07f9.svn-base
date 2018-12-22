@@ -1,0 +1,73 @@
+package cn.wellcare.web;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import cn.wellcare.api.trade.IPscAccRefundService;
+import cn.wellcare.core.bean.ServiceLocator;
+import cn.wellcare.core.constant.BaseParam;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.exception.UnauthorizedException;
+import cn.wellcare.pojo.common.PaymentResult;
+import cn.wellcare.pojo.common.RpcResult;
+
+public class AccountRefundController extends DataBinder{
+
+    protected Logger log = Logger.getLogger(this.getClass());
+    protected RpcResult<PaymentResult> refundPayResult = null;
+
+    @ModelAttribute
+    public synchronized void refundPay(HttpServletRequest request, HttpServletResponse response,
+                                       @RequestParam Map<String ,Object> param) {
+        this.refundPayResult = new RpcResult<>();
+        try {
+            Assert.notNull(param.get(BaseParam.USER_ID));
+            Assert.notNull(param.get(BaseParam.ORG_ID));
+            Assert.notNull(param.get(BaseParam.REFUND_AMOUNT));//退款金额
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            this.refundPayResult.setError(ErrorEnum.PARAM_IS_INVALID);
+        } catch (BusinessException e) {
+            this.refundPayResult.setError(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.refundPayResult.setError(ErrorEnum.SERVER_EXCEPTION);
+        }
+        refundPayMothod(param);
+
+    }
+
+    private void refundPayMothod(Map<String,Object> param) {
+        try {
+			IPscAccRefundService refundPayApi = null;
+			refundPayApi = (IPscAccRefundService) ServiceLocator.getInstance().getBean("accountRefundService");
+            this.log.debug("确定使用实例："+refundPayApi.getClass().getName());
+			this.refundPayResult = refundPayApi.accRefund(param);
+        }catch (Exception e) {
+            this.refundPayResult.setSuccess(false);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.SERVER_EXCEPTION.getErrCode().equals(pe.getCode())){
+                    this.refundPayResult.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());}
+                else{
+                    this.refundPayResult.setMsgInfo(e.getMessage());}
+            } else {
+                if (e instanceof UnauthorizedException) {
+                    this.refundPayResult.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+                } else {
+                    e.printStackTrace();
+                    this.refundPayResult.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                }
+            }
+        }
+
+    }
+}

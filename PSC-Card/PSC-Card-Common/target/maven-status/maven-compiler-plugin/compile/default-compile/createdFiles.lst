@@ -1,0 +1,10 @@
+cn\wellcare\web\DataBinder.class
+cn\wellcare\freemarker\CustomFreeMarkerConfigurer.class
+cn\wellcare\web\BaseController$3.class
+cn\wellcare\web\BaseController$1.class
+cn\wellcare\freemarker\FreemarkerStaticModels.class
+cn\wellcare\mq\RocketMQProducer.class
+cn\wellcare\freemarker\EscapeHtmlTemplateLoader.class
+cn\wellcare\web\BaseController$2.class
+cn\wellcare\web\BaseController.class
+cn\wellcare\web\BaseController$4.class

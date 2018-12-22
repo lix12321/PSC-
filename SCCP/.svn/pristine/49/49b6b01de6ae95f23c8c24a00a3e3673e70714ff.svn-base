@@ -1,0 +1,1216 @@
+[{
+    "type": "textbox",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "label",
+        "type": "String",
+        "desc": "label",
+        "dv": ""
+    }, {
+        "name": "labelWidth",
+        "type": "Number",
+        "desc": "label宽度",
+        "dv": "auto"
+    }, {
+        "name": "labelPosition",
+        "type": "String",
+        "desc": "label位置",
+        "vs":"before:前面;after:后面;top:顶部",
+        "dv": "before"
+    }, {
+        "name": "labelAlign",
+        "type": "String",
+        "desc": "label对齐方式",
+        "vs":"left:左对齐;right:右对齐",
+        "dv": "left"
+    }, {
+        "name": "prompt",
+        "type": "String",
+        "desc": "文本为空时的提示内容",
+        "dv": ""
+    }, {
+        "name": "editable",
+        "type": "Boolean",
+        "desc": "可编辑",
+        "dv": "true"
+    }, {
+        "name": "readonly",
+        "type": "Boolean",
+        "desc": "只读",
+        "dv": "false"
+    }, {
+        "name": "width",
+        "type": "Number",
+        "desc": "宽度",
+        "dv": "100%"
+    }, {
+        "name": "height",
+        "type": "Number",
+        "desc": "高度",
+        "dv": "auto"
+    }, {
+        "name": "iconCls",
+        "type": "String",
+        "desc": "文本框图片",
+        "dv": ""
+    }, {
+        "name": "iconAlign",     
+        "type": "String",
+        "desc": "icon对齐方式",
+        "vs":"left:左对齐;right:右对齐",
+        "dv": "left"
+    }, {
+        "name": "iconWidth",
+        "type": "Number",
+        "desc": "icon宽度度",
+        "dv": "18"
+    }],
+    "event": [{
+        "name": "onChange",
+        "params":"newValue,oldValue",
+        "type": "",
+        "desc": "值改变时发生"
+    }, {
+       "name": "onClickIcon",
+         "params":"index",
+        "type": "",
+        "desc": "文本框图片点击事件"
+    }, {
+        "name": "keydown",
+        "type": "DOM",
+        "desc": "键盘按下时发生"
+    }, {
+        "name": "keyup",
+        "type": "DOM",
+        "desc": "键盘按起时发生"
+    }, {
+        "name": "focus",
+        "type": "DOM",
+        "desc": "获取焦点时发生"
+    }, {
+        "name": "blur",
+        "type": "DOM",
+        "desc": "失去焦点时发生"
+    }],
+    "method":[{
+        "name":"doValueChanged()",
+        "type":"",
+        "desc":"主动激发valuechanged事件。一般在设置值之后调用。"
+    }, {
+        "name":"setValue(value)",
+        "type":"",
+        "desc":"设置值"
+    }, {
+        "name":"getValue()",
+        "type":"",
+        "desc":"获取值"
+    }],
+    "extends": ["control"]
+}, {
+    "type": "combobox",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "label",
+        "type": "String",
+        "desc": "label",
+        "dv": ""
+    }, {
+        "name": "labelField",
+        "type": "Boolean",
+        "desc": "是否显示label",
+        "dv": "true"
+    }, {
+        "name": "autoload",
+        "type": "Boolean",
+        "desc": "自动加载数据",
+        "dv": "true"
+    }, {
+        "name": "loadParams",
+        "type": "Json",
+        "desc": "加载数据参数",
+        "dv": "{}"
+    }, {
+        "name": "trancode",
+        "type": "String",
+        "desc": "交易号",
+        "dv": ""
+    }, {
+        "name": "valueField",
+        "type": "String",
+        "desc": "值字段",
+        "dv": "id"
+    }, {
+        "name": "textField",
+        "type": "String",
+        "desc": "文本显示字段",
+        "dv": "text"
+    }, {
+        "name": "pinyinField",
+        "type": "String",
+        "desc": "拼音字段",
+        "dv": ""
+    }, {
+        "name": "multiSelect",
+        "type": "Boolean",
+        "desc": "多选",
+        "dv": "false"
+    }, {
+        "name": "showNullItem",
+        "type": "Boolean",
+        "desc": "显示空项",
+        "dv": "false"
+    }, {
+        "name": "nullItemText",
+        "type": "String",
+        "desc": "空项文本",
+        "dv": ""
+    }, {
+        "name": "width",
+        "type": "Number",
+        "desc": "宽度",
+        "dv": "100%"
+    }, {
+        "name": "height",
+        "type": "Number",
+        "desc": "高度",
+        "dv": ""
+    }, {
+        "name": "inputStyle",
+        "type": "String",
+        "desc": "输入框样式",
+        "dv": ""
+    }, {
+        "name": "labelStyle",
+        "type": "String",
+        "desc": "label样式",
+        "dv": ""
+    }],
+    "event": [{
+        "name": "valuechanged",
+        "type": "ds",
+        "desc": "值改变时发生"
+    }, {
+        "name": "itemclick",
+        "type": "",
+        "desc": "下拉项点击时发生"
+    }],
+    "method":[{
+        "name":"setValue(value)",
+        "type":"",
+        "desc":"设置值"
+    }, {
+        "name":"getValue()",
+        "type":"",
+        "desc":"获取值"
+    }, {
+        "name":"getFormValue()",
+        "type":"",
+        "desc":"获取表单值"
+    }, {
+        "name":"load(url)",
+        "type":"",
+        "desc":"加载数据"
+    }, {
+        "name":"select(Number)",
+        "type":"",
+        "desc":"选择项"
+    }],
+    "extends": ["control"]
+}, {
+    "type": "datagrid",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "trancode",
+        "type": "String",
+        "desc": "交易号",
+        "dv": ""
+    }, {
+        "name": "idField",
+        "type": "String",
+        "desc": "行唯一字段",
+        "dv": ""
+    },{
+        "name": "fitColumns",
+        "type": "Boolean",
+        "desc": "固定列宽",
+        "dv": "true"
+    }, {
+        "name": "virtualScroll",
+        "type": "Boolean",
+        "desc": "虚拟滚动",
+        "dv": "false"
+    }, {
+        "name": "showPager",
+        "type": "Boolean",
+        "desc": "显示分页",
+        "dv": "true"
+    }, {
+        "name": "pageSize",
+        "type": "Number",
+        "desc": "每页多少条",
+        "dv": "10.00"
+    }, {
+        "name": "sizeList",
+        "type": "Array",
+        "desc": "页尺寸集合，比如[5,10,100]",
+        "dv": "[5,10,20,50,100]"
+    }, {
+        "name": "showHGridLines",
+        "type": "Boolean",
+        "desc": "显示横向表格线条",
+        "dv": "true"
+    }, {
+        "name": "showVGridLines",
+        "type": "Boolean",
+        "desc": "显示竖向表格线条",
+        "dv": "true"
+    }, {
+        "name": "showFilterRow",
+        "type": "Boolean",
+        "desc": "显示过滤行",
+        "dv": "false"
+    }, {
+        "name": "showSummaryRow",
+        "type": "Boolean",
+        "desc": "显示汇总行",
+        "dv": "false"
+    }, {
+        "name": "allowCellWrap",
+        "type": "Boolean",
+        "desc": "允许单元格换行",
+        "dv": "false"
+    }, {
+        "name": "allowHeaderWrap",
+        "type": "Boolean",
+        "desc": "允许表头文本换行",
+        "dv": "false"
+    }, {
+        "name": "allowSortColumn",
+        "type": "Boolean",
+        "desc": "允许列排序",
+        "dv": "true"
+    }, {
+        "name": "allowMoveColumn",
+        "type": "Boolean",
+        "desc": "允许移动列",
+        "dv": "true"
+    }, {
+        "name": "allowResizeColumn",
+        "type": "Boolean",
+        "desc": "允许拖拽调节列宽度",
+        "dv": "true"
+    }, {
+        "name": "enableHotTrack",
+        "type": "Boolean",
+        "desc": "移动到行时高亮显示",
+        "dv": "true"
+    }, {
+        "name": "allowCellSelect",
+        "type": "Boolean",
+        "desc": "允许选择单元格",
+        "dv": "false"
+    }, {
+        "name": "allowCellEdit",
+        "type": "Boolean",
+        "desc": "允许单元格编辑。",
+        "dv": "false"
+    }, {
+        "name": "multiSelect",
+        "type": "Boolean",
+        "desc": "允许多选行",
+        "dv": "false"
+    }, {
+        "name": "frozenStartColumn",
+        "type": "Number",
+        "desc": "锁定开始列",
+        "dv": "-1.00"
+    }, {
+        "name": "frozenEndColumn",
+        "type": "Number",
+        "desc": "锁定截至列",
+        "dv": "-1.00"
+    }],
+    "event": [ {
+        "name": "rowclick",
+        "type": "{     sender: Object, //表格对象 record: Object //行对象}",
+        "desc": "行点击时发生"
+    }, {
+        "name": "rowdblclick",
+        "type": "{   sender: Object, //表格对象    record: Object //行对象 }",
+        "desc": "行双击时发生"
+    }, {
+        "name": "rowmousedown",
+        "type": "{  sender: Object, //表格对象   record: Object //行对象 }",
+        "desc": "行鼠标按下时发生"
+    }, {
+        "name": "cellclick",
+        "type": "{ sender: Object, //表格对象  record: Object, //行对象 column: Object //列对象 }",
+        "desc": "单元格点击时发生"
+    }, {
+        "name": "cellmousedown",
+        "type": "{   sender: Object, //表格对象 record: Object, //行对象  column: Object //列对象 }",
+        "desc": "单元格鼠标按下时发生"
+    }, {
+        "name": "headercellclick",
+        "type": "{   sender: Object, //表格对象   column: Object //列对象}",
+        "desc": "表头单元格点击时发生"
+    }, {
+        "name": "headercellmousedown",
+        "type": "{  sender: Object, //表格对象 column: Object //列对象}",
+        "desc": "表头单元格鼠标按下时发生"
+    }, {
+        "name": "headercellcontextmenu",
+        "type": "{  sender: Object, //表格对象 column: Object //列对象}",
+        "desc": "表头单元格点击右键时发生"
+    }, {
+        "name": "beforeload",
+        "type": "{  sender: Object, //表格对象  data: Object    //参数对象  cancel: Boolean }",
+        "desc": "数据加载前发生"
+    }, {
+        "name": "preload",
+        "type": "",
+        "desc": "数据加载，设置到Grid前发生"
+    }, {
+        "name": "load",
+        "type": "{ sender: Object, //表格对象 xhr: Object,    //ajax对象 data: Array     //数据    }",
+        "desc": "数据加载成功时发生"
+    }, {
+        "name": "update",
+        "type": "",
+        "desc": "表格渲染完毕事件"
+    }, {
+        "name": "drawcell",
+        "type": "{    sender: Object,    rowIndex: Number,    umnIndex: Number,    record: Object,   column: Object,    field: String,    value: String,    cellHtml: '',    rowCls: '',    cellCls: '',  rowStyle: '',  cellStyle: ''}",
+        "desc": "绘制单元格时发生"
+    }, {
+        "name": "celleditenter",
+        "type": "{sender: Object,record: Object}",
+        "desc": "编辑器按回车时发生"
+    }, {
+        "name": "selectionchanged",
+        "type": "",
+        "desc": "行选择改变时发生"
+    }, {
+        "name": "beforeselect",
+        "type": "{ sender: Object, record: Object,cancel: Boolean}",
+        "desc": "行选中前发生"
+    }, {
+        "name": "beforedeselect",
+        "type": "{sender: Object, record: Object,cancel: Boolean}",
+        "desc": "行取消选中前发生"
+    }, {
+        "name": "select",
+        "type": "{sender: Object, record: Object}",
+        "desc": "行选中时发生"
+    }, {
+        "name": "deselect",
+        "type": "{sender: Object, record: Object}",
+        "desc": "行取消选中时发生"
+    }, {
+        "name": "drawsummarycell",
+        "type": "{    sender: Object,    result: Object,     //服务端返回的原始数据对象 records: Array,     //行数组 column: Object, field: String, value: String, cellHtml: '', cellCls: '',cellStyle: ''}",
+        "desc": "绘制汇总单元格事件"
+    }],
+    "method":[ {
+        "name":"clearGroup()",
+        "type":"",
+        "desc":"取消分组。"
+    }, {
+        "name":"collapseGroups()",
+        "type":"",
+        "desc":"折叠所有分组。"
+    }, {
+        "name":"deselect(row,fireEvent)",
+        "type":"fireEvent:Boolean。是否激发选择事件。",
+        "desc":"取消选中行"
+    }, {
+        "name":"deselectAll(fireEvent)",
+        "type":"fireEvent:Boolean。是否激发选择事件。",
+        "desc":"取消选中所有行"
+    }, {
+        "name":"deselects(rows,fireEvent)",
+        "type":"fireEvent:Boolean。是否激发选择事件。",
+        "desc":"取消选中多行"
+    }, {
+        "name":"expandGroups()",
+        "type":"",
+        "desc":"展开所有分组。"
+    }, {
+        "name":"findRow(Function)",
+        "type":"",
+        "desc":"通过查询函数获取行对象。如：nullvarrow=grid.findRow(function(row){nullif(row.name=='张三')returntrue;null});"
+    }, {
+        "name":"findRows(Function)",
+        "type":"",
+        "desc":"通过查询函数获取行对象数组。如：nullvarrows=grid.findRows(function(row){nullif(row.age>20)returntrue;null});"
+    }, {
+        "name":"frozenColumns(start,end)",
+        "type":"",
+        "desc":"锁定列。比如：grid.frozenColumns(0,2)"
+    }, {
+        "name":"getChanges(state,onlyField)",
+        "type":"state:added|modified|removed。如传递null，则获取增删改数据。onlyField：Boolean。传递true，modified的行数据将只返回修改的字段。",
+        "desc":"获取增加、删除、修改后的数据集合。row._state为added/modified/removed。null"
+    }, {
+        "name":"getColumn(index/columnName)",
+        "type":"",
+        "desc":"获取列对象"
+    }, {
+        "name":"getCurrentCell()",
+        "type":"",
+        "desc":"null获取当前选中单元格。"
+    }, {
+        "name":"getFilterCellEl(column)",
+        "type":"",
+        "desc":"null获取过滤行单元格DOM对象"
+    }, {
+        "name":"getLoadParams()",
+        "type":"",
+        "desc":"null获取查询参数对象。"
+    }, {
+        "name":"getRow(index)",
+        "type":"",
+        "desc":"null获取行对象"
+    }, {
+        "name":"getRowDetailCellEl(row)",
+        "type":"",
+        "desc":"获取行详细DOM对象"
+    }, {
+        "name":"getSelected()",
+        "type":"",
+        "desc":"null获取当前选中行"
+    }, {
+        "name":"getSelecteds()",
+        "type":"",
+        "desc":"null获取所有选中的行"
+    }, {
+        "name":"getSummaryCellEl(column)",
+        "type":"",
+        "desc":"获取汇总行单元格DOM对象"
+    }, {
+        "name":"gotoPage(index,size)",
+        "type":"",
+        "desc":"跳转页码。"
+    }, {
+        "name":"groupBy(field,dir)",
+        "type":"",
+        "desc":"分组。比如：grid.groupBy('city','desc')"
+    }, {
+        "name":"hideAllRowDetail()",
+        "type":"",
+        "desc":"隐藏所有行详细"
+    }, {
+        "name":"hideColumn(column)",
+        "type":"",
+        "desc":"隐藏列"
+    }, {
+        "name":"hideRowDetail(row)",
+        "type":"",
+        "desc":"隐藏行详细"
+    }, {
+        "name":"indexOf(row)",
+        "type":"",
+        "desc":"获取行索引号"
+    }, {
+        "name":"isChanged()",
+        "type":"",
+        "desc":"是否已修改。"
+    }, {
+        "name":"isSelected(row)",
+        "type":"",
+        "desc":"null是否选中行"
+    }, {
+        "name":"load(params,success,fail)",
+        "type":"params：Object。参数对象。success：Function。成功回调函数。fail：Function。失败回调函数。",
+        "desc":"null加载数据。null比如，grid.load({key:'普加'})。 null后台接收如下信息：null{nullkey:'普加',nullpageIndex:0,nullpageSize:10,nullsortField:'',nullsortOrder:'asc'null}null使用：Stringkey=request."
+    }, {
+        "name":"loading()",
+        "type":"",
+        "desc":"null显示加载遮罩。"
+    }, {
+        "name":"mergeCells(cells)",
+        "type":"",
+        "desc":"null合并单元格。比如：nullvarcells=[null{rowIndex:1,columnIndex:0,rowSpan:1,colSpan:2},null{rowIndex:3,columnIndex:0,rowSpan:4,colSpan:3}null];nullgrid.mergeCells(cells);"
+    }, {
+        "name":"mergeColumns(columns)",
+        "type":"",
+        "desc":"null自动合并相同值单元格。比如：nullgrid.mergeColumns(['company']);"
+    }, {
+        "name":"moveDown(Array)",
+        "type":"",
+        "desc":"下移"
+    }, {
+        "name":"moveRow(row,index)",
+        "type":"",
+        "desc":"移动行(Javascript)"
+    }, {
+        "name":"moveUp(Array)",
+        "type":"",
+        "desc":"null上移"
+    }, {
+        "name":"reload()",
+        "type":"",
+        "desc":"null重新加载数据。"
+    }, {
+        "name":"removeRow(row,autoSelect)",
+        "type":"",
+        "desc":"删除行(JavaScript)。autoSelect为true，则删除记录后，自动选择下一条记录。"
+    }, {
+        "name":"removeRowCls(row,cls)",
+        "type":"",
+        "desc":"删除行样式"
+    }, {
+        "name":"removeRows(rows,autoSelect)",
+        "type":"",
+        "desc":"删除多行(JavaScript)。autoSelect为true，则删除记录后，自动选择下一条记录。"
+    }, {
+        "name":"scrollIntoView(row)",
+        "type":"",
+        "desc":"null定位滚动条到行null"
+    }, {
+        "name":"select(row,fireEvent)",
+        "type":"fireEvent:Boolean。是否激发选择事件。",
+        "desc":"选中行"
+    }, {
+        "name":"selectAll(fireEvent)",
+        "type":"fireEvent:Boolean。是否激发选择事件。",
+        "desc":"选中所有行"
+    }, {
+        "name":"selects(rows,fireEvent)",
+        "type":"fireEvent:Boolean。是否激发选择事件。",
+        "desc":"选中多行"
+    }, {
+        "name":"setColumnWidth(column,Number)",
+        "type":"",
+        "desc":"设置列宽"
+    }, {
+        "name":"setCurrentCell(cell)",
+        "type":"cell:[row,column]",
+        "desc":"设置当前选中单元格。"
+    }, {
+        "name":"setSelected(row)",
+        "type":"",
+        "desc":"设置当前选中行"
+    }, {
+        "name":"showColumn(column)",
+        "type":"",
+        "desc":"显示列"
+    }, {
+        "name":"showRowDetail(row)",
+        "type":"",
+        "desc":"显示行详细"
+    }, {
+        "name":"unFrozenColumns()",
+        "type":"",
+        "desc":"取消锁定列。"
+    }, {
+        "name":"unmask()",
+        "type":"",
+        "desc":"取消遮罩。"
+    }, {
+        "name":"updateColumn(column,Object)",
+        "type":"",
+        "desc":"更新列内容。例如：grid.updateColumn('name',{header:'姓名'});"
+    }, {
+        "name":"updateRow(row,rowData)",
+        "type":"",
+        "desc":"更新行(JavaScript)"
+    }],
+    "item": [{
+        "name": "name",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "header",
+        "type": "String",
+        "desc": "表头列文本",
+        "dv": ""
+    }, {
+        "name": "type",
+        "type": "indexolumn|checkcolumn|checkboxcolumn|comboboxcolumn|treeselectcolumn",
+        "desc": "列类型。。",
+        "dv": ""
+    }, {
+        "name": "displayField",
+        "type": "String",
+        "desc": "单元格文本字段",
+        "dv": ""
+    }, {
+        "name": "field",
+        "type": "String",
+        "desc": "单元格隐藏值字段",
+        "dv": ""
+    }, {
+        "name": "width",
+        "type": "Number",
+        "desc": "列宽度",
+        "dv": ""
+    }, {
+        "name": "visible",
+        "type": "Boolean",
+        "desc": "是否显示",
+        "dv": ""
+    }, {
+        "name": "hideable",
+        "type": "Boolean",
+        "desc": "表头菜单项显示",
+        "dv": "false"
+    }, {
+        "name": "readOnly",
+        "type": "Boolean",
+        "desc": "是否只读",
+        "dv": "false"
+    }, {
+        "name": "headerAlign",
+        "type": "String",
+        "desc": "表头对齐方式。",
+        "dv": "left"
+    }, {
+        "name": "align",
+        "type": "String",
+        "desc": "单元格对齐方式",
+        "dv": "left"
+    }, {
+        "name": "headerCls",
+        "type": "String",
+        "desc": "表头列样式类。",
+        "dv": ""
+    }, {
+        "name": "cellCls",
+        "type": "String",
+        "desc": "单元格样式类",
+        "dv": ""
+    }, {
+        "name": "headerStyle",
+        "type": "String",
+        "desc": "表头列样式",
+        "dv": ""
+    }, {
+        "name": "cellStyle",
+        "type": "String",
+        "desc": "单元格样式",
+        "dv": ""
+    }, {
+        "name": "editor",
+        "type": "Object",
+        "desc": "单元格编辑器",
+        "dv": ""
+    }, {
+        "name": "allowMove",
+        "type": "Boolean",
+        "desc": "是否可移动表头列",
+        "dv": "true"
+    }, {
+        "name": "allowResize",
+        "type": "Boolean",
+        "desc": "是否拖拽调节表头列宽度",
+        "dv": "true"
+    }, {
+        "name": "autoShowPopup",
+        "type": "Boolean",
+        "desc": "编辑时是否自动显示下拉框",
+        "dv": "false"
+    }, {
+        "name": "dataType",
+        "type": "string|int|float|date|boolean|currency",
+        "desc": "数据类型",
+        "dv": "string"
+    }, {
+        "name": "currencyUnit",
+        "type": "String",
+        "desc": "货币单位",
+        "dv": ""
+    }, {
+        "name": "dateFormat",
+        "type": "String",
+        "desc": "日期格式化",
+        "dv": ""
+    }, {
+        "name": "numberFormat",
+        "type": "String",
+        "desc": "数字格式化",
+        "dv": ""
+    }, {
+        "name": "summaryType",
+        "type": "count|min|max|sum|avg",
+        "desc": "汇总计算类型",
+        "dv": ""
+    }, {
+        "name": "summaryRenderer",
+        "type": "Function",
+        "desc": "汇总单元格渲染函数",
+        "dv": ""
+    }, {
+        "name": "decimalPlaces",
+        "type": "Number",
+        "desc": "保留的小数位数，默认2位。",
+        "dv": "null"
+    }]
+}, {
+    "type": "button",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "text",
+        "type": "String",
+        "desc": "按钮文本",
+        "dv": ""
+    }, {
+        "name": "iconCls",
+        "type": "String",
+        "desc": "按钮图标类",
+        "dv": ""
+    }, {
+        "name": "iconStyle",
+        "type": "String",
+        "desc": "按钮图标样式",
+        "dv": ""
+    }, {
+        "name": "width",
+        "type": "Number",
+        "desc": "宽度",
+        "dv": ""
+    }, {
+        "name": "height",
+        "type": "Number",
+        "desc": "高度",
+        "dv": ""
+    },{
+        "name": "plain",
+        "type": "Boolean",
+        "desc": "背景透明",
+        "dv": "FALSE"
+    }],
+    "event": [{
+        "name": "click",
+        "type": "",
+        "desc": "按钮点击时发生"
+    }, {
+        "name": "checkedchanged",
+        "type": "",
+        "desc": "按钮选择变化时发生"
+    }],
+    "method": [{
+        "name": "doClick()",
+        "type": "",
+        "desc": "主动激发click事件。"
+    }, {
+        "name": "setText()",
+        "type": "",
+        "desc": "设置文本"
+    }, {
+        "name": "setIconCls()",
+        "type": "",
+        "desc": "设置图标"
+    }, {
+        "name": "setChecked()",
+        "type": "",
+        "desc": "设置检查"
+    }]
+}, {
+    "type": "datepicker",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "label",
+        "type": "String",
+        "desc": "显示条件名称",
+        "dv": ""
+    }, {
+        "name": "labelField",
+        "type": "String",
+        "desc": "",
+        "dv": "true"
+    }, {
+        "name": "width",
+        "type": "String",
+        "desc": "",
+        "dv": "100%"
+    }, {
+        "name": "format",
+        "type": "String",
+        "desc": "格式化字符串",
+        "dv": "yyyy-MM-dd"
+    }, {
+        "name": "timeFormat",
+        "type": "String",
+        "desc": "时间格式化字符串",
+        "dv": "H:mm"
+    }, {
+        "name": "viewDate",
+        "type": "Date",
+        "desc": "下拉默认显示日期",
+        "dv": ""
+    }, {
+        "name": "showTime",
+        "type": "Boolean",
+        "desc": "显示'时间输入框'",
+        "dv": "FALSE"
+    }, {
+        "name": "showTodayButton",
+        "type": "Boolean",
+        "desc": "显示'今天'按钮",
+        "dv": "TRUE"
+    }, {
+        "name": "showOkButton",
+        "type": "Boolean",
+        "desc": "显示'确定'按钮",
+        "dv": "FALSE"
+    }, {
+        "name": "showClearButton",
+        "type": "Boolean",
+        "desc": "显示'清除'按钮",
+        "dv": "TRUE"
+    }, {
+        "name": "valueType",
+        "type": "String",
+        "desc": "值类型。默认是date，当设置为string后，输入框可以输入任意字符串。",
+        "dv": "date"
+    }],
+    "event": [{
+        "name": "valuechanged",
+        "type": "",
+        "desc": "值改变时发生"
+    }],
+    "method":[{
+        "name":"setValue(value)",
+        "type":"",
+        "desc":"设置值"
+    }, {
+        "name":"getValue()",
+        "type":"",
+        "desc":"获取值"
+    }, {
+        "name":"getFormValue()",
+        "type":"",
+        "desc":"获取表单值"
+    }]
+}, {
+    "type": "spinner",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "label",
+        "type": "String",
+        "desc": "显示条件名称",
+        "dv": ""
+    }, {
+        "name": "labelField",
+        "type": "String",
+        "desc": "",
+        "dv": "true"
+    }, {
+        "name": "width",
+        "type": "String",
+        "desc": "",
+        "dv": "true"
+    }, {
+        "name": "value",
+        "type": "Number",
+        "desc": "值",
+        "dv": "0"
+    }, {
+        "name": "minValue",
+        "type": "Number",
+        "desc": "最小值",
+        "dv": "0"
+    }, {
+        "name": "maxValue",
+        "type": "Number",
+        "desc": "最大值",
+        "dv": "100"
+    }, {
+        "name": "increment",
+        "type": "Number",
+        "desc": "增量值",
+        "dv": "1"
+    }, {
+        "name": "format",
+        "type": "String",
+        "desc": "数字格式化。",
+        "dv": ""
+    }, {
+        "name": "allowLimitValue",
+        "type": "Boolean",
+        "desc": "是否强制约束大小范围",
+        "dv": "TRUE"
+    }, {
+        "name": "changeOnMousewheel",
+        "type": "Boolean",
+        "desc": "是否滚动滚轮改变值",
+        "dv": "TRUE"
+    }],
+    "event": [{
+        "name": "valuechanged",
+        "type": "",
+        "desc": "值改变时发生"
+    }],
+    "method":[{
+        "name":"setValue(value)",
+        "type":"",
+        "desc":"设置值"
+    },{
+        "name":"getValue()",
+        "type":"",
+        "desc":"获取值"
+    }]
+}, {
+    "type": "treeselect",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "label",
+        "type": "String",
+        "desc": "显示条件名称",
+        "dv": ""
+    }, {
+        "name": "labelField",
+        "type": "String",
+        "desc": "",
+        "dv": "true"
+    }, {
+        "name": "width",
+        "type": "String",
+        "desc": "",
+        "dv": "true"
+    }, {
+        "name": "virtualScroll",
+        "type": "Boolean",
+        "desc": "虚拟模式。适用于大数据显示场合。",
+        "dv": "false"
+    }, {
+        "name": "data",
+        "type": "Array",
+        "desc": "树形数据对象",
+        "dv": ""
+    }, {
+        "name": "url",
+        "type": "String",
+        "desc": "数据加载地址",
+        "dv": ""
+    }, {
+        "name": "value",
+        "type": "String",
+        "desc": "选中的节点值",
+        "dv": ""
+    }, {
+        "name": "valueField",
+        "type": "String",
+        "desc": "值字段。",
+        "dv": "id"
+    }, {
+        "name": "parentField",
+        "type": "String",
+        "desc": "父节点字段",
+        "dv": "pid"
+    }, {
+        "name": "resultAsTree",
+        "type": "Boolean",
+        "desc": "url数据是否列表",
+        "dv": "true"
+    }, {
+        "name": "textField",
+        "type": "String",
+        "desc": "节点文本字段",
+        "dv": "text"
+    }, {
+        "name": "pinyinField",
+        "type": "String",
+        "desc": "拼音字段",
+        "dv": ""
+    }, {
+        "name": "multiSelect",
+        "type": "Boolean",
+        "desc": "多选",
+        "dv": "false"
+    }, {
+        "name": "checkRecursive",
+        "type": "Boolean",
+        "desc": "是否联动选择",
+        "dv": "false"
+    }, {
+        "name": "showTreeIcon",
+        "type": "Boolean",
+        "desc": "显示节点图标",
+        "dv": "true"
+    }, {
+        "name": "showTreeLines",
+        "type": "Boolean",
+        "desc": "显示树形线条",
+        "dv": "true"
+    }, {
+        "name": "showFolderCheckBox",
+        "type": "Boolean",
+        "desc": "显示父节点checkbox",
+        "dv": "false"
+    }, {
+        "name": "autoCheckParent",
+        "type": "Boolean",
+        "desc": "是否自动选择父节点。比如选中子节点，将父节点也自动选中。",
+        "dv": "false"
+    }, {
+        "name": "expandOnLoad",
+        "type": "Boolean/Number",
+        "desc": "加载后是否展开。比如：true展开所有节点；0展开第一级节点。以此类推。",
+        "dv": "false"
+    }, {
+        "name": "valueFromSelect",
+        "type": "Boolean",
+        "desc": "必须从选择项录入",
+        "dv": "false"
+    }],
+    "event": [{
+        "name": "valuechanged",
+        "type": "",
+        "desc": "值改变时发生"
+    }, {
+        "name": "nodeclick",
+        "type": "",
+        "desc": "下拉项点击时发生"
+    }, {
+        "name": "beforenodecheck",
+        "type": "{  sender: Object,         //树对象  node: Object,           //节点对象  isLeaf: Boolean,  checked: Boolean,       //Check状态  cancel: alse}",
+        "desc": "Check选择前发生"
+    }, {
+        "name": "beforenodeselect",
+        "type": "{  sender: Object,         //树对象  node: Object,           //节点对象  isLeaf: Boolean,  cancel: false}",
+        "desc": "选择节点前发生"
+    }],
+    "method":[{
+        "name":"setValue(value)",
+        "type":"",
+        "desc":"设置值"
+    }, {
+        "name":"getValue()",
+        "type":"",
+        "desc":"获取值"
+    }, {
+        "name":"getFormValue()",
+        "type":"",
+        "desc":"获取表单值"
+    }, {
+        "name":"load(url)",
+        "type":"",
+        "desc":"加载数据"
+    }, {
+        "name":"loadList(Array, idField, parentField)",
+        "type":"",
+        "desc":"加载列表数据。比如：tree.loadList(list,'id','pid')"
+    }, {
+        "name":"getData()",
+        "type":"",
+        "desc":"获取树形数据"
+    }, {
+        "name":"getList()",
+        "type":"",
+        "desc":"获取列表数据"
+    }, {
+        "name":"getSelectedNode()",
+        "type":"",
+        "desc":"获取选中的节点"
+    }, {
+        "name":"getCheckedNodes(haveParent)",
+        "type":"haveParent: Boolean。是否包含父节点。",
+        "desc":"获取Check选中的多个节点"
+    }]
+}, {
+    "type": "bodyview",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }],
+    "event": [{
+        "name": "load",
+        "type": "",
+        "desc": ""
+    }]
+}, {
+    "type": "layout.grid.column",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "name",
+        "type": "String",
+        "desc": "名称",
+        "dv": ""
+    }, {
+        "name": "height",
+        "type": "String",
+        "desc": "高",
+        "dv": ""
+    }, {
+        "name": "width",
+        "type": "String",
+        "desc": "宽",
+        "dv": ""
+    }],
+    "event": []
+}, {
+    "type": "layout.grid",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "name",
+        "type": "String",
+        "desc": "名称",
+        "dv": ""
+    }],
+    "event": []
+}, {
+    "type": "form",
+    "property": [{
+        "name": "id",
+        "type": "String",
+        "desc": "控件编号",
+        "dv": ""
+    }, {
+        "name": "name",
+        "type": "String",
+        "desc": "名称",
+        "dv": ""
+    }, {
+        "name": "row",
+        "type": "String",
+        "desc": "行数",
+        "dv": "1"
+    }, {
+        "name": "column",
+        "type": "String",
+        "desc": "列数",
+        "dv": "3"
+    }],
+    "event": []
+}]

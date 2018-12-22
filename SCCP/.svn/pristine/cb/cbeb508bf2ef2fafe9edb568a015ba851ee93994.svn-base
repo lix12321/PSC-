@@ -1,0 +1,198 @@
+package cn.wellcare.service;
+
+import cn.wellcare.dao.SystemResourcesRolesDao;
+import cn.wellcare.entity.SystemResourcesRoles;
+import cn.wellcare.exception.BusinessException;
+import cn.wellcare.exception.ErrorEnum;
+import cn.wellcare.pojo.ServiceResult;
+import cn.wellcare.utils.PagerInfo;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Service(value = "systemResourcesRolesService")
+public class SystemResourcesRolesService {
+	private Logger log = Logger.getLogger(this.getClass());
+
+	@Resource
+	private SystemResourcesRolesDao systemResourcesRolesDao;
+
+	/**
+	 * 根据id取得角色资源对应表
+	 * 
+	 * @param systemResourcesRolesId
+	 * @return
+	 */
+	public ServiceResult<SystemResourcesRoles> getSystemResourcesRolesById(Integer systemResourcesRolesId) {
+		ServiceResult<SystemResourcesRoles> serviceResult = new ServiceResult<SystemResourcesRoles>();
+		try {
+			serviceResult.setData(systemResourcesRolesDao.get(systemResourcesRolesId));
+		} catch (Exception e) {
+			log.error("[ISystemResourcesRolesService][getSystemResourcesRolesById]根据id[" + systemResourcesRolesId
+					+ "]取得角色资源对应表时出现未知异常：", e);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+		}
+		return serviceResult;
+	}
+
+	/**
+	 * 保存角色资源对应表
+	 * 
+	 * @param systemResourcesRoles
+	 * @return
+	 */
+	public ServiceResult<Integer> saveSystemResourcesRoles(SystemResourcesRoles systemResourcesRoles) {
+		ServiceResult<Integer> serviceResult = new ServiceResult<Integer>();
+		try {
+			serviceResult.setData(systemResourcesRolesDao.save(systemResourcesRoles));
+		} catch (Exception e) {
+			log.error("[ISystemResourcesRolesService][saveSystemResourcesRoles]保存角色资源对应表时出现未知异常：", e);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+		}
+		return serviceResult;
+	}
+
+	/**
+	 * 更新角色资源对应表
+	 * 
+	 * @param systemResourcesRoles
+	 * @return
+	 * @see SystemResourcesRolesService#updateSystemResourcesRoles(SystemResourcesRoles)
+	 */
+	public ServiceResult<Integer> updateSystemResourcesRoles(SystemResourcesRoles systemResourcesRoles) {
+		ServiceResult<Integer> serviceResult = new ServiceResult<Integer>();
+		try {
+			serviceResult.setData(systemResourcesRolesDao.update(systemResourcesRoles));
+		} catch (Exception e) {
+			log.error("[ISystemResourcesRolesService][updateSystemResourcesRoles]更新角色资源对应表时出现未知异常：", e);
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+		}
+		return serviceResult;
+	}
+
+	public ServiceResult<List<SystemResourcesRoles>> page(Map<String, Object> queryMap, PagerInfo pager) {
+		ServiceResult<List<SystemResourcesRoles>> serviceResult = new ServiceResult<List<SystemResourcesRoles>>();
+		try {
+			Map<String, Object> param = new HashMap<String, Object>(queryMap);
+			Integer start = 0, size = 0;
+			if (pager != null) {
+				pager.setRowsCount(systemResourcesRolesDao.getCount(param));
+				start = pager.getStart();
+				size = pager.getPageSize();
+			}
+			param.put("start", start);
+			param.put("size", size);
+			serviceResult.setData(systemResourcesRolesDao.getList(param));
+		} catch (Exception e) {
+			log.error("[SystemResourcesRolesService][page] exception:" + e.getMessage());
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+
+		}
+		return serviceResult;
+	}
+
+	public ServiceResult<Boolean> del(Integer id) {
+		ServiceResult<Boolean> serviceResult = new ServiceResult<Boolean>();
+		try {
+			serviceResult.setData(systemResourcesRolesDao.del(id) > 0);
+		} catch (Exception e) {
+			log.error("[SystemResourcesRolesService][del] exception:" + e.getMessage());
+
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+		}
+		return serviceResult;
+	}
+
+	public ServiceResult<Boolean> saveAuthority(String roleId, String[] resArr) {
+		ServiceResult<Boolean> serviceResult = new ServiceResult<Boolean>();
+		try {
+			// 删除此角色之前的资源关联
+			systemResourcesRolesDao.delByRole(roleId);
+			// 保存选中的资源
+			for (String resId : resArr) {
+				SystemResourcesRoles srr = new SystemResourcesRoles();
+				srr.setResourcesId(Integer.valueOf(resId));
+				srr.setRolesId(Integer.valueOf(roleId));
+				srr.setCreateTime(new Date());
+				systemResourcesRolesDao.save(srr);
+			}
+			serviceResult.setData(true);
+		} catch (Exception e) {
+			log.error("[SystemResourcesRolesService][saveAuthority] exception:" + e.getMessage());
+
+			if (e instanceof BusinessException) {
+				BusinessException pe = (BusinessException) e;
+				if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+					serviceResult.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+				else
+					serviceResult.setMsgInfo(e.getMessage());
+				serviceResult.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+			} else {
+				e.printStackTrace();
+				serviceResult.setError(ErrorEnum.SERVER_EXCEPTION);
+			}
+			throw e;
+		}
+		return serviceResult;
+	}
+
+}

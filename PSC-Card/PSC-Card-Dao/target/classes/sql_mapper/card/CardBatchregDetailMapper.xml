@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.card.CardBatchregDetailDao">
+	<resultMap id="CardBatchregDetailResult" type="cn.wellcare.card.entity.CardBatchregDetail">
+		<result property="cardNo" column="card_no" />
+		<result property="createTime" column="create_time" />
+		<result property="creator" column="creator" />
+		<result property="delFlag" column="del_flag" />
+		<result property="dtPaymode" column="dt_paymode" />
+		<result property="modifier" column="modifier" />
+		<result property="modityTime" column="modity_time" />
+		<result property="pkBatchcharge" column="pk_batchcharge" />
+		<result property="pkBatchregDetail" column="pk_batchreg_detail" />
+		<result property="pkReginfo" column="pk_reginfo" />
+		<result property="ts" column="ts" />
+	</resultMap>
+
+	<select id="get" parameterType="Integer" resultMap="CardBatchregDetailResult">
+		select
+			card_no,
+			create_time,
+			creator,
+			del_flag,
+			dt_paymode,
+			modifier,
+			modity_time,
+			pk_batchcharge,
+			pk_batchreg_detail,
+			pk_reginfo,
+			ts
+		from card_batchreg_detail
+	</select>
+
+	<select id="getCount" parameterType="java.util.Map"
+			resultType="java.lang.Integer">
+		select count(1) from card_batchreg_detail t1
+		<include refid="whereConditions" />
+	</select>
+
+	<select id="getList" resultType="cn.wellcare.card.entity.CardBatchregDetail">
+		select
+		card_no,
+		create_time,
+		creator,
+		del_flag,
+		dt_paymode,
+		modifier,
+		modity_time,
+		pk_batchcharge,
+		pk_batchreg_detail,
+		pk_reginfo,
+		ts
+		from card_batchreg_detail
+		<include refid="whereConditions" />
+	</select>
+
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="cardNo != null and cardNo !=''"  >
+				and card_no= #{cardNo}
+			</if>
+			<if test="createTime != null and createTime !=''"  >
+				and create_time= #{createTime}
+			</if>
+			<if test="creator != null and creator !=''"  >
+				and creator= #{creator}
+			</if>
+			<if test="delFlag != null and delFlag !=''"  >
+				and del_flag= #{delFlag}
+			</if>
+			<if test="dtPaymode != null and dtPaymode !=''"  >
+				and dt_paymode= #{dtPaymode}
+			</if>
+			<if test="modifier != null and modifier !=''"  >
+				and modifier= #{modifier}
+			</if>
+			<if test="modityTime != null and modityTime !=''"  >
+				and modity_time= #{modityTime}
+			</if>
+			<if test="pkBatchcharge != null and pkBatchcharge !=''"  >
+				and pk_batchcharge= #{pkBatchcharge}
+			</if>
+			<if test="pkBatchregDetail != null and pkBatchregDetail !=''"  >
+				and pk_batchreg_detail= #{pkBatchregDetail}
+			</if>
+			<if test="pkReginfo != null and pkReginfo !=''"  >
+				and pk_reginfo= #{pkReginfo}
+			</if>
+			<if test="ts != null and ts !=''"  >
+				and ts= #{ts}
+			</if>
+		</trim>
+	</sql>
+
+	<delete id="del">
+        delete from card_batchreg_detail where id = #{id}
+	</delete>
+
+	<insert id="save" parameterType="cn.wellcare.card.entity.CardBatchregDetail">
+        insert into
+        card_batchreg_detail
+        (
+            pk_batchreg_detail,
+            pk_batchcharge,
+            pk_reginfo,
+            card_no,
+            create_time,
+            creator,
+            del_flag,
+            dt_paymode,
+            modifier,
+            modity_time,
+            ts
+        )
+        values
+        (
+            #{pkBatchregDetail},
+            #{pkBatchcharge},
+            #{pkReginfo},
+            #{cardNo},
+            #{createTime},
+            #{creator},
+            #{delFlag},
+            #{dtPaymode},
+            #{modifier},
+            #{modityTime},
+            #{ts}
+        )
+
+    </insert>
+
+	<insert id="batchSave" parameterType="java.util.List">
+		insert into
+		card_batchreg_detail
+		(
+		pk_batchreg_detail,
+		pk_batchcharge,
+		pk_reginfo,
+		card_no,
+		create_time,
+		creator,
+		del_flag,
+		dt_paymode,
+		modifier,
+		modity_time,
+		ts
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.pkBatchregDetail},
+			#{item.pkBatchcharge},
+			#{item.pkReginfo},
+			#{item.cardNo},
+			#{item.createTime},
+			#{item.creator},
+			#{item.delFlag},
+			#{item.dtPaymode},
+			#{item.modifier},
+			#{item.modityTime},
+			#{item.ts}
+			)
+		</foreach>
+	</insert>
+
+
+</mapper>

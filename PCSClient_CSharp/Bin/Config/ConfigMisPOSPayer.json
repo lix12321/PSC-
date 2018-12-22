@@ -1,0 +1,22 @@
+{
+//服务注册信息，每一个服务一个项目，注册时的参数意义如下：
+    //    Name     接口实现名称
+    //    Provider 接口实现地址
+    //    Enabled  是否启用
+    //    Config   接口配置信息
+    "Services": {
+        //远程HTTP服务
+        "ApplicationServiceFactory": [{
+            "Name": "PCS",
+            "Enabled": true,
+            "Config": {
+            "ServiceUrl":"http://192.168.2.234:7001/his/"
+        },
+        },{
+            "Name": "Platform",
+            "Provider": "Zebone.His.HisPayer.Platform.dll",
+            "Enabled": true,
+            "Config": {}
+        }],
+    }
+}

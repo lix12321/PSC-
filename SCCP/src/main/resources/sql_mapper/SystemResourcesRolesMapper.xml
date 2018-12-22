@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.SystemResourcesRolesDao">
+	<resultMap id="SystemResourcesRolesResult" type="SystemResourcesRoles">
+			<result property="id" column="id" />
+			<result property="resourcesId" column="res_id" />
+			<result property="rolesId" column="role_id" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="SystemResourcesRolesResult">
+		select
+			id,
+			res_id,
+			role_id
+		from system_resources_roles
+		where id = #{id}
+	</select>
+	
+	<delete id="delByRole">
+        delete from system_resources_roles where role_id = #{roleId}
+    </delete>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from system_resources_roles t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="SystemResourcesRoles">
+		select 
+			id,
+			res_id,
+			role_id
+		from system_resources_roles
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="id != null and id !=''"  >
+			and id= #{id}
+		</if>
+		<if test="resourcesId != null and resourcesId !=''"  > 
+			and res_id= #{resourcesId}
+		</if>
+		<if test="rolesId != null and rolesId !=''"  > 
+			and role_id= #{rolesId}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from system_resources_roles where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="SystemResourcesRoles">
+        update system_resources_roles
+    	<set>
+			<if test="id != null">id= #{id},</if>
+			<if test="resId != null">res_id= #{resourcesId},</if>
+			<if test="roleId != null">role_id= #{rolesId}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="SystemResourcesRoles" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			system_resources_roles
+		(
+			res_id,
+			role_id
+		)
+		values
+		(
+			#{resourcesId},
+			#{rolesId}
+		)
+	</insert>
+	
+</mapper>

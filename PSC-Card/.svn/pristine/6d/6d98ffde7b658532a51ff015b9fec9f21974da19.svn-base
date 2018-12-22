@@ -1,0 +1,16 @@
+package cn.wellcare.api.card;
+
+import java.util.List;
+import java.util.Map;
+
+import cn.wellcare.card.bo.card.EmpolyeeRegInfo;
+import cn.wellcare.pojo.RpcResult;
+
+public interface ICardEmpolyeeService {
+
+	RpcResult<String> batchSendCard(Map<String, Object> paramMap);
+
+	RpcResult<List<EmpolyeeRegInfo>> getEmpolyeeRegInfo(Map<String, Object> paramMap);
+
+	RpcResult<String> batchCharge(Map<String, Object> paramMap);
+}

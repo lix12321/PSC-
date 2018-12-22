@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://code.alibabatech.com/schema/dubbo 
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="psc-account-dubbo-customer" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper"
+		address="127.0.0.1:2181" />
+	<!-- check:关闭启动检查，否则，启动消费者必须先启动服务。请注意，关闭此检查后，系统初始化时加载的数据字典将会异常失效 -->
+	<!-- retries:dubbo默认服务调用失败会再次调用此服务，可能会造成某个方法被多次调用，进而导致某方法（如新增）记录被插入若干条的情况，请在开发时注意校验或针对此服务关闭重试 -->
+	<!-- 生产环境retries参数可设置为大于2的数，但会引起性能问题，超时时间在开发时可以设置较长时间，否则会影响dubug结果 -->
+	<dubbo:consumer retries="0" timeout="15000" check="false" />
+
+	<!-- 声明需要引用的服务接口 -->
+	<dubbo:reference interface="cn.wellcare.api.acc.IPscPiAccCreditService" id="pscPiAccCreditService" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.acc.IPscPiAccDetailService" id="pscPiAccDetailService" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.acc.IPscPiAccService" id="pscPiAccService" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.trade.IPscAccPaymentService" id="accountPayService" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.trade.IPscAccRefundService" id="accountRefundService" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.payment.modules.system.ISysCodeMasterService" id="sysCodeMasterService" retries="0" connections="120"/>
+
+
+
+</beans>

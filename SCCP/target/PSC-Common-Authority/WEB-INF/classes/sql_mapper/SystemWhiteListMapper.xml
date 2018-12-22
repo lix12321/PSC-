@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.SystemWhiteListDao">
+	<resultMap id="SystemWhiteListResult" type="cn.wellcare.entity.SystemWhiteList">
+			<result property="content" column="content" />
+			<result property="enable" column="enable" />
+			<result property="id" column="id" />
+			<result property="userId" column="user_id" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="SystemWhiteListResult">
+		select
+			content,
+			enable,
+			id,
+			user_id
+		from system_white_list
+		where id = #{id}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from system_white_list t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.SystemWhiteList">
+		select 
+			content,
+			enable,
+			id,
+			user_id
+		from system_white_list
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="content != null and content !=''"  > 
+			and content= #{content}
+		</if>
+		<if test="enable != null and enable !=''"  > 
+			and enable= #{enable}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="userId != null and userId !=''"  > 
+			and user_id= #{userId}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from system_white_list where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.SystemWhiteList">
+        update system_white_list
+    	<set>
+			<if test="content != null">content= #{content},</if>
+			<if test="enable != null">enable= #{enable},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="userId != null">user_id= #{userId}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.SystemWhiteList" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			system_white_list
+		(
+			content,
+			enable,
+			
+			user_id
+		)
+		values
+		(
+			#{content},
+			#{enable},
+			
+			#{userId}
+		)
+	</insert>
+	
+</mapper>

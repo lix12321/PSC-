@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{59AD1F80-9FC6-4140-8010-2F692A8838FA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zebone</RootNamespace>
+    <AssemblyName>Zebone</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\CollectionExtensions.cs" />
+    <Compile Include="Common\CommandLineArgs.cs" />
+    <Compile Include="Common\DataRowExtensions.cs" />
+    <Compile Include="Common\DrawingUtils.cs" />
+    <Compile Include="Common\EnumDescriptor.cs" />
+    <Compile Include="Common\EnumDescriptorAttribute.cs" />
+    <Compile Include="Common\EnumUtils.cs" />
+    <Compile Include="Common\IdCardNoParser.cs" />
+    <Compile Include="Common\MnemonicCodeUtils.cs" />
+    <Compile Include="Common\NetUtils.cs" />
+    <Compile Include="Common\ReflectionUtils.cs" />
+    <Compile Include="Common\SearchMatchType.cs" />
+    <Compile Include="Common\TypeUtils.cs" />
+    <Compile Include="Common\WorkingProgressEventArgs.cs" />
+    <Compile Include="Common\XmlExtensions.cs" />
+    <Compile Include="Logging\FileLogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\FakeAttribute.cs" />
+    <Compile Include="Services\IApplicationServiceFactory.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\IServiceBase.cs" />
+    <Compile Include="Services\IServiceConfig.cs" />
+    <Compile Include="Services\LoginServiceAttribute.cs" />
+    <Compile Include="Services\ParameterSerializationOptionsAttribute.cs" />
+    <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\ServiceErrorEventArgs.cs" />
+    <Compile Include="Services\ServiceExtensions.cs" />
+    <Compile Include="Services\ServiceFactory.cs" />
+    <Compile Include="Services\ServiceParameterAttribute.cs" />
+    <Compile Include="Services\ServiceProxy.cs" />
+    <Compile Include="Services\ServiceProxyBuilder.cs" />
+    <Compile Include="Services\ServiceRegistrationCollection.cs" />
+    <Compile Include="Services\ServiceRegistrationInfo.cs" />
+    <Compile Include="Services\ServiceResult.cs" />
+    <Compile Include="Services\ServiceResult.Generic.cs" />
+    <Compile Include="Services\ServiceResultExtensions.cs" />
+    <Compile Include="Services\TransactionCodeAttribute.cs" />
+    <Compile Include="ZeboneException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

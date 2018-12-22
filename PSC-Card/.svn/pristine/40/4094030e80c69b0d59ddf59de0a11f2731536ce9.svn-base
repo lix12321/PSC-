@@ -1,0 +1,318 @@
+package cn.wellcare.service.card;
+
+import cn.wellcare.api.card.ICardEmpolyeeService;
+import cn.wellcare.card.bo.card.EmployeeChargeInfo;
+import cn.wellcare.card.bo.card.EmpolyeeInfo;
+import cn.wellcare.card.bo.card.EmpolyeeRegInfo;
+import cn.wellcare.card.bo.card.PscPiAcc;
+import cn.wellcare.card.entity.*;
+import cn.wellcare.core.bean.DomainUrlUtil;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.utils.DateUtil;
+import cn.wellcare.core.utils.HttpClientUtil;
+import cn.wellcare.core.utils.RandomUtil;
+import cn.wellcare.core.utils.StringUtil;
+import cn.wellcare.model.card.*;
+import cn.wellcare.pojo.RpcResult;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.stream.Collectors;
+
+@Service("cardEmpolyeeService")
+public class CardEmpolyeeService implements ICardEmpolyeeService {
+
+    private Logger log = Logger.getLogger(this.getClass());
+
+    @Resource
+    private CardEmpolyeeModel cardEmpolyeeModel;
+
+    @Resource
+    private CardRegInfoModel cardRegInfoModel;
+
+    @Resource
+    private CardCardinfoModel cardCardinfoModel;
+
+    @Resource
+    private CardBatchregDetailModel cardBatchregDetailModel;
+
+    @Resource
+    private CardBatchregModel cardBatchregModel;
+
+    @Resource
+    private CardBatchchargeModel cardBatchchargeModel;
+
+    @Resource
+    private CardChargeModel cardChargeModel;
+
+    private static final String DEL_FALG = "0";
+
+    private static final int DEFAULT_SORT_NO = 1;
+    /**
+     * 获取员工信息
+     * @param paramMap
+     * @return
+     */
+    @Override
+	public RpcResult<List<EmpolyeeRegInfo>> getEmpolyeeRegInfo(Map<String, Object> paramMap) {
+		RpcResult<List<EmpolyeeRegInfo>> jsonResult = new RpcResult<>();
+        //List<EmpolyeeRegInfo> empolyeeRegInfo = cardEmpolyeeModel.getEmpolyeeRegInfo(paramMap);
+     /*   if (null != empolyeeRegInfo && empolyeeRegInfo.size()>0){
+            jsonResult.setData(empolyeeRegInfo);
+        }*/
+        List<EmpolyeeRegInfo> empolyeeRegInfo = new ArrayList<>();
+        for (int i=0;i<5;i++){
+            EmpolyeeRegInfo empolyeeRegInfo1 = new EmpolyeeRegInfo();
+            empolyeeRegInfo1.setRegName(getName());
+            empolyeeRegInfo1.setCodeDepartment("12");
+            empolyeeRegInfo1.setCodeEmployee("10000"+i);
+            empolyeeRegInfo1.setBirthDay(DateUtil.strToDate("1998-10-15 09:16:00"));
+            empolyeeRegInfo1.setCredentialNo("612731199"+i+"0"+(i+1)+"2"+(i+3)+RandomUtil.randomNumberic(4));
+            empolyeeRegInfo1.setAddressCode("33");
+            empolyeeRegInfo1.setDetailedAddress("西安市");
+            empolyeeRegInfo1.setMpi(RandomUtil.randomNumber(5));
+            empolyeeRegInfo1.setSex("1");
+            empolyeeRegInfo1.setTeleNo("1822236554"+i);
+            empolyeeRegInfo.add(empolyeeRegInfo1);
+        }
+        jsonResult.setData(empolyeeRegInfo);
+        return jsonResult;
+    }
+
+    /**
+     * 员工批量发卡
+     * @param paramMap
+     * @return
+     */
+    @Override
+	public RpcResult<String> batchSendCard(Map<String, Object> paramMap) {
+		RpcResult<String> result = new RpcResult<>();
+        //申请部门
+        String codeApplyDepartment = (String) paramMap.get("codeApplyDepartment");
+        //申请人
+        String codeApplyer = (String) paramMap.get("codeApplyer");
+        //原始申请数据
+        //String oriCSVData = (String) paramMap.get("oriCSVData");
+       // List<EmpolyeeInfo> empolyeeRegInfoList = (List<EmpolyeeInfo>) paramMap.get("empolyees");
+        String oridataFilename = (String) paramMap.get("oridataFilename");
+        List<EmpolyeeInfo> empolyeeRegInfoList = new Gson().fromJson((String)paramMap.get("buildCardList"), new TypeToken<List<EmpolyeeInfo>>() {}.getType());
+
+       if (null == empolyeeRegInfoList || empolyeeRegInfoList.isEmpty()){
+			throw new BusinessException("员工信息为空！");
+       }
+
+        // 保存批量发卡信息
+        //批量发卡信息
+        CardBatchreg cardBatchreg = new CardBatchreg();
+        cardBatchreg.setPkBatchreg(RandomUtil.randomNumber(32));
+        cardBatchreg.setApplyDatapath(oridataFilename);
+        cardBatchreg.setCodeApplydepartment(codeApplyDepartment);
+        cardBatchreg.setCodeApplyer(codeApplyer);
+        cardBatchreg.setCreator("");
+        cardBatchreg.setCreateTime(new Date());
+        cardBatchreg.setDelFlag(DEL_FALG);
+        cardBatchregModel.save(cardBatchreg);
+
+       List<CardReginfo> cardReginfos = new ArrayList<>();
+       List<CardEmpolyeeinfo> cardEmpolyeeinfos = new ArrayList<>();
+       List<CardCardinfo> cardCardinfos = new ArrayList<>();
+       List<PscPiAcc> emplyeeAccs = new ArrayList<>();
+       List<CardBatchregDetail> cardBatchregDetails = new ArrayList<>();
+       for (EmpolyeeInfo regInfo : empolyeeRegInfoList){
+            //登记信息
+            CardReginfo cardReginfo = new CardReginfo();
+            cardReginfo.setPkReginfo(RandomUtil.randomNumber(32));
+            cardReginfo.setCodeReg(RandomUtil.randomNumber(10));
+            cardReginfo.setMpi(regInfo.getmPI());
+            cardReginfo.setNameReg(regInfo.getRegName());
+            cardReginfo.setTelNo(regInfo.getTeleNo());
+            cardReginfo.setIdNo(regInfo.getCredentialNo());
+            cardReginfo.setDtSex(regInfo.getSex());
+            cardReginfo.setBirthDay(DateUtil.strToDate(regInfo.getBirthDay(),"yyyyMMddHHmmss"));
+            cardReginfo.setAddressCode(regInfo.getAddressCode());
+            cardReginfo.setDetailedAddress(regInfo.getDetailedAddress());
+            cardReginfo.setPostcode(regInfo.getPostCode());
+            cardReginfo.setDelFlag(DEL_FALG);
+            cardReginfo.setCreator("");
+            cardReginfo.setCreateTime(new Date());
+            cardReginfos.add(cardReginfo);
+
+            //员工登记信息
+            CardEmpolyeeinfo cardEmpolyeeinfo = new CardEmpolyeeinfo();
+            cardEmpolyeeinfo.setPkEmployeeinfo(RandomUtil.randomNumber(32));
+            cardEmpolyeeinfo.setPkReginfo(cardReginfo.getPkReginfo());
+            cardEmpolyeeinfo.setCodeEmployee(regInfo.getCodeEmployee());
+            cardEmpolyeeinfo.setCodeDepartment(regInfo.getCodeDepartment());
+            cardEmpolyeeinfo.setCreateTime(new Date());
+            cardEmpolyeeinfo.setCreator("123");
+            cardEmpolyeeinfo.setCodeApplyer(codeApplyer);
+            cardEmpolyeeinfo.setCodeApplydepartment(codeApplyDepartment);
+            cardEmpolyeeinfo.setDelFlag(DEL_FALG);
+            cardEmpolyeeinfos.add(cardEmpolyeeinfo);
+
+            //员工卡信息
+           CardCardinfo cardCardinfo = new CardCardinfo();
+           cardCardinfo.setPkCardinfo(RandomUtil.randomNumber(32));
+           cardCardinfo.setPkReginfo(cardReginfo.getPkReginfo());
+           cardCardinfo.setCardNo(regInfo.getCardNo());
+           cardCardinfo.setInnerNo(regInfo.getInnerNo());
+           cardCardinfo.setDtCardtype(regInfo.getCardType());
+           cardCardinfo.setSortNo(new BigDecimal(DEFAULT_SORT_NO));
+           cardCardinfo.setPaySerialid(regInfo.getPaySerialID());
+           cardCardinfo.setDelFlag(DEL_FALG);
+           cardCardinfo.setCreator("");
+           cardCardinfo.setCreateTime(new Date());
+           cardCardinfos.add(cardCardinfo);
+
+            // 员工账户密码
+           PscPiAcc acc = new PscPiAcc();
+           acc.setPkPi(regInfo.getmPI());
+           acc.setPwd(regInfo.getAccountPassword());
+           emplyeeAccs.add(acc);
+
+
+           //批量发卡明细
+           CardBatchregDetail cardBatchregDetail = new CardBatchregDetail();
+           cardBatchregDetail.setPkBatchregDetail(RandomUtil.randomNumber(32));
+           cardBatchregDetail.setPkBatchcharge(cardBatchreg.getPkBatchreg());
+           cardBatchregDetail.setPkReginfo(cardReginfo.getPkReginfo());
+           cardBatchregDetail.setDtPaymode(regInfo.getCardType());
+           cardBatchregDetail.setCardNo(regInfo.getCardNo());
+           cardBatchregDetail.setCreator("");
+           cardBatchregDetail.setCreateTime(new Date());
+           cardBatchregDetail.setDelFlag(DEL_FALG);
+           cardBatchregDetails.add(cardBatchregDetail);
+
+       }
+        //保存员工登记信息
+        cardRegInfoModel.batchSave(cardReginfos);
+
+        // 保存员工信息
+        cardEmpolyeeModel.batchSave(cardEmpolyeeinfos);
+
+        // 保存员工卡信息
+        cardCardinfoModel.batchSave(cardCardinfos);
+
+        //保存批量发卡明细信息
+        cardBatchregDetailModel.batchSave(cardBatchregDetails);
+
+        //保存员工账户信息
+        // TODO: 2018/12/10
+        Map<String,Object> map = new HashMap<>();
+        map.put("pscPiAccList",emplyeeAccs);
+        log.info("调用账户中心创建账户 url："+ DomainUrlUtil.PSC_ACCOUNT_URL+"/pscPiAcc/batchUpdateAdd");
+        String resultStr = HttpClientUtil.doPost("http://localhost:8088/pscPiAcc/batchUpdateAdd",map);
+        log.info("账户中心返回信息："+resultStr);
+        RpcResult<Boolean> accountResult = null;
+        if (!StringUtil.isEmpty(resultStr)){
+            Map<String,Class<Boolean>> resultMap = new HashMap<>();
+            resultMap.put("data", Boolean.class);
+            JSONObject jsonObject=JSONObject.fromObject(resultStr);
+            accountResult = (RpcResult<Boolean>) JSONObject.toBean(jsonObject,RpcResult.class,resultMap);
+            log.info("账户中心返回信息："+ accountResult);
+
+        }
+        if (accountResult != null && accountResult.getData()!= null && accountResult.getData().booleanValue()){
+			result.setData("批量保存员工信息成功！");
+
+        }else{
+			result.setData("批量保存员工信息失败！");
+        }
+        return result;
+    }
+
+    @Override
+	public RpcResult<String> batchCharge(Map<String, Object> paramMap) {
+        RpcResult<String> result = new RpcResult<>();
+
+        //申请部门
+        String codeApplyDepartment = (String) paramMap.get("codeApplyDepartment");
+        //申请人
+        String codeApplyer = (String) paramMap.get("codeApplyer");
+        //原始申请数据
+        String oriCSVData = (String) paramMap.get("oriCSVData");
+        ObjectMapper mapper = new ObjectMapper();
+        List<EmployeeChargeInfo> employeeChargeInfoList = new Gson().fromJson((String)paramMap.get("empolyees"), new TypeToken<List<EmployeeChargeInfo>>() {}.getType());
+        if (null == employeeChargeInfoList || employeeChargeInfoList.isEmpty()){
+			throw new BusinessException("员工信息为空！");
+        }
+        //查询登记员工的信息
+        List<CardReginfo> cardRegInfoList = cardRegInfoModel.getAllCardRegInfo();
+        if (cardRegInfoList == null || cardRegInfoList.isEmpty()){
+            return RpcResult.failedResult("-1","员工信息未登记，请先登记员工信息！");
+        }
+        //将查询出的员工登记信息放入map中，key为mpi value为登记信息的id
+        Map<String,String> cardRegInfoMaps = cardRegInfoList.stream().collect(Collectors.toMap(CardReginfo::getMpi,CardReginfo::getPkReginfo));
+
+        //保存批量充值信息
+        CardBatchcharge cardBatchcharge = new CardBatchcharge();
+        cardBatchcharge.setPkBatchcharge(RandomUtil.randomNumber(32));
+        cardBatchcharge.setCodeApplydepartment(codeApplyDepartment);
+        cardBatchcharge.setCodeApplyer(codeApplyer);
+        cardBatchcharge.setApplyDatapath(oriCSVData);
+        cardBatchcharge.setCreator("");
+        cardBatchcharge.setCreateTime(new Date());
+        cardBatchcharge.setDelFlag(DEL_FALG);
+        cardBatchchargeModel.save(cardBatchcharge);
+        //批量保存充值明细
+        List<CardCharge> chargeList = new ArrayList<>();
+        for (EmployeeChargeInfo chargeInfo : employeeChargeInfoList){
+            CardCharge cardCharge = new CardCharge();
+            cardCharge.setPkCharge(RandomUtil.randomNumber(32));
+            //通过员工信息的mpi 获取登记信息的id
+            cardCharge.setPkReginfo(cardRegInfoMaps.get(chargeInfo.getMPI()));
+            cardCharge.setCodeDepartment(codeApplyDepartment);
+            BigDecimal amount = new BigDecimal(0);
+            if (!StringUtils.isEmpty(chargeInfo.getAmount())){
+                amount = new BigDecimal(chargeInfo.getAmount());
+            }
+            cardCharge.setAmount(amount);
+            //cardCharge.setp
+            chargeList.add(cardCharge);
+
+        }
+        cardChargeModel.batchSave(chargeList);
+
+        //调用账户中心充值
+
+
+        return null;
+    }
+
+    //获得汉字名字
+    public static String getName(){
+        String name = "";
+        int chineseNameNum = (int)(Math.random()*3 + 2);
+        for(int i=1; i<=chineseNameNum;i++){
+            name += getChinese();
+        }
+        return name;
+    }
+
+    //获得单个汉字
+    public static String getChinese() {
+        String chinese = "";
+        int i = (int) (Math.random() * 40 + 16);
+        int j = (int) (Math.random() * 94 + 1);
+        if (i == 55) {
+            j = (int) (Math.random() * 89 + 1);
+        }
+        byte[] bytes = {(byte) (i + 160), (byte) (j + 160)};
+        try {
+            chinese = new String(bytes, "gb2312");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return chinese;
+    }
+
+
+}

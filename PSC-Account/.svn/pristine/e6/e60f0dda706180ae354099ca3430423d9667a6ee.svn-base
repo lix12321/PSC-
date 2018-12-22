@@ -1,0 +1,229 @@
+package cn.wellcare.controller.acc;
+
+import cn.wellcare.acc.entity.PscPiAccDetail;
+import cn.wellcare.api.acc.IPscPiAccDetailService;
+import cn.wellcare.core.constant.Constants;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.utils.HttpJsonResult;
+import cn.wellcare.core.utils.PagerInfo;
+import cn.wellcare.core.utils.WebUtil;
+import cn.wellcare.pojo.common.RpcResult;
+import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.util.Strings;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * psc_pi_acc_detail
+ *                       
+ * @Filename: PscPiAccDetail.java
+ * @Version: 1.0
+ * 
+ */
+@Controller
+@RequestMapping(value = "pscPiAccDetail")
+public class PscPiAccDetailController  {
+    @Resource
+    private IPscPiAccDetailService pscPiAccDetailService;
+
+    /**
+     * 默认页面
+     * @param dataMap
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "", method = { RequestMethod.GET })
+    public String index(HttpServletRequest request, ModelMap dataMap) throws Exception {
+        dataMap.put("pageSize", Constants.DEFAULT_PAGE_SIZE);
+
+        Map<String, Object> queryMap = WebUtil.handlerQueryMap(request);
+        dataMap.put("queryMap", queryMap);
+        return "/admin/pscPiAccDetail/pscPiAccDetaillist";
+    }
+
+    /**
+     * gridDatalist数据
+     * @param request
+     * @param dataMap
+     * @return
+     */
+    @RequestMapping(value = "list", method = { RequestMethod.GET })
+    @ResponseBody
+    public  HttpJsonResult<List<PscPiAccDetail>> list(HttpServletRequest request,
+                                                                   ModelMap dataMap) {
+        Map<String, Object> queryMap = WebUtil.handlerQueryMap(request);
+        PagerInfo pager = WebUtil.handlerPagerInfo(request, dataMap);
+		RpcResult<List<PscPiAccDetail>> serviceResult = pscPiAccDetailService.page(
+            queryMap, pager);
+        if (!serviceResult.isSuccess()) {
+            if (Constants.SERVICE_RESULT_CODE_SYSERROR.equals(serviceResult.getMsgCode())) {
+				throw new RuntimeException(serviceResult.getMsgInfo());
+			} else {
+				throw new BusinessException(serviceResult.getMsgInfo());
+			}
+        }
+
+        HttpJsonResult<List<PscPiAccDetail>> jsonResult = new HttpJsonResult<List<PscPiAccDetail>>();
+        jsonResult.setRows((List<PscPiAccDetail>) serviceResult.getData());
+        jsonResult.setTotal(pager.getRowsCount());
+
+        return jsonResult;
+    }
+
+    @RequestMapping(value = "edit", method = { RequestMethod.GET })
+    public String edit(HttpServletRequest request, ModelMap dataMap, Integer id) {
+        if (id != null) {
+            PscPiAccDetail pscPiAccDetail = pscPiAccDetailService.getPscPiAccDetailById(id)
+                .getData();
+            dataMap.put("obj", pscPiAccDetail);
+        }
+
+        return "/admin/pscPiAccDetail/pscPiAccDetailedit";
+    }
+
+    /**
+     * 新增/更新账户流水
+     * @param request
+     * @param response
+     * @param
+     */
+    @RequestMapping(value = "doMultifunctionAdd")
+    @ResponseBody
+	public RpcResult<PscPiAccDetail> doAdd(HttpServletRequest request,
+                                                       HttpServletResponse response,
+                                                       PscPiAccDetail pscPiAccDetail) {
+		RpcResult<PscPiAccDetail> jsonResult = new RpcResult<>();
+		RpcResult<Integer> serviceResult = null;
+        try {
+            if (pscPiAccDetail.getPkAccdt() != null && 0 != pscPiAccDetail.getPkAccdt()) {
+                serviceResult = pscPiAccDetailService.updatePscPiAccDetail(pscPiAccDetail);
+            } else {
+                serviceResult = pscPiAccDetailService.savePscPiAccDetail(pscPiAccDetail);
+            }
+            jsonResult.setSuccess(serviceResult.getData() > 0);
+            jsonResult.setData(pscPiAccDetail);
+        } catch (Exception e) {
+            jsonResult.setMsgInfo(e.getMessage());
+            e.printStackTrace();
+        }
+        return jsonResult;
+    }
+
+    /**
+     * 删除
+     * @param request
+     * @param response
+     * @param
+     */
+    @RequestMapping(value = "del")
+    @ResponseBody
+    public  HttpJsonResult<Boolean> del(HttpServletRequest request,
+                                                     HttpServletResponse response, Integer id) {
+        HttpJsonResult<Boolean> jsonResult = new HttpJsonResult<Boolean>();
+        try {
+			RpcResult<Boolean> serviceResult = pscPiAccDetailService.del(id);
+           if (!serviceResult.isSuccess()) {
+                if (Constants.SERVICE_RESULT_CODE_SYSERROR.equals(serviceResult.getMsgCode())) {
+					throw new RuntimeException(serviceResult.getMsgInfo());
+				} else {
+					throw new BusinessException(serviceResult.getMsgInfo());
+				}
+            }
+        } catch (Exception e) {
+            jsonResult.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return jsonResult;
+    }
+
+    /**
+     * 根据账户id查询账户流水
+     * @param request
+     * @param response
+     * @param
+     */
+    @RequestMapping(value = "queryDetail")
+    @ResponseBody
+	public RpcResult<List<PscPiAccDetail>> queryDetialByPkPiacc(HttpServletRequest request,
+                                                               HttpServletResponse response,
+                                                               String pkPiacc) {
+		RpcResult<List<PscPiAccDetail>> jsonResult = new RpcResult<>();
+		RpcResult<List<PscPiAccDetail>> serviceResult = null;
+        try {
+            //'String pkPiacc = (String) param.get("pkPiacc");
+            if (StringUtils.isEmpty(pkPiacc)) {
+                throw new BusinessException("未传入账户主键");
+            }
+            serviceResult = pscPiAccDetailService.getPscPiAccDetailByPkPiacc(Integer.valueOf(pkPiacc));
+             if (serviceResult.getData() == null) {
+            throw new BusinessException("未查询到患者账户流水信息");
+                 }
+            jsonResult.setSuccess(serviceResult.isSuccess());
+            jsonResult.setData(serviceResult.getData());
+        } catch (Exception e) {
+            jsonResult.setMsgInfo(e.getMessage());
+            e.printStackTrace();
+        }
+        return jsonResult;
+    }
+
+
+    /**
+     * 根据账户id、操作类型 查询账户流水
+     * @param request
+     * @param response
+     * @param
+     */
+    @RequestMapping(value = "queryAccDetial")
+    @ResponseBody
+	public RpcResult<List<PscPiAccDetail>> queryAccDetialByPkPiacc(HttpServletRequest request,
+                                                                     HttpServletResponse response,
+                                                                     String codeAccount,String optype) {
+		RpcResult<List<PscPiAccDetail>> jsonResult = new RpcResult<>();
+		RpcResult<List<PscPiAccDetail>> serviceResult = null;
+        try {
+            if (StringUtils.isEmpty(codeAccount)) {
+                throw new BusinessException("未传入账户主键");
+            }
+            serviceResult = pscPiAccDetailService.getPscPiAccDetailByPkPiacc(Integer.valueOf(codeAccount));
+
+            if (serviceResult.getData() == null) {
+                throw new BusinessException("未查询到患者账户流水信息");
+            }
+
+            if (!Strings.isEmpty(optype)){
+                List<String> optypes = Arrays.asList(optype.split(","));
+                List<PscPiAccDetail> piAccDetails = serviceResult.getData();
+                Iterator<PscPiAccDetail> iterator = piAccDetails.iterator();
+                while (iterator.hasNext()){
+                    PscPiAccDetail piAccDetail = iterator.next();
+                    String euOptype = piAccDetail.getEuOptype();
+                    if (!optypes.contains(euOptype)){
+                        iterator.remove();
+                    }
+                }
+            }
+            jsonResult.setSuccess(serviceResult.isSuccess());
+            jsonResult.setData(serviceResult.getData());
+        } catch (Exception e) {
+            jsonResult.setMsgInfo(e.getMessage());
+            e.printStackTrace();
+        }
+        return jsonResult;
+    }
+
+
+
+
+}

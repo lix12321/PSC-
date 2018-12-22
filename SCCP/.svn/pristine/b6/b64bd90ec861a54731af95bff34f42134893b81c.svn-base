@@ -1,0 +1,194 @@
+package cn.wellcare.controller;
+
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.wellcare.constant.Constants;
+import cn.wellcare.entity.SystemRoles;
+import cn.wellcare.exception.BusinessException;
+import cn.wellcare.pojo.ServiceResponse;
+import cn.wellcare.service.SystemResourcesRolesService;
+import cn.wellcare.service.SystemRolesService;
+import cn.wellcare.utils.HttpJsonResult;
+import cn.wellcare.utils.PagerInfo;
+import cn.wellcare.utils.WebUtil;
+
+/**
+ * 角色表相关action
+ * 
+ * @Filename: SystemRoles.java
+ * @Version: 1.0
+ * 
+ */
+@Controller
+@RequestMapping(value = "systemroles")
+public class SystemRolesController {
+	@Resource
+	private SystemRolesService systemRolesService;
+	@Resource
+	private SystemResourcesRolesService resourcesRolesService;
+
+	/**
+	 * 默认页面
+	 * 
+	 * @param dataMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "", method = { RequestMethod.GET })
+	public String index(HttpServletRequest request, ModelMap dataMap) throws Exception {
+		dataMap.put("pageSize", Constants.DEFAULT_PAGE_SIZE);
+
+		Map<String, Object> queryMap = WebUtil.handlerQueryMap(request);
+		dataMap.put("queryMap", queryMap);
+		return "system/systemroleslist";
+	}
+
+	/**
+	 * gridDatalist数据
+	 * 
+	 * @param request
+	 * @param dataMap
+	 * @return
+	 */
+	@RequestMapping(value = "list", method = { RequestMethod.GET })
+	public @ResponseBody HttpJsonResult<List<SystemRoles>> list(HttpServletRequest request, ModelMap dataMap) {
+		Map<String, Object> queryMap = WebUtil.handlerQueryMap(request);
+		PagerInfo pager = WebUtil.handlerPagerInfo(request, dataMap);
+		ServiceResponse<List<SystemRoles>> serviceResult = systemRolesService.page(queryMap, pager);
+		if (!serviceResult.getSuccess()) {
+			if (Constants.SERVICE_RESULT_CODE_SYSERROR.equals(serviceResult.getMsgCode())) {
+				throw new RuntimeException(serviceResult.getMsgInfo());
+			} else {
+				throw new BusinessException(serviceResult.getMsgInfo());
+			}
+		}
+
+		HttpJsonResult<List<SystemRoles>> jsonResult = new HttpJsonResult<List<SystemRoles>>();
+		jsonResult.setRows(serviceResult.getData());
+		jsonResult.setTotal(pager.getRowsCount());
+
+		return jsonResult;
+	}
+
+	/**
+	 * 保存角色资源(权限)
+	 * 
+	 * @param request
+	 * @param response
+	 * @param roleId
+	 * @param resIds
+	 */
+	@RequestMapping(value = "saveRoleRes", method = { RequestMethod.POST })
+	public void saveRoleRes(HttpServletRequest request, HttpServletResponse response, String roleId, String resIds) {
+		response.setContentType("text/html;charset=utf-8");
+		String msg = "";
+		PrintWriter pw = null;
+
+		String[] resArr = resIds.split(",");
+		ServiceResponse<Boolean> serviceResult = new ServiceResponse<Boolean>();
+		try {
+			pw = response.getWriter();
+
+			serviceResult = resourcesRolesService.saveAuthority(roleId, resArr);
+			if (!serviceResult.getSuccess()) {
+				if (Constants.SERVICE_RESULT_CODE_SYSERROR.equals(serviceResult.getMsgCode())) {
+					throw new RuntimeException(serviceResult.getMsgInfo());
+				} else {
+					throw new BusinessException(serviceResult.getMsgInfo());
+				}
+			}
+			msg = serviceResult.getMsgInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg = e.getMessage();
+		}
+		pw.print(msg);
+	}
+
+	@RequestMapping(value = "editWin")
+	public String edit(HttpServletRequest request, ModelMap dataMap, Integer id) {
+		if (id != null) {
+			SystemRoles systemRoles = systemRolesService.getSystemRolesById(id).getData();
+			dataMap.put("obj", systemRoles);
+		}
+		return "system/editroleswin";
+	}
+
+	@RequestMapping(value = "role2Res")
+	public String role2Res(HttpServletRequest request, Integer id, String rolesName, Map<String, Object> dataMap) {
+		dataMap.put("id", id);
+		dataMap.put("rolesName", rolesName);
+		return "system/reswin";
+	}
+
+	@RequestMapping(value = "addroleswin")
+	public String addWin(HttpServletRequest request) throws Exception {
+		return "system/addroleswin";
+	}
+
+	/**
+	 * 新增/编辑
+	 * 
+	 * @param request
+	 * @param response
+	 * @param cate
+	 */
+	@RequestMapping(value = "doAdd", method = { RequestMethod.POST })
+	public @ResponseBody HttpJsonResult<Boolean> doAdd(HttpServletRequest request, HttpServletResponse response,
+			SystemRoles systemRoles) {
+		HttpJsonResult<Boolean> jsonResult = new HttpJsonResult<Boolean>();
+		ServiceResponse<Integer> serviceResult = null;
+		try {
+			if (systemRoles.getId() != null && 0 != systemRoles.getId()) {
+				serviceResult = systemRolesService.updateSystemRoles(systemRoles);
+			} else {
+				serviceResult = systemRolesService.saveSystemRoles(systemRoles);
+			}
+			jsonResult.setRows(serviceResult.getData() > 0);
+		} catch (Exception e) {
+			jsonResult.setMessage(e.getMessage());
+			e.printStackTrace();
+		}
+		return jsonResult;
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param request
+	 * @param response
+	 * @param cate
+	 */
+	@RequestMapping(value = "del", method = { RequestMethod.GET })
+	public @ResponseBody HttpJsonResult<Boolean> del(HttpServletRequest request, HttpServletResponse response,
+			Integer id) {
+		HttpJsonResult<Boolean> jsonResult = new HttpJsonResult<Boolean>();
+		try {
+			ServiceResponse<Boolean> serviceResult = systemRolesService.del(id);
+			if (!serviceResult.getSuccess()) {
+				if (Constants.SERVICE_RESULT_CODE_SYSERROR.equals(serviceResult.getMsgCode())) {
+					throw new RuntimeException(serviceResult.getMsgInfo());
+				} else {
+					throw new BusinessException(serviceResult.getMsgInfo());
+				}
+			}
+		} catch (Exception e) {
+			jsonResult.setMessage(e.getMessage());
+			e.printStackTrace();
+		}
+		return jsonResult;
+	}
+
+}
