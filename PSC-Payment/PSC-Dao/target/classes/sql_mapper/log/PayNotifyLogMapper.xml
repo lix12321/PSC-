@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.log.PayNotifyLogDao">
+	<resultMap id="PayNotifyLogResult" type="cn.wellcare.entity.log.PayNotifyLog">
+			<result property="error" column="error" />
+			<result property="id" column="id" />
+			<result property="notifyId" column="notify_id" />
+			<result property="notifyStatus" column="notify_status" />
+			<result property="notifyTime" column="notify_time" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PayNotifyLogResult">
+		select
+			error,
+			id,
+			notify_id,
+			notify_status,
+			notify_time
+		from pay_notify_log
+		where id = #{id}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from pay_notify_log t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.log.PayNotifyLog">
+		select 
+			error,
+			id,
+			notify_id,
+			notify_status,
+			notify_time
+		from pay_notify_log
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="error != null and error !=''"  > 
+			and error= #{error}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="notifyId != null and notifyId !=''"  > 
+			and notify_id= #{notifyId}
+		</if>
+		<if test="notifyStatus != null and notifyStatus !=''"  > 
+			and notify_status= #{notifyStatus}
+		</if>
+		<if test="notifyTime != null and notifyTime !=''"  > 
+			and notify_time= #{notifyTime}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from pay_notify_log where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.log.PayNotifyLog">
+        update pay_notify_log
+    	<set>
+			<if test="error != null">error= #{error},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="notifyId != null">notify_id= #{notifyId},</if>
+			<if test="notifyStatus != null">notify_status= #{notifyStatus},</if>
+			<if test="notifyTime != null">notify_time= #{notifyTime}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.log.PayNotifyLog" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			pay_notify_log
+		(
+			error,
+			
+			notify_id,
+			notify_status,
+			notify_time
+		)
+		values
+		(
+			#{error},
+			
+			#{notifyId},
+			#{notifyStatus},
+			#{notifyTime}
+		)
+	</insert>
+	
+</mapper>

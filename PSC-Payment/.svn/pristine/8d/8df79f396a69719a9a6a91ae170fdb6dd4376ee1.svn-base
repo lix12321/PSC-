@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.log.PayOrderLogDao">
+	<resultMap id="PayOrderLogResult" type="cn.wellcare.entity.log.PayOrderLog">
+			<result property="handleNum" column="handle_num" />
+			<result property="handleName" column="handle_name" />
+			<result property="amountAfter" column="amount_after" />
+			<result property="amountPrev" column="amount_prev" />
+			<result property="content" column="content" />
+			<result property="createTime" column="create_time" />
+			<result property="id" column="id" />
+			<result property="orderId" column="order_id" />
+			<result property="orgId" column="org_id" />
+			<result property="outerOrderSn" column="outer_order_sn" />
+			<result property="paymentAfter" column="payment_after" />
+			<result property="paymentPrev" column="payment_prev" />
+			<result property="statusAfter" column="status_after" />
+			<result property="statusPrev" column="status_prev" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PayOrderLogResult">
+		select
+			handle_num,
+			handle_name,
+			amount_after,
+			amount_prev,
+			content,
+			create_time,
+			id,
+			order_id,
+			org_id,
+			outer_order_sn,
+			payment_after,
+			payment_prev,
+			status_after,
+			status_prev
+		from pay_order_log
+		where id = #{id}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from pay_order_log t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.log.PayOrderLog">
+		select 
+			handle_num,
+			handle_name,
+			amount_after,
+			amount_prev,
+			content,
+			create_time,
+			id,
+			order_id,
+			org_id,
+			outer_order_sn,
+			payment_after,
+			payment_prev,
+			status_after,
+			status_prev
+		from pay_order_log
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="handleNum != null and handleNum !=''"  > 
+			and handle_num= #{handleNum}
+		</if>
+		<if test="handleName != null and handleName !=''"  > 
+			and handle_name= #{handleName}
+		</if>
+		<if test="amountAfter != null and amountAfter !=''"  > 
+			and amount_after= #{amountAfter}
+		</if>
+		<if test="amountPrev != null and amountPrev !=''"  > 
+			and amount_prev= #{amountPrev}
+		</if>
+		<if test="content != null and content !=''"  > 
+			and content= #{content}
+		</if>
+		<if test="createTime != null and createTime !=''"  > 
+			and create_time= #{createTime}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="orderId != null and orderId !=''"  > 
+			and order_id= #{orderId}
+		</if>
+		<if test="orgId != null and orgId !=''"  > 
+			and org_id= #{orgId}
+		</if>
+		<if test="outerOrderSn != null and outerOrderSn !=''"  > 
+			and outer_order_sn= #{outerOrderSn}
+		</if>
+		<if test="paymentAfter != null and paymentAfter !=''"  > 
+			and payment_after= #{paymentAfter}
+		</if>
+		<if test="paymentPrev != null and paymentPrev !=''"  > 
+			and payment_prev= #{paymentPrev}
+		</if>
+		<if test="statusAfter != null and statusAfter !=''"  > 
+			and status_after= #{statusAfter}
+		</if>
+		<if test="statusPrev != null and statusPrev !=''"  > 
+			and status_prev= #{statusPrev}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from pay_order_log where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.log.PayOrderLog">
+        update pay_order_log
+    	<set>
+			<if test="handleNum != null">handle_num= #{handleNum},</if>
+			<if test="handleName != null">handle_name= #{handleName},</if>
+			<if test="amountAfter != null">amount_after= #{amountAfter},</if>
+			<if test="amountPrev != null">amount_prev= #{amountPrev},</if>
+			<if test="content != null">content= #{content},</if>
+			<if test="createTime != null">create_time= #{createTime},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="orderId != null">order_id= #{orderId},</if>
+			<if test="orgId != null">org_id= #{orgId},</if>
+			<if test="outerOrderSn != null">outer_order_sn= #{outerOrderSn},</if>
+			<if test="paymentAfter != null">payment_after= #{paymentAfter},</if>
+			<if test="paymentPrev != null">payment_prev= #{paymentPrev},</if>
+			<if test="statusAfter != null">status_after= #{statusAfter},</if>
+			<if test="statusPrev != null">status_prev= #{statusPrev}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.log.PayOrderLog" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			pay_order_log
+		(
+			handle_num,
+			handle_name,
+			amount_after,
+			amount_prev,
+			content,
+			create_time,
+			
+			order_id,
+			org_id,
+			outer_order_sn,
+			payment_after,
+			payment_prev,
+			status_after,
+			status_prev
+		)
+		values
+		(
+			#{handleNum},
+			#{handleName},
+			#{amountAfter},
+			#{amountPrev},
+			#{content},
+			#{createTime},
+			
+			#{orderId},
+			#{orgId},
+			#{outerOrderSn},
+			#{paymentAfter},
+			#{paymentPrev},
+			#{statusAfter},
+			#{statusPrev}
+		)
+	</insert>
+	
+</mapper>

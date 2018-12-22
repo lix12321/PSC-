@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.statistics.OrderCompletedCountDao">
+
+	<select id="getList" resultType="java.util.HashMap">
+		select a.nopay nopay, b.pay pay
+		from (select count(1) nopay from pay_order po where po.order_state = '6'
+		and po.payment_status = '0' <include refid="whereConditions" />) a,
+		(select count(1) pay from pay_order po where po.order_state = '6'
+		and po.payment_status = '1' <include refid="whereConditions" />) b
+
+
+	</select>
+
+	<sql id="whereConditions">
+		<trim  suffixOverrides="," >
+			<if test="q_orgId != null and q_orgId !=''"  >
+				AND po.org_id = #{q_orgId}
+			</if>
+			<if test="q_startTime != null and q_startTime !=''"  >
+				AND po.create_time &gt; to_date(#{q_startTime}, 'YYYY-MM-DD')
+			</if>
+			<if test="q_endTime != null and q_endTime !=''"  >
+				AND po.create_time &lt;= to_date(#{q_endTime}, 'YYYY-MM-DD')
+			</if>
+		</trim>
+	</sql>
+
+
+</mapper>

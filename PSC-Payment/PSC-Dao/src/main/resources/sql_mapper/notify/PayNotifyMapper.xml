@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.notify.PayNotifyDao">
+	<resultMap id="PayNotifyResult" type="cn.wellcare.entity.notify.PayNotify">
+			<result property="backUrl" column="back_url" />
+			<result property="body" column="body" />
+			<result property="gmtClose" column="gmt_close" />
+			<result property="gmtPayment" column="gmt_payment" />
+			<result property="gmtRefund" column="gmt_refund" />
+			<result property="notifyId" column="notify_id" />
+			<result property="notifyTime" column="notify_time" />
+			<result property="orderId" column="order_id" />
+			<result property="outerOrderSn" column="outer_order_sn" />
+			<result property="orgId" column="org_id" />
+			<result property="refundFee" column="refund_fee" />
+			<result property="sendBackFee" column="send_back_fee" />
+			<result property="sign" column="sign" />
+			<result property="signType" column="sign_type" />
+			<result property="totalAmount" column="total_amount" />
+			<result property="tradeNo" column="trade_no" />
+			<result property="tradeStatus" column="trade_status" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PayNotifyResult">
+		select
+			back_url,
+			body,
+			gmt_close,
+			gmt_payment,
+			gmt_refund,
+			notify_id,
+			notify_time,
+			order_id,
+			outer_order_sn,
+			org_id,
+			refund_fee,
+			send_back_fee,
+			sign,
+			sign_type,
+			total_amount,
+			trade_no,
+			trade_status
+		from pay_notify
+		where notify_id = #{notifyId}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from pay_notify t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.bo.PayNotifyBO">
+		select
+			back_url,
+			body,
+			gmt_close,
+			gmt_payment,
+			gmt_refund,
+			pn.notify_id,
+			pn.notify_time,
+			order_id,
+			outer_order_sn,
+			org_id,
+			refund_fee,
+			send_back_fee,
+			sign,
+			sign_type,
+			total_amount,
+			trade_no,
+			trade_status,
+			pnl.notify_status
+		from pay_notify pn
+		left join pay_notify_log pnl on pn.notify_id = pnl.notify_id
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="backUrl != null and backUrl !=''"  > 
+			and back_url= #{backUrl}
+		</if>
+		<if test="body != null and body !=''"  > 
+			and body= #{body}
+		</if>
+		<if test="gmtClose != null and gmtClose !=''"  > 
+			and gmt_close= #{gmtClose}
+		</if>
+		<if test="gmtPayment != null and gmtPayment !=''"  > 
+			and gmt_payment= #{gmtPayment}
+		</if>
+		<if test="gmtRefund != null and gmtRefund !=''"  > 
+			and gmt_refund= #{gmtRefund}
+		</if>
+		<if test="notifyId != null and notifyId !=''"  > 
+			and notify_id= #{notifyId}
+		</if>
+		<if test="notifyTime != null and notifyTime !=''"  > 
+			and notify_time= #{notifyTime}
+		</if>
+		<if test="orderId != null and orderId !=''"  > 
+			and order_id= #{orderId}
+		</if>
+		<if test="outerOrderSn != null and outerOrderSn !=''"  > 
+			and outer_order_sn= #{outerOrderSn}
+		</if>
+		<if test="orgId != null and orgId !=''"  > 
+			and org_id= #{orgId}
+		</if>
+		<if test="refundFee != null and refundFee !=''"  > 
+			and refund_fee= #{refundFee}
+		</if>
+		<if test="sendBackFee != null and sendBackFee !=''"  > 
+			and send_back_fee= #{sendBackFee}
+		</if>
+		<if test="sign != null and sign !=''"  > 
+			and sign= #{sign}
+		</if>
+		<if test="signType != null and signType !=''"  > 
+			and sign_type= #{signType}
+		</if>
+		<if test="totalAmount != null and totalAmount !=''"  > 
+			and total_amount= #{totalAmount}
+		</if>
+		<if test="tradeNo != null and tradeNo !=''"  > 
+			and trade_no= #{tradeNo}
+		</if>
+		<if test="tradeStatus != null and tradeStatus !=''"  > 
+			and trade_status= #{tradeStatus}
+		</if>
+		<if test="q_orderSn != null and q_orderSn !=''"  >
+			and outer_order_sn like CONCAT('%',#{q_orderSn},'%')
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from pay_notify where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.notify.PayNotify">
+        update pay_notify
+    	<set>
+			<if test="backUrl != null">back_url= #{backUrl},</if>
+			<if test="body != null">body= #{body},</if>
+			<if test="gmtClose != null">gmt_close= #{gmtClose},</if>
+			<if test="gmtPayment != null">gmt_payment= #{gmtPayment},</if>
+			<if test="gmtRefund != null">gmt_refund= #{gmtRefund},</if>
+			<if test="notifyId != null">notify_id= #{notifyId},</if>
+			<if test="notifyTime != null">notify_time= #{notifyTime},</if>
+			<if test="orderId != null">order_id= #{orderId},</if>
+			<if test="outerOrderSn != null">outer_order_sn= #{outerOrderSn},</if>
+			<if test="orgId != null">org_id= #{orgId},</if>
+			<if test="refundFee != null">refund_fee= #{refundFee},</if>
+			<if test="sendBackFee != null">send_back_fee= #{sendBackFee},</if>
+			<if test="sign != null">sign= #{sign},</if>
+			<if test="signType != null">sign_type= #{signType},</if>
+			<if test="totalAmount != null">total_amount= #{totalAmount},</if>
+			<if test="tradeNo != null">trade_no= #{tradeNo},</if>
+			<if test="tradeStatus != null">trade_status= #{tradeStatus}</if>
+	    </set>
+        where notify_id = #{notifyId}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.notify.PayNotify" useGeneratedKeys="true" keyProperty="notifyId" keyColumn="notify_id">
+		insert into 
+			pay_notify
+		(
+			back_url,
+			body,
+			gmt_close,
+			gmt_payment,
+			gmt_refund,
+			
+			notify_time,
+			order_id,
+			outer_order_sn,
+			org_id,
+			refund_fee,
+			send_back_fee,
+			sign,
+			sign_type,
+			total_amount,
+			trade_no,
+			trade_status
+		)
+		values
+		(
+			#{backUrl},
+			#{body},
+			#{gmtClose},
+			#{gmtPayment},
+			#{gmtRefund},
+			
+			#{notifyTime},
+			#{orderId},
+			#{outerOrderSn},
+			#{orgId},
+			#{refundFee},
+			#{sendBackFee},
+			#{sign},
+			#{signType},
+			#{totalAmount},
+			#{tradeNo},
+			#{tradeStatus}
+		)
+	</insert>
+
+	<select id="getSettingsByOrg"
+			parameterType="java.lang.Integer" resultMap="PayNotifyResult">
+		SELECT
+			ps.org_id,
+			ps.status,
+			ps.enable_notify,
+			psw. ID,
+			psw.ps_id,
+			psw.order_name,
+			psw.appid,
+			psw.mchid,
+			psw.appsecret,
+			psw."key",
+			psw.notify_url,
+			psw.code_addr,
+			psw.oauth2_url,
+			psw.oauth2_token,
+			psw.create_order_url,
+			psw.access_token,
+			psw.user_info,
+			psw.app_scope,
+			psw.customer_state
+		FROM
+			pay_setting ps
+		INNER JOIN pay_setting_wechat psw ON ps. ID = psw.ps_id
+		WHERE
+			ps.org_id = #{orgId}
+	</select>
+
+	<update id="updateByOrderId"
+			parameterType="cn.wellcare.entity.notify.PayNotify">
+		update pay_notify
+		<set>
+			<if test="backUrl != null">
+				back_url = #{backUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="notifyTime != null">
+				notify_time = #{notifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="signType != null">
+				sign_type = #{signType,jdbcType=VARCHAR},
+			</if>
+			<if test="sign != null">
+				sign = #{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeNo != null">
+				trade_no = #{tradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeStatus != null">
+				trade_status = #{tradeStatus,jdbcType=SMALLINT},
+			</if>
+			<if test="totalAmount != null">
+				total_amount = #{totalAmount,jdbcType=NUMERIC},
+			</if>
+			<if test="refundFee != null">
+				refund_fee = #{refundFee,jdbcType=NUMERIC},
+			</if>
+			<if test="sendBackFee != null">
+				send_back_fee = #{sendBackFee,jdbcType=NUMERIC},
+			</if>
+			<if test="body != null">
+				body = #{body,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtPayment != null">
+				gmt_payment = #{gmtPayment,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtRefund != null">
+				gmt_refund = #{gmtRefund,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtClose != null">
+				gmt_close = #{gmtClose,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where outer_order_sn = #{outerOrderSn,jdbcType=VARCHAR}
+	</update>
+
+	<sql id="Base_Column_List">
+		notify_id, order_id, outer_order_sn, back_url, notify_time,
+		sign_type, sign,
+		trade_no,
+		trade_status, total_amount, refund_fee,
+		send_back_fee, body, gmt_payment,
+		gmt_refund,
+		gmt_close
+	</sql>
+	<select id="getPayNotifyByOrderId"
+			parameterType="java.lang.Integer" resultMap="PayNotifyResult">
+		select
+		<include refid="Base_Column_List" />
+		from pay_notify
+		where order_id = #{orderId}
+	</select>
+
+</mapper>

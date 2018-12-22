@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.statistics.OrderPayModelTrendByDayDao">
+
+	<select id="findOrderPayModelTrendByDay" resultType="java.util.HashMap">
+		SELECT t1.payDay, scm.code_text paymode, SUM(t1.orderMoney) orderMoney
+		FROM (SELECT TO_CHAR(series.create_time, 'YYYY-MM-DD') payDay,
+		series.org_id                             orgID,
+		series.payment_code                       orderPayMode,
+		COUNT(1)                                  orderCount,
+		SUM(series.pay_money)                     orderMoney
+		FROM pay_log series
+		LEFT JOIN pay_order orders ON series.order_id = orders.ID
+		WHERE 1 = 1
+		<trim  suffixOverrides="," >
+			<if test="q_orgId != null and q_orgId !=''"  >
+				AND series.org_id = #{q_orgId}
+			</if>
+			<if test="q_opType != null and q_opType !=''"  >
+				AND series.op_type = #{q_opType}
+			</if>
+			<if test="q_startTime != null and q_startTime !=''"  >
+				AND series.create_time &gt; to_date(#{q_startTime}, 'YYYY-MM-DD')
+			</if>
+			<if test="q_endTime != null and q_endTime !=''"  >
+				AND series.create_time &lt;= to_date(#{q_endTime}, 'YYYY-MM-DD')
+			</if>
+		</trim>
+		GROUP BY TO_CHAR(series.create_time, 'YYYY-MM-DD'),
+		series.org_id,
+		series.payment_code
+		ORDER BY TO_CHAR(series.create_time, 'YYYY-MM-DD'),
+		series.org_id,
+		series.payment_code) t1
+		left join sys_code_master scm on scm.code_cd = t1.orderPayMode and scm.code_div = 'PAYMENT_TYPE'
+		WHERE 1 = 1
+		<trim  suffixOverrides="," >
+			<if test="q_paymentType != null and q_paymentType !=''"  >
+				AND t1.orderPayMode in
+				<foreach item="item" index="index" collection="q_paymentType"  open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+
+		</trim>
+		GROUP BY t1.payDay,
+		scm.code_text
+		ORDER BY t1.payDay
+	</select>
+
+</mapper>

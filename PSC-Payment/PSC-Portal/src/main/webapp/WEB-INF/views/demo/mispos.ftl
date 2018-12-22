@@ -1,0 +1,144 @@
+<script src="/resources/js/jquery.form.js"></script>
+<script src="/resources/js/jquery.qrcode.min.js"></script>
+<style>
+.api-form input[readonly="readonly"]{
+	background: #fcfcfc;
+	color: #a1a1a1;
+}
+
+.posinfo{
+	margin-bottom: 10px;
+	color: #6d8331;
+}
+</style>
+<script>
+	function dosubmit(obj) {
+		var this_ = $(obj);
+		var form_ = this_.closest("form.api-form");
+		var targetUrl = form_.attr("action");
+		form_.ajaxSubmit({
+			url : targetUrl,
+			type : 'post',
+			success : function(data) {
+				if(data.success){
+					$(".posinfo").html("返回参数");
+					form_.empty();
+					$.each(data,function(e,idx){
+						form_.append(JSON.stringify(this));
+					});
+				} else{
+					this_.parent().siblings("p.pinfo").remove();
+					this_.parent().before("<p class='pinfo' style='color:red;margin-left: 20px'>"+data.msgInfo+"</p>");
+				}
+			}
+		});
+	}
+</script>
+
+<div class="posinfo">
+	由POS终端收款后传递至平台的参数
+</div>
+<form class="api-form" method="post"
+	action="demo/unifyPay/dopay">
+	<input type="hidden" name="payType" value="005" />
+	
+	<p>
+		<label>账户ID：</label> <input type="text" name="userId" readonly="readonly"
+			placeholder="用户名（账户中心账户）" value="1" title="用户名"
+			required="required" />
+	</p>
+	<p>
+		<label>机构用户名：</label> <input type="text" name="encryptUser" readonly="readonly"
+			placeholder="" value="777290058110048" title="业务系统（机构）用户名"
+			required="required" />
+	</p>
+	<p>
+		<label>机构密码：</label> <input type="text" name="encryptPwd" readonly="readonly"
+			placeholder="" value="1" title="业务系统（机构）密码"
+			required="required" />
+	</p>
+	<p>
+		<label>机构号：</label> <input type="text" name="orgId" readonly="readonly"
+			placeholder="机构号" value="1" title="机构号，在支付平台授权后获得"
+			required="required" /> </label>
+	<p>
+	<p>
+		<label>订单发送时间：</label> <input type="text" name="tradeTime" readonly="readonly"
+			placeholder="订单发送时间" value="${time!}" title="GMT标准时间时间戳，即自1970至今的毫秒数"
+			required="required" /> </label>
+	</p>
+		
+	<p>
+		<label>POS支付方式：</label> <input type="text" name="dtPayMode"
+			placeholder="POS支付方式" value="BankCard" title="POS支付方式" readonly="readonly"
+			required="required" />
+	</p>
+	<p>
+		<label>结算状态：</label> <input type="text" name="settleStatus"
+			value="0" title="结算状态" readonly="readonly"
+			required="required" />
+	</p>
+	<p>
+		<label>银行行号：</label> <input type="text" name="bankCode"
+			value="0308" title="银行行号" readonly="readonly"
+			required="required" />
+	</p>
+	<p>
+		<label>卡号：</label> <input type="text" name="cardNo"
+			value="111111111111111111111" title="卡号" readonly="readonly"
+			required="required" /> </label>
+	<p>
+	<p>
+		<label>交易金额：</label> <input type="number" name="payAmount" readonly="readonly"
+			placeholder="交易金额" value="100" title="单位：元" required="required"
+			max="9999999" min="1" />
+	</p>
+	
+	<p>
+		<label>POS流水号：</label> <input type="text" name="trace"
+			value="094944" title="POS流水号" readonly="readonly"
+			required="required" /> </label>
+	<p>
+	<p>
+		<label>POS交易参考号：</label> <input type="text" name="refer"
+			value="20181108094944" title="POS交易参考号" readonly="readonly"
+			required="required" /> </label>
+	<p>
+	<p>
+		<label>收银流水(订单)号：</label> <input type="text" name="szOrderTrace"
+			value="09494420181108" title="收银流水(订单)号" readonly="readonly"
+			required="required" /> </label>
+	<p>
+	<p>
+		<label>终端号：</label> <input type="text" name="terno"
+			value="00000815" title="终端号" readonly="readonly"
+			required="required" /> </label>
+	<p>
+	<p>
+		<label>原终端号：</label> <input type="text" name="oldTerno"
+			value="00000815" title="原终端号" readonly="readonly"
+			required="required" /> </label>
+	<p>
+	<p>
+		<label>交易日期：</label> <input type="text" name="date" readonly="readonly"
+			value="${time!}" title="GMT标准时间时间戳，即自1970至今的毫秒数"
+			required="required" /> </label>
+	<p>
+
+	<p>
+		<label>&nbsp;</label> <input type="button" onclick="dosubmit(this)"
+			class="button" value="提交" /> <input type="button" class="showFaqBtn"
+			value="MISPOS支付说明" />
+	</p>
+</form>
+
+<div class="question">
+	<hr />
+	<h4>MISPOS支付说明</h4>
+	<p class="faq">
+		<ul style="font-size: .8em;">
+			<li style="margin: 10px auto;">MisPOS是由POS终端收款后，向支付平台发送的交易信息，支付平台将保存这些信息</li>
+		</ul>
+	</p>
+
+</div>

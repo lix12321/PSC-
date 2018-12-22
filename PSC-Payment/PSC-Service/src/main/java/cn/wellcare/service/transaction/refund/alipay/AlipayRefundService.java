@@ -1,0 +1,149 @@
+package cn.wellcare.service.transaction.refund.alipay;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
+import com.alipay.demo.trade.config.Configs;
+import com.alipay.demo.trade.model.TradeStatus;
+import com.alipay.demo.trade.model.builder.AlipayTradeRefundRequestBuilder;
+import com.alipay.demo.trade.model.result.AlipayF2FRefundResult;
+import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
+
+import cn.wellcare.core.constant.BaseParam;
+import cn.wellcare.core.constant.PayLogHandler;
+import cn.wellcare.core.constant.annotations.PaymentLog;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.exception.UnauthorizedException;
+import cn.wellcare.entity.order.PayOrder;
+import cn.wellcare.entity.refund.PayRefund;
+import cn.wellcare.model.modules.refund.PayRefundModel;
+import cn.wellcare.payment.api.RefundPayApi;
+import cn.wellcare.payment.order.IOrderService;
+import cn.wellcare.pojo.common.RefundPayResult;
+import cn.wellcare.pojo.common.RpcResult;
+import cn.wellcare.support.EnumerateParameter;
+
+@Service(value = "alipayRefundService")
+public class AlipayRefundService implements RefundPayApi {
+
+    @Resource
+    private IOrderService orderService;
+    @Resource
+    private PayRefundModel payRefundModel;
+
+    protected Logger logger = Logger.getLogger(this.getClass());
+    /**
+     * 调用退款方法
+     * @param param
+     * @return
+     */
+    @Override
+    @PaymentLog(PayLogHandler.CREATE)
+    public RpcResult<RefundPayResult> refundPay(Map<String, Object> param) {
+        RpcResult<RefundPayResult> result = new RpcResult<>();
+        try {
+
+            Configs.init("zfbinfo.properties");
+            LocalDateTime localDateTime=LocalDateTime.now();
+            DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+            String outRequestNo = localDateTime.format(dateTimeFormatter);
+            //获取调用方传来的参数
+            String outTradeNo = String.valueOf(param.get(BaseParam.OUT_TRADE_NO));
+            String refundAmount = String.valueOf(param.get(BaseParam.REFUND_AMOUNT));
+            String refundReason = String.valueOf(param.get(BaseParam.REFUND_REASON));
+            String storeId = String.valueOf(param.get(BaseParam.STORE_ID));
+            //更新订单状态为退款中
+			RpcResult<PayOrder> payOrder = orderService.getOrderByOuterSn(outTradeNo);// 查询出退款的订单信息
+            PayOrder order = payOrder.getData();
+            if (order.getPaymentStatus().equals(EnumerateParameter.ZERO)) {
+                throw new BusinessException("此订单未支付，不能进行退款操作");
+            }
+            order.setOrderState(Integer.valueOf(EnumerateParameter.TWO));
+            orderService.updateOrder(order);
+            //创建退款信息
+            PayRefund payRefund = new PayRefund();
+            payRefund.setIspartial(Integer.valueOf(EnumerateParameter.ZERO));
+            payRefund.setStatus(Integer.valueOf(EnumerateParameter.ONE));
+            payRefund.setRefundAmount(new BigDecimal(refundAmount));
+            payRefund.setOrderId(order.getId());
+            payRefund.setApplyNo(outRequestNo);
+            payRefundModel.savePayRefund(payRefund);
+            //组装支付宝退费参数
+            AlipayTradeRefundRequestBuilder builder = new AlipayTradeRefundRequestBuilder();
+            builder.setOutTradeNo(order.getPaySn());
+            builder.setRefundAmount(refundAmount);
+            builder.setRefundReason(refundReason);
+            builder.setOutRequestNo(outRequestNo);  // 多次退费同一笔订单，每次号码不同
+            builder.setStoreId(storeId);
+
+            AlipayTradeServiceImpl refundService = new AlipayTradeServiceImpl.ClientBuilder().build();
+            AlipayF2FRefundResult results = refundService.tradeRefund(builder);
+            String msgString = "";
+            switch (results.getTradeStatus()) {
+                case SUCCESS:
+                    msgString = "支付宝退款成功: )";
+                    logger.info(msgString);
+                    break;
+
+                case FAILED:
+                    msgString = "支付宝退款失败!!!";
+                    logger.error(msgString);
+                    break;
+
+                case UNKNOWN:
+                    msgString = "系统异常，订单退款状态未知!!!";
+                    logger.error(msgString);
+                    break;
+
+                default:
+                    msgString = "不支持的交易状态，交易返回异常!!!";
+                    logger.error(msgString);
+                    break;
+            }
+            if(!results.getTradeStatus().equals(TradeStatus.SUCCESS)){
+                throw new BusinessException(String.format("退款交易号: %s, 支付状态: %s, 支付错误明细: %s",
+                        outTradeNo, results.getTradeStatus(), msgString));
+            }
+            //更新退款表
+            payRefund.setStatus(Integer.valueOf(EnumerateParameter.THREE));
+            payRefund.setTradeSn(results.getResponse().getTradeNo());
+            payRefundModel.updatePayRefund(payRefund);
+            //更新订单
+            order.setOrderState(Integer.valueOf(EnumerateParameter.THREE));
+            order.setUpdateTime(new Date());
+            orderService.updateOrder(order); //更新订单状态
+            param.put("orderInfo", order);
+
+            result.setData(new RefundPayResult(outTradeNo, String.valueOf(order.getMoneyOrder()), refundAmount));
+        }catch (Exception e) {
+            result.setSuccess(false);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.BUSINESS_EXCEPTION.getErrCode().equals(pe.getCode()))
+                    result.setMsgInfo(ErrorEnum.BUSINESS_EXCEPTION.getErrDesc());
+                else
+                    result.setMsgInfo(e.getMessage());
+                result.setMsgCode(ErrorEnum.BUSINESS_EXCEPTION.getErrCode());
+            } else {
+                if (e instanceof UnauthorizedException) {
+                    result.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+                } else {
+                    e.printStackTrace();
+                    result.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                }
+            }
+            throw e;
+        }
+
+        return result;
+    }
+}

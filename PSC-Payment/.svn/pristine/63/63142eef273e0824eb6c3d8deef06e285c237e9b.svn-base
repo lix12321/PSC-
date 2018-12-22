@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui displayName="BlankPage" lastModified="0">
+  <resource>
+    <include></include>
+  <style></style>
+    <javascript></javascript>
+  </resource>
+
+  <view id="Viewmodel" name="Viewmodel" type="bodyview">
+    <event name="load">
+      <script><![CDATA[grid0.load({param:"{}"});]]></script>
+      <parameters>
+        <parameter type="Object">e</parameter>
+      </parameters>
+    </event>
+    <property name="width"></property>
+    <property name="height"></property>
+    <view id="layout0" name="layout0" type="layout.grid">
+      <view type="layout.grid.row">
+       <property name="height">58px</property>
+        <view id="layout_cell10" name="layout_cell7" type="layout.grid.column">
+          <view id="form0" name="form0" type="form">
+            <view type="layout.grid.row">
+              <view id="layout_cell1" name="layout_cell1" type="layout.grid.column">
+              <property name="width">25%</property>
+                <view id="textfield1" name="textfield1" type="combobox">
+                  <property name="label" option="true">textfield1:</property>
+                  <property name="labelField" option="true">true</property>
+                  <property name="width" option="true">100%</property>
+                </view>
+              </view>
+              <view id="layout_cell2" name="layout_cell2" type="layout.grid.column">
+               <property name="width">25%</property>
+                <view id="textfield2" name="textfield2" type="textbox">
+                  <property name="label" option="true">textfield2:</property>
+                  <property name="labelField" option="true">true</property>
+                  <property name="width" option="true">100%</property>
+                </view>
+              </view>
+              <view id="layout_cell3" name="layout_cell3" type="layout.grid.column">
+               <property name="width">25%</property>
+                <view id="textfield3" name="textfield3" type="combobox">
+                  <property name="label" option="true">textfield3:</property>
+                  <property name="labelField" option="true">true</property>
+                  <property name="width" option="true">100%</property>
+                </view>
+              </view>
+              <view id="layout_cell4" name="layout_cell4" type="layout.grid.column">
+               <property name="width">25%</property>
+                <view id="textfield4" name="textfield4" type="textbox">
+                  <property name="label" option="true">textfield4:</property>
+                  <property name="labelField" option="true">true</property>
+                  <property name="width" option="true">100%</property>
+                </view>
+              </view>
+            </view>
+            <view type="layout.grid.row">
+              <view id="layout_cell5" name="layout_cell5" type="layout.grid.column">
+                <view id="textfield5" name="textfield0" type="combobox">
+                  <property name="label" option="true">textfield5:</property>
+                  <property name="labelField" option="true">true</property>
+                  <property name="width" option="true">100%</property>
+                </view>
+              </view>
+              <view id="layout_cell6" name="layout_cell6" type="layout.grid.column">
+                <view id="textfield6" name="textfield0" type="textbox">
+                  <property name="label" option="true">textfield6:</property>
+                  <property name="labelField" option="true">true</property>
+                  <property name="width" option="true">100%</property>
+                </view>
+              </view>
+              <view id="layout_cell7" name="layout_cell7" type="layout.grid.column">
+                <view id="textfield7" name="textfield0" type="combobox">
+                  <property name="label" option="true">textfield7:</property>
+                  <property name="labelField" option="true">true</property>
+                  <property name="width" option="true">100%</property>
+                </view>
+              </view>
+              <view id="layout_cell8" name="layout_cell8" type="layout.grid.column">
+                <view id="textfield8" name="textfield0" type="textbox">
+                  <property name="label" option="true">textfield8:</property>
+                  <property name="labelField" option="true">true</property>
+                  <property name="width" option="true">100%</property>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view type="layout.grid.row">
+        <view id="layout_cell9" name="layout_cell9" type="layout.grid.column">
+      
+          <view id="grid0" name="grid0" type="datagrid">
+          
+           <property name="pageSize">20</property>
+             <property name="trancode">001001001001</property>
+            <group name="columns">
+              <view id="datagrid_column1" name="datagrid_column" type="datagrid.item">
+                <property name="field">nameOrg</property>
+                <property name="header">nameOrg</property>
+                <property name="width">100px</property>
+              </view>
+              <view id="datagrid_column2" name="datagrid_column" type="datagrid.item">
+                <property name="field">code2</property>
+                <property name="header">Code2</property>
+                <property name="width">100px</property>
+              </view>
+              <view id="datagrid_column3" name="datagrid_column" type="datagrid.item">
+                <property name="field">code3</property>
+                <property name="header">Code3</property>
+                <property name="width">100px</property>
+              </view>
+              
+            </group>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</ui>

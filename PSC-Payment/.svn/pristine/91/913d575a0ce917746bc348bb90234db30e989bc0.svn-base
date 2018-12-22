@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.statistics.TodayOrderPayStateCountDao">
+
+	<select id="getChartData" resultType="java.util.HashMap">
+		select order_state orderState, sum(money_order) orderMoney
+		from pay_order
+		<include refid="whereConditions" />
+		group by order_state;
+	</select>
+
+	<sql id="whereConditions">
+		where 1 = 1
+		<trim  suffixOverrides="," >
+			<if test="q_orgId != null and q_orgId !=''" >
+				AND org_id = #{q_orgId}
+			</if>
+			<if test="q_today != null and q_today !=''" >
+				AND create_time = current_date
+			</if>
+			<if test="q_month != null and q_month !=''" >
+				AND TO_CHAR(create_time, 'YYYY-MM') = #{q_month}
+			</if>
+		</trim>
+	</sql>
+
+</mapper>

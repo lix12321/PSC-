@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.statistics.OrderPayModelCountDao">
+
+	<select id="findOrderPayModelCount" resultType="java.util.HashMap">
+		select scm.code_text paymode, t2.orderMoney
+		from sys_code_master scm
+		left join (SELECT t1.orderPayMode paymode, SUM(orderMoney) orderMoney
+		FROM (SELECT series.org_id orgID,
+		series.payment_code orderPayMode,
+		COUNT(1) orderCount,
+		SUM(series.pay_money) orderMoney
+		FROM pay_log series
+		LEFT JOIN pay_order orders ON series.order_id = orders.ID
+		WHERE 1 = 1
+		<trim  suffixOverrides="," >
+			<if test="q_orgId != null and q_orgId !=''"  >
+				AND series.org_ID = #{q_orgId}
+			</if>
+			<if test="q_opType != null and q_opType !=''"  >
+				AND series.op_type = #{q_opType}
+			</if>
+			<if test="q_startTime != null and q_startTime !=''"  >
+				AND series.create_time &gt; to_date(#{q_startTime}, 'yyyy-mm-dd')
+			</if>
+			<if test="q_endTime != null and q_endTime !=''"  >
+				AND series.create_time &lt;= to_date(#{q_endTime}, 'yyyy-mm-dd')
+			</if>
+		</trim>
+		GROUP BY series.org_id,
+		series.payment_code
+		ORDER BY series.org_id,
+		series.payment_code) AS t1
+		WHERE 1 = 1
+		GROUP BY t1.orderPayMode) t2 on scm.code_cd = t2.paymode
+		where scm.code_div = 'PAYMENT_TYPE'
+		order by scm.sort_order
+	</select>
+
+</mapper>

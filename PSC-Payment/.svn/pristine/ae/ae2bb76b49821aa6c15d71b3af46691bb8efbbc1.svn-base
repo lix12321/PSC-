@@ -1,0 +1,33 @@
+package cn.wellcare.portal.controller.refundpay.account;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.wellcare.core.constant.Constants;
+import cn.wellcare.pojo.common.RefundPayResult;
+import cn.wellcare.pojo.common.RpcResult;
+import cn.wellcare.web.AccountRefundController;
+
+@RequestMapping(Constants.UNIFIED_REFUND)
+@Controller
+public class AccountRefundPayController extends AccountRefundController {
+    @RequestMapping(value = Constants.ACCOUNT_REFUNDPAY,produces = Constants.CONTENT_TYPE_JSON)
+    @ResponseBody
+    public RpcResult<RefundPayResult> accountPayRefund(HttpServletRequest request, HttpServletResponse response,
+                                                           @RequestParam Map<String, Object> param) {
+		// 2.调用账户中心
+		// accountRefundService.accRefund(param);
+		// 3.更新退款
+		// payRefundService.updatePayRefund("");
+		// 4.更新订单
+		// orderService.updateOrder(order);
+        return super.refundPayResult;
+    }
+}

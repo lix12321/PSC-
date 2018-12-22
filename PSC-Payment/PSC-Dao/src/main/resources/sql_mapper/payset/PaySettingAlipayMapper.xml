@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.payset.PaySettingAlipayDao">
+	<resultMap id="PaySettingAlipayResult" type="cn.wellcare.entity.payset.PaySettingAlipay">
+			<result property="appid" column="appid" />
+			<result property="cancelDuration" column="cancel_duration" />
+			<result property="enableNotify" column="enable_notify" />
+			<result property="heartbeatDelay" column="heartbeat_delay" />
+			<result property="heartbeatDuration" column="heartbeat_duration" />
+			<result property="id" column="id" />
+			<result property="inputCharset" column="input_charset" />
+			<result property="key" column="key" />
+			<result property="maxCancelRetry" column="max_cancel_retry" />
+			<result property="maxQueryRetry" column="max_query_retry" />
+			<result property="mcloudApiDomain" column="mcloud_api_domain" />
+			<result property="notifyUrl" column="notify_url" />
+			<result property="openApiDomain" column="open_api_domain" />
+			<result property="orderName" column="order_name" />
+			<result property="orgId" column="org_id" />
+			<result property="partner" column="partner" />
+			<result property="pid" column="pid" />
+			<result property="privateKey" column="private_key" />
+			<result property="publicKey" column="public_key" />
+			<result property="alipayPublicKey" column="alipay_public_key" />
+			<result property="queryDuration" column="query_duration" />
+			<result property="sellerEmail" column="seller_email" />
+			<result property="signType" column="sign_type" />
+			<result property="status" column="status" />
+			<result property="timeout" column="timeout" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PaySettingAlipayResult">
+		select
+			appid,
+			cancel_duration,
+			enable_notify,
+			heartbeat_delay,
+			heartbeat_duration,
+			id,
+			input_charset,
+			key,
+			max_cancel_retry,
+			max_query_retry,
+			mcloud_api_domain,
+			notify_url,
+			open_api_domain,
+			order_name,
+			org_id,
+			partner,
+			pid,
+			private_key,
+			public_key,
+			alipay_public_key,
+			query_duration,
+			seller_email,
+			sign_type,
+			status,
+			timeout
+		from pay_setting_alipay
+		where id = #{id}
+	</select>
+	
+	<select id="getByOrg" parameterType="Integer" resultMap="PaySettingAlipayResult">
+		select
+			appid,
+			cancel_duration,
+			enable_notify,
+			heartbeat_delay,
+			heartbeat_duration,
+			id,
+			input_charset,
+			key,
+			max_cancel_retry,
+			max_query_retry,
+			mcloud_api_domain,
+			notify_url,
+			open_api_domain,
+			order_name,
+			org_id,
+			partner,
+			pid,
+			private_key,
+			public_key,
+			alipay_public_key,
+			query_duration,
+			seller_email,
+			sign_type,
+			status,
+			timeout
+		from pay_setting_alipay
+		where org_id = #{org}
+			and status=1
+		limit 1
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from pay_setting_alipay t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.payset.PaySettingAlipay">
+		select 
+			appid,
+			cancel_duration,
+			enable_notify,
+			heartbeat_delay,
+			heartbeat_duration,
+			id,
+			input_charset,
+			key,
+			max_cancel_retry,
+			max_query_retry,
+			mcloud_api_domain,
+			notify_url,
+			open_api_domain,
+			order_name,
+			org_id,
+			partner,
+			pid,
+			private_key,
+			public_key,
+			alipay_public_key,
+			query_duration,
+			seller_email,
+			sign_type,
+			status,
+			timeout
+		from pay_setting_alipay
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="appid != null and appid !=''"  > 
+			and appid= #{appid}
+		</if>
+		<if test="cancelDuration != null and cancelDuration !=''"  > 
+			and cancel_duration= #{cancelDuration}
+		</if>
+		<if test="enableNotify != null and enableNotify !=''"  > 
+			and enable_notify= #{enableNotify}
+		</if>
+		<if test="heartbeatDelay != null and heartbeatDelay !=''"  > 
+			and heartbeat_delay= #{heartbeatDelay}
+		</if>
+		<if test="heartbeatDuration != null and heartbeatDuration !=''"  > 
+			and heartbeat_duration= #{heartbeatDuration}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="inputCharset != null and inputCharset !=''"  > 
+			and input_charset= #{inputCharset}
+		</if>
+		<if test="key != null and key !=''"  > 
+			and key= #{key}
+		</if>
+		<if test="maxCancelRetry != null and maxCancelRetry !=''"  > 
+			and max_cancel_retry= #{maxCancelRetry}
+		</if>
+		<if test="maxQueryRetry != null and maxQueryRetry !=''"  > 
+			and max_query_retry= #{maxQueryRetry}
+		</if>
+		<if test="mcloudApiDomain != null and mcloudApiDomain !=''"  > 
+			and mcloud_api_domain= #{mcloudApiDomain}
+		</if>
+		<if test="notifyUrl != null and notifyUrl !=''"  > 
+			and notify_url= #{notifyUrl}
+		</if>
+		<if test="openApiDomain != null and openApiDomain !=''"  > 
+			and open_api_domain= #{openApiDomain}
+		</if>
+		<if test="orderName != null and orderName !=''"  > 
+			and order_name= #{orderName}
+		</if>
+		<if test="orgId != null and orgId !=''"  > 
+			and org_id= #{orgId}
+		</if>
+		<if test="partner != null and partner !=''"  > 
+			and partner= #{partner}
+		</if>
+		<if test="pid != null and pid !=''"  > 
+			and pid= #{pid}
+		</if>
+		<if test="privateKey != null and privateKey !=''"  > 
+			and private_key= #{privateKey}
+		</if>
+		<if test="publicKey != null and publicKey !=''"  > 
+			and public_key= #{publicKey}
+		</if>
+		<if test="alipayPublicKey != null and alipayPublicKey !=''"  > 
+			and alipay_public_key= #{alipayPublicKey}
+		</if>
+		<if test="queryDuration != null and queryDuration !=''"  > 
+			and query_duration= #{queryDuration}
+		</if>
+		<if test="sellerEmail != null and sellerEmail !=''"  > 
+			and seller_email= #{sellerEmail}
+		</if>
+		<if test="signType != null and signType !=''"  > 
+			and sign_type= #{signType}
+		</if>
+		<if test="status != null and status !=''"  > 
+			and status= #{status}
+		</if>
+		<if test="timeout != null and timeout !=''"  > 
+			and timeout= #{timeout}
+		</if>
+		<if test="q_partner != null and q_partner !=''"  >
+			and partner like CONCAT('%',#{q_partner},'%')
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from pay_setting_alipay where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.payset.PaySettingAlipay">
+        update pay_setting_alipay
+    	<set>
+			<if test="appid != null">appid= #{appid},</if>
+			<if test="cancelDuration != null">cancel_duration= #{cancelDuration},</if>
+			<if test="enableNotify != null">enable_notify= #{enableNotify},</if>
+			<if test="heartbeatDelay != null">heartbeat_delay= #{heartbeatDelay},</if>
+			<if test="heartbeatDuration != null">heartbeat_duration= #{heartbeatDuration},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="inputCharset != null">input_charset= #{inputCharset},</if>
+			<if test="key != null">key= #{key},</if>
+			<if test="maxCancelRetry != null">max_cancel_retry= #{maxCancelRetry},</if>
+			<if test="maxQueryRetry != null">max_query_retry= #{maxQueryRetry},</if>
+			<if test="mcloudApiDomain != null">mcloud_api_domain= #{mcloudApiDomain},</if>
+			<if test="notifyUrl != null">notify_url= #{notifyUrl},</if>
+			<if test="openApiDomain != null">open_api_domain= #{openApiDomain},</if>
+			<if test="orderName != null">order_name= #{orderName},</if>
+			<if test="orgId != null">org_id= #{orgId},</if>
+			<if test="partner != null">partner= #{partner},</if>
+			<if test="pid != null">pid= #{pid},</if>
+			<if test="privateKey != null">private_key= #{privateKey},</if>
+			<if test="publicKey != null">public_key= #{publicKey},</if>
+			<if test="alipayPublicKey != null">alipay_public_key= #{alipayPublicKey},</if>
+			<if test="queryDuration != null">query_duration= #{queryDuration},</if>
+			<if test="sellerEmail != null">seller_email= #{sellerEmail},</if>
+			<if test="signType != null">sign_type= #{signType},</if>
+			<if test="status != null">status= #{status},</if>
+			<if test="timeout != null">timeout= #{timeout}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.payset.PaySettingAlipay" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			pay_setting_alipay
+		(
+			appid,
+			cancel_duration,
+			enable_notify,
+			heartbeat_delay,
+			heartbeat_duration,
+			
+			input_charset,
+			key,
+			max_cancel_retry,
+			max_query_retry,
+			mcloud_api_domain,
+			notify_url,
+			open_api_domain,
+			order_name,
+			org_id,
+			partner,
+			pid,
+			private_key,
+			public_key,
+			alipay_public_key,
+			query_duration,
+			seller_email,
+			sign_type,
+			status,
+			timeout
+		)
+		values
+		(
+			#{appid},
+			#{cancelDuration},
+			#{enableNotify},
+			#{heartbeatDelay},
+			#{heartbeatDuration},
+			
+			#{inputCharset},
+			#{key},
+			#{maxCancelRetry},
+			#{maxQueryRetry},
+			#{mcloudApiDomain},
+			#{notifyUrl},
+			#{openApiDomain},
+			#{orderName},
+			#{orgId},
+			#{partner},
+			#{pid},
+			#{privateKey},
+			#{publicKey},
+			#{alipayPublicKey},
+			#{queryDuration},
+			#{sellerEmail},
+			#{signType},
+			#{status},
+			#{timeout}
+		)
+	</insert>
+	
+</mapper>

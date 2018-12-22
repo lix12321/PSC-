@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.statistics.MonthOrderRefundRateDao">
+
+	<select id="getChartData" resultType="java.util.HashMap">
+		select a.orderdate orderdate, ROUND((a.refund*100/(a.refund + b.total)),2) refundrate
+		from (select TO_CHAR(po.create_time, 'DD') orderdate, sum(abs(money_order)) refund
+		  from pay_order po
+		  where po.order_state = '3'
+			and po.payment_status = '1'
+			and TO_CHAR(po.create_time, 'YYYY-MM') = TO_CHAR(current_date, 'YYYY-MM')
+		  group by TO_CHAR(po.create_time, 'DD')) a
+		   left join (select TO_CHAR(po.create_time, 'DD') orderdate, sum(abs(money_order)) total
+					  from pay_order po
+					  where po.order_state = '6'
+						and po.payment_status = '1'
+						and TO_CHAR(po.create_time, 'YYYY-MM') = TO_CHAR(current_date, 'YYYY-MM')
+					  group by TO_CHAR(po.create_time, 'DD')) b on a.orderdate = b.orderdate
+		group by a.orderdate, b.orderdate, a.refund, b.total
+	</select>
+
+</mapper>

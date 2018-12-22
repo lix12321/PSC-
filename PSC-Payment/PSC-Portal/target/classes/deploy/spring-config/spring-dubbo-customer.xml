@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://code.alibabatech.com/schema/dubbo 
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="psc-dubbo-customer" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper"
+		address="127.0.0.1:2181" />
+	<!-- check:关闭启动检查，否则，启动消费者必须先启动服务。请注意，关闭此检查后，系统初始化时加载的数据字典将会异常失效 -->
+	<!-- retries:dubbo默认服务调用失败会再次调用此服务，可能会造成某个方法被多次调用，进而导致某方法（如新增）记录被插入若干条的情况，请在开发时注意校验或针对此服务关闭重试 -->
+	<!-- 生产环境retries参数可设置为大于2的数，但会引起性能问题，超时时间在开发时可以设置较长时间，否则会影响dubug结果 -->
+	<dubbo:consumer retries="0" timeout="8000" check="false" />
+
+	<!-- 声明需要引用的服务接口 -->
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="wechatNativePaymentService" group="wxnative" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="wechatJsAPI" group="wxjs"/>
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="wechatSaoMaPaymentService" group="wxsm" retries="0" connections="120"/>
+	
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="unionpayService" group="unps" retries="0" connections="120"/>
+	
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="integrationPaymentService" group="itgs" retries="0" connections="120"/>
+	
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="alipayNativePaymentService" group="anpt" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="alipaySaoMaPaymentService" group="asmp" retries="0" connections="120"/>
+
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="accountPayService" group="accpay" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="accRechargeService" group="accrecharge" retries="0" connections="120"/>
+
+	<dubbo:reference interface="cn.wellcare.api.PaymentApi" id="cashPayService" group="cashpay" retries="0" connections="120"/>
+	
+	<!-- 退款 -->
+	<dubbo:reference interface="cn.wellcare.api.RefundPayApi" id="accountRefundService" group="accrefund" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.RefundPayApi" id="refundPayService" group="integrefund" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.api.RefundPayApi" id="wxNativeRefundPayService" group="cashpay" retries="0" connections="120"/>
+	
+	<!-- 非系统API接口 -->
+	<!-- 账户 -->
+	<dubbo:reference interface="cn.wellcare.account.IPscPiAccCreditService" id="pscPiAccCreditService" group="acccred" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.account.IPscPiAccDetailService" id="pscPiAccDetailService" group="accdetail" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.account.IPscPiAccService" id="pscPiAccService" group="accservice" retries="0" connections="120"/>
+	
+	<!-- 机构 -->
+	<dubbo:reference interface="cn.wellcare.admin.system.ISysOrganizationService" id="sysOrganizationService" group="orgserv" retries="0" connections="120"/>
+	
+	<!-- 通知 -->
+	<dubbo:reference interface="cn.wellcare.notify.PaymentNotifyRpc" id="accountNativeNotifyService" group="accnotify" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.notify.PaymentNotifyRpc" id="alipayNotifyService" group="alipaynotify" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.notify.PaymentNotifyRpc" id="integrationpayNotifyService" group="integnotify" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.notify.PaymentNotifyRpc" id="integrationPayRefundNotifyService" group="integrefundnotify" retries="0" connections="120"/>
+	<dubbo:reference interface="cn.wellcare.notify.PaymentNotifyRpc" id="wechatNativeNotifyService" group="wxnotify" retries="0" connections="120"/>
+	
+	<!-- 订单 -->
+	<dubbo:reference interface="cn.wellcare.order.IOrderService" id="orderService" group="orderserv" retries="0" connections="120" />
+	<dubbo:reference interface="cn.wellcare.order.CommonOrderService" id="tradeOrderService" group="tradeorder" retries="0" connections="120" />
+
+</beans>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.payset.PaySettingWechatDao">
+	<resultMap id="PaySettingWechatResult" type="cn.wellcare.entity.payset.PaySettingWechat">
+			<result property="accessToken" column="access_token" />
+			<result property="appid" column="appid" />
+			<result property="appScope" column="app_scope" />
+			<result property="appsecret" column="appsecret" />
+			<result property="codeAddr" column="code_addr" />
+			<result property="createOrderUrl" column="create_order_url" />
+			<result property="customerState" column="customer_state" />
+			<result property="enableNotify" column="enable_notify" />
+			<result property="id" column="id" />
+			<result property="key" column="key" />
+			<result property="mchid" column="mchid" />
+			<result property="notifyUrl" column="notify_url" />
+			<result property="oauth2Token" column="oauth2_token" />
+			<result property="oauth2Url" column="oauth2_url" />
+			<result property="orderName" column="order_name" />
+			<result property="orgId" column="org_id" />
+			<result property="status" column="status" />
+			<result property="userInfo" column="user_info" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PaySettingWechatResult">
+		select
+			access_token,
+			appid,
+			app_scope,
+			appsecret,
+			code_addr,
+			create_order_url,
+			customer_state,
+			enable_notify,
+			id,
+			key,
+			mchid,
+			notify_url,
+			oauth2_token,
+			oauth2_url,
+			order_name,
+			org_id,
+			status,
+			user_info
+		from pay_setting_wechat
+		where id = #{id}
+	</select>
+	
+	<select id="getByOrg" parameterType="Integer" resultMap="PaySettingWechatResult">
+		select
+			access_token,
+			appid,
+			app_scope,
+			appsecret,
+			code_addr,
+			create_order_url,
+			customer_state,
+			enable_notify,
+			id,
+			key,
+			mchid,
+			notify_url,
+			oauth2_token,
+			oauth2_url,
+			order_name,
+			org_id,
+			status,
+			user_info
+		from pay_setting_wechat
+		where org_id = #{orgId}
+			and status=1
+		limit 1
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from pay_setting_wechat t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.payset.PaySettingWechat">
+		select 
+			access_token,
+			appid,
+			app_scope,
+			appsecret,
+			code_addr,
+			create_order_url,
+			customer_state,
+			enable_notify,
+			id,
+			key,
+			mchid,
+			notify_url,
+			oauth2_token,
+			oauth2_url,
+			order_name,
+			org_id,
+			status,
+			user_info
+		from pay_setting_wechat
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="accessToken != null and accessToken !=''"  > 
+			and access_token= #{accessToken}
+		</if>
+		<if test="appid != null and appid !=''"  > 
+			and appid= #{appid}
+		</if>
+		<if test="appScope != null and appScope !=''"  > 
+			and app_scope= #{appScope}
+		</if>
+		<if test="appsecret != null and appsecret !=''"  > 
+			and appsecret= #{appsecret}
+		</if>
+		<if test="codeAddr != null and codeAddr !=''"  > 
+			and code_addr= #{codeAddr}
+		</if>
+		<if test="createOrderUrl != null and createOrderUrl !=''"  > 
+			and create_order_url= #{createOrderUrl}
+		</if>
+		<if test="customerState != null and customerState !=''"  > 
+			and customer_state= #{customerState}
+		</if>
+		<if test="enableNotify != null and enableNotify !=''"  > 
+			and enable_notify= #{enableNotify}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="key != null and key !=''"  > 
+			and key= #{key}
+		</if>
+		<if test="mchid != null and mchid !=''"  > 
+			and mchid= #{mchid}
+		</if>
+		<if test="notifyUrl != null and notifyUrl !=''"  > 
+			and notify_url= #{notifyUrl}
+		</if>
+		<if test="oauth2Token != null and oauth2Token !=''"  > 
+			and oauth2_token= #{oauth2Token}
+		</if>
+		<if test="oauth2Url != null and oauth2Url !=''"  > 
+			and oauth2_url= #{oauth2Url}
+		</if>
+		<if test="orderName != null and orderName !=''"  > 
+			and order_name= #{orderName}
+		</if>
+		<if test="orgId != null and orgId !=''"  > 
+			and org_id= #{orgId}
+		</if>
+		<if test="status != null and status !=''"  > 
+			and status= #{status}
+		</if>
+		<if test="userInfo != null and userInfo !=''"  > 
+			and user_info= #{userInfo}
+		</if>
+		<if test="q_mchid != null and q_mchid !=''"  >
+			and mchid like CONCAT('%',#{q_mchid},'%')
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from pay_setting_wechat where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.payset.PaySettingWechat">
+        update pay_setting_wechat
+    	<set>
+			<if test="accessToken != null">access_token= #{accessToken},</if>
+			<if test="appid != null">appid= #{appid},</if>
+			<if test="appScope != null">app_scope= #{appScope},</if>
+			<if test="appsecret != null">appsecret= #{appsecret},</if>
+			<if test="codeAddr != null">code_addr= #{codeAddr},</if>
+			<if test="createOrderUrl != null">create_order_url= #{createOrderUrl},</if>
+			<if test="customerState != null">customer_state= #{customerState},</if>
+			<if test="enableNotify != null">enable_notify= #{enableNotify},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="key != null">key= #{key},</if>
+			<if test="mchid != null">mchid= #{mchid},</if>
+			<if test="notifyUrl != null">notify_url= #{notifyUrl},</if>
+			<if test="oauth2Token != null">oauth2_token= #{oauth2Token},</if>
+			<if test="oauth2Url != null">oauth2_url= #{oauth2Url},</if>
+			<if test="orderName != null">order_name= #{orderName},</if>
+			<if test="orgId != null">org_id= #{orgId},</if>
+			<if test="status != null">status= #{status},</if>
+			<if test="userInfo != null">user_info= #{userInfo}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.payset.PaySettingWechat" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			pay_setting_wechat
+		(
+			access_token,
+			appid,
+			app_scope,
+			appsecret,
+			code_addr,
+			create_order_url,
+			customer_state,
+			enable_notify,
+			
+			key,
+			mchid,
+			notify_url,
+			oauth2_token,
+			oauth2_url,
+			order_name,
+			org_id,
+			status,
+			user_info
+		)
+		values
+		(
+			#{accessToken},
+			#{appid},
+			#{appScope},
+			#{appsecret},
+			#{codeAddr},
+			#{createOrderUrl},
+			#{customerState},
+			#{enableNotify},
+			
+			#{key},
+			#{mchid},
+			#{notifyUrl},
+			#{oauth2Token},
+			#{oauth2Url},
+			#{orderName},
+			#{orgId},
+			#{status},
+			#{userInfo}
+		)
+	</insert>
+	
+</mapper>

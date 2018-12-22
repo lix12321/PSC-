@@ -1,0 +1,97 @@
+package cn.wellcare.web;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import cn.wellcare.core.bean.ServiceLocator;
+import cn.wellcare.core.constant.BaseParam;
+import cn.wellcare.core.constant.PaymentType;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.core.exception.ErrorEnum;
+import cn.wellcare.core.exception.UnauthorizedException;
+import cn.wellcare.payment.api.RefundPayApi;
+import cn.wellcare.pojo.common.RefundPayResult;
+import cn.wellcare.pojo.common.RpcResult;
+
+/**
+ * 退款基础Controller
+ */
+public class RefundController extends BaseController{
+    protected Logger log = Logger.getLogger(this.getClass());
+    protected RpcResult<RefundPayResult> refundPayResult = null;
+    @ModelAttribute
+    public synchronized void refundPay(HttpServletRequest request, HttpServletResponse response,
+                                       @RequestParam Map<String ,Object> param) {
+        this.refundPayResult = new RpcResult<>();
+        try {
+            Assert.notNull(param.get(BaseParam.OUT_TRADE_NO));//退款订单号
+            Assert.notNull(param.get(BaseParam.REFUND_AMOUNT));//退款金额
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            this.refundPayResult.setError(ErrorEnum.PARAM_IS_INVALID);
+        } catch (BusinessException e) {
+            this.refundPayResult.setError(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.refundPayResult.setError(ErrorEnum.SERVER_EXCEPTION);
+        }
+        refundPayMothod(param);
+
+    }
+
+    private void refundPayMothod(Map<String,Object> param) {
+        try {
+            RefundPayApi refundPayApi = null;
+          //  PaymentNotifyRpc nr = null;
+
+			String payType = (String) param.get(BaseParam.PAY_TYPE);
+			Assert.notNull(payType);
+
+			if (PaymentType.WECHAT_NATIVE.getPaymentCode().equals(payType)||PaymentType.WECHAT_JSAPI.getPaymentCode().equals(payType)
+			        ||PaymentType.WECHAT_SAOMA.getPaymentCode().equals(payType) || PaymentType.WECHAT_NATIVE.getPaymentName().equals(payType)
+                    ||PaymentType.WECHAT_JSAPI.getPaymentName().equals(payType)||PaymentType.ALIPAY_SAOMA.getPaymentName().equals(payType)) {
+				// 微信本地扫码支付
+				refundPayApi = (RefundPayApi) ServiceLocator.getInstance().getBean("wxNativeRefundPayService");
+			} else if (PaymentType.JUHPAY.getPaymentCode().equals(payType)
+					|| PaymentType.JUHPAY.getPaymentName().equals(payType)) {
+				refundPayApi = (RefundPayApi) ServiceLocator.getInstance().getBean("refundPayService");
+				//nr = (PaymentNotifyRpc) ServiceLocator.getInstance().getBean("integrationPayRefundNotifyService");
+			}else if (PaymentType.ALIPAY.getPaymentCode().equals(payType)||PaymentType.ALIPAY_SAOMA.getPaymentCode().equals(payType)
+                    ||PaymentType.ALIPAY.getPaymentName().equals(payType)||PaymentType.ALIPAY_SAOMA.getPaymentName().equals(payType)){
+                refundPayApi = (RefundPayApi) ServiceLocator.getInstance().getBean("alipayRefundService");
+            }
+
+            this.log.debug("确定使用实例："+refundPayApi.getClass().getName());
+            this.refundPayResult = refundPayApi.refundPay(param);
+            /*if (PaymentType.JUHPAY.getPaymentCode().equals(payType)
+                    || PaymentType.JUHPAY.getPaymentName().equals(payType)) {
+                param.put("orderInfo",);
+                nr.doNotify(param);//调用通知
+            }*/
+        }catch (Exception e) {
+            this.refundPayResult.setSuccess(false);
+            if (e instanceof BusinessException) {
+                BusinessException pe = (BusinessException) e;
+                if (pe.getCode() != null && ErrorEnum.SERVER_EXCEPTION.getErrCode().equals(pe.getCode())){
+                    this.refundPayResult.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());}
+                else{
+                    this.refundPayResult.setMsgInfo(e.getMessage());}
+            } else {
+                if (e instanceof UnauthorizedException) {
+                    this.refundPayResult.setError(ErrorEnum.UNAUTHORIZED_EXCEPTION);
+                } else {
+                    e.printStackTrace();
+                    this.refundPayResult.setMsgInfo(ErrorEnum.SERVER_EXCEPTION.getErrDesc());
+                }
+            }
+        }
+        
+    }
+}

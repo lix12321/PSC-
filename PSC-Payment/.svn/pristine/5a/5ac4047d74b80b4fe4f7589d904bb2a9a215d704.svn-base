@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.wellcare</groupId>
+		<artifactId>PSC-Parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../PSC-Parent/pom.xml</relativePath>
+	</parent>
+	<artifactId>PSC-Api</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>cn.wellcare</groupId>
+			<artifactId>PSC-Pojo</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.wellcare</groupId>
+			<artifactId>PSC-Core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://192.168.2.27:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

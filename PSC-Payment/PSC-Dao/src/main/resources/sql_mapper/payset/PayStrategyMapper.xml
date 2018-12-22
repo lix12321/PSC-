@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.payset.PayStrategyDao">
+	<resultMap id="PayStrategyResult" type="cn.wellcare.entity.payset.PayStrategy">
+			<result property="id" column="id" />
+			<result property="orgId" column="org_id" />
+			<result property="payStrategy" column="pay_strategy" />
+			<result property="status" column="status" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PayStrategyResult">
+		select
+			id,
+			org_id,
+			pay_strategy,
+			status
+		from pay_strategy
+		where id = #{id}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from pay_strategy t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.payset.PayStrategy">
+		select 
+			id,
+			org_id,
+			pay_strategy,
+			status
+		from pay_strategy
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="orgId != null and orgId !=''"  > 
+			and org_id= #{orgId}
+		</if>
+		<if test="payStrategy != null and payStrategy !=''"  > 
+			and pay_strategy= #{payStrategy}
+		</if>
+		<if test="status != null and status !=''"  > 
+			and status= #{status}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from pay_strategy where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.payset.PayStrategy">
+        update pay_strategy
+    	<set>
+			<if test="id != null">id= #{id},</if>
+			<if test="orgId != null">org_id= #{orgId},</if>
+			<if test="payStrategy != null">pay_strategy= #{payStrategy},</if>
+			<if test="status != null">status= #{status}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.payset.PayStrategy" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			pay_strategy
+		(
+			
+			org_id,
+			pay_strategy,
+			status
+		)
+		values
+		(
+			
+			#{orgId},
+			#{payStrategy},
+			#{status}
+		)
+	</insert>
+
+	<select id="findAllList" resultType="cn.wellcare.bo.PayStrategyBO">
+		select
+		ps.id,
+		ps.org_id,
+		ps.pay_strategy,
+		ps.status,
+		so.org_name
+		from pay_strategy ps
+		left join sys_organization so on so.id = ps.org_id
+		where 1=1
+		<trim  suffixOverrides="," >
+			<if test="id != null and id !=''"  >
+				and ps.id= #{id}
+			</if>
+			<if test="orgId!= null and orgId !=''"  >
+				and ps.org_id = #{orgId}
+			</if>
+			<if test="orgName != null and orgName !=''"  >
+				and so.org_namelike CONCAT('%',#{orgName},'%')
+			</if>
+			<if test="payStrategy != null and payStrategy !=''"  >
+				and ps.pay_strategy= #{payStrategy}
+			</if>
+			<if test="status != null and status !=''"  >
+				and ps.status= #{status}
+			</if>
+            <if test="q_payStrategy != null and q_payStrategy !=''">
+                and ps.pay_strategy = #{q_payStrategy}
+            </if>
+		</trim>
+	</select>
+	
+</mapper>

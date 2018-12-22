@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.order.PayPosOrderDao">
+	<resultMap id="PayPosOrderResult" type="cn.wellcare.entity.order.PayPosOrder">
+			<result property="amount" column="amount" />
+			<result property="auth" column="auth" />
+			<result property="bankCode" column="bank_code" />
+			<result property="batch" column="batch" />
+			<result property="cardNo" column="card_no" />
+			<result property="date" column="date" />
+			<result property="dtPayMode" column="dt_pay_mode" />
+			<result property="expr" column="expr" />
+			<result property="id" column="id" />
+			<result property="oldTerno" column="old_terno" />
+			<result property="orderId" column="order_id" />
+			<result property="orgId" column="org_id" />
+			<result property="refer" column="refer" />
+			<result property="respChin" column="resp_chin" />
+			<result property="respCode" column="resp_code" />
+			<result property="settleStatus" column="settle_status" />
+			<result property="szOrderTrace" column="sz_order_trace" />
+			<result property="terno" column="terno" />
+			<result property="trace" column="trace" />
+			<result property="updateTime" column="update_time" />
+			<result property="userno" column="userno" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PayPosOrderResult">
+		select
+			amount,
+			auth,
+			bank_code,
+			batch,
+			card_no,
+			date,
+			dt_pay_mode,
+			expr,
+			id,
+			old_terno,
+			order_id,
+			org_id,
+			refer,
+			resp_chin,
+			resp_code,
+			settle_status,
+			sz_order_trace,
+			terno,
+			trace,
+			update_time,
+			userno
+		from pay_pos_order
+		where id = #{id}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from pay_pos_order t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.order.PayPosOrder">
+		select 
+			amount,
+			auth,
+			bank_code,
+			batch,
+			card_no,
+			date,
+			dt_pay_mode,
+			expr,
+			id,
+			old_terno,
+			order_id,
+			org_id,
+			refer,
+			resp_chin,
+			resp_code,
+			settle_status,
+			sz_order_trace,
+			terno,
+			trace,
+			update_time,
+			userno
+		from pay_pos_order
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="amount != null and amount !=''"  > 
+			and amount= #{amount}
+		</if>
+		<if test="auth != null and auth !=''"  > 
+			and auth= #{auth}
+		</if>
+		<if test="bankCode != null and bankCode !=''"  > 
+			and bank_code= #{bankCode}
+		</if>
+		<if test="batch != null and batch !=''"  > 
+			and batch= #{batch}
+		</if>
+		<if test="cardNo != null and cardNo !=''"  > 
+			and card_no= #{cardNo}
+		</if>
+		<if test="date != null and date !=''"  > 
+			and date= #{date}
+		</if>
+		<if test="dtPayMode != null and dtPayMode !=''"  > 
+			and dt_pay_mode= #{dtPayMode}
+		</if>
+		<if test="expr != null and expr !=''"  > 
+			and expr= #{expr}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="oldTerno != null and oldTerno !=''"  > 
+			and old_terno= #{oldTerno}
+		</if>
+		<if test="orderId != null and orderId !=''"  > 
+			and order_id= #{orderId}
+		</if>
+		<if test="orgId != null and orgId !=''"  > 
+			and org_id= #{orgId}
+		</if>
+		<if test="refer != null and refer !=''"  > 
+			and refer= #{refer}
+		</if>
+		<if test="respChin != null and respChin !=''"  > 
+			and resp_chin= #{respChin}
+		</if>
+		<if test="respCode != null and respCode !=''"  > 
+			and resp_code= #{respCode}
+		</if>
+		<if test="settleStatus != null and settleStatus !=''"  > 
+			and settle_status= #{settleStatus}
+		</if>
+		<if test="szOrderTrace != null and szOrderTrace !=''"  > 
+			and sz_order_trace= #{szOrderTrace}
+		</if>
+		<if test="terno != null and terno !=''"  > 
+			and terno= #{terno}
+		</if>
+		<if test="trace != null and trace !=''"  > 
+			and trace= #{trace}
+		</if>
+		<if test="updateTime != null and updateTime !=''"  > 
+			and update_time= #{updateTime}
+		</if>
+		<if test="userno != null and userno !=''"  > 
+			and userno= #{userno}
+		</if>
+		<if test="q_orderId != null and q_orderId !=''"  >
+			and order_id like CONCAT('%',#{q_orderId},'%')
+		</if>
+		<if test="q_userno != null and q_userno !=''"  >
+			and userno like CONCAT('%',#{q_userno},'%')
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from pay_pos_order where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.order.PayPosOrder">
+        update pay_pos_order
+    	<set>
+			<if test="amount != null">amount= #{amount},</if>
+			<if test="auth != null">auth= #{auth},</if>
+			<if test="bankCode != null">bank_code= #{bankCode},</if>
+			<if test="batch != null">batch= #{batch},</if>
+			<if test="cardNo != null">card_no= #{cardNo},</if>
+			<if test="date != null">date= #{date},</if>
+			<if test="dtPayMode != null">dt_pay_mode= #{dtPayMode},</if>
+			<if test="expr != null">expr= #{expr},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="oldTerno != null">old_terno= #{oldTerno},</if>
+			<if test="orderId != null">order_id= #{orderId},</if>
+			<if test="orgId != null">org_id= #{orgId},</if>
+			<if test="refer != null">refer= #{refer},</if>
+			<if test="respChin != null">resp_chin= #{respChin},</if>
+			<if test="respCode != null">resp_code= #{respCode},</if>
+			<if test="settleStatus != null">settle_status= #{settleStatus},</if>
+			<if test="szOrderTrace != null">sz_order_trace= #{szOrderTrace},</if>
+			<if test="terno != null">terno= #{terno},</if>
+			<if test="trace != null">trace= #{trace},</if>
+			<if test="updateTime != null">update_time= #{updateTime},</if>
+			<if test="userno != null">userno= #{userno}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.order.PayPosOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			pay_pos_order
+		(
+			amount,
+			auth,
+			bank_code,
+			batch,
+			card_no,
+			date,
+			dt_pay_mode,
+			expr,
+			
+			old_terno,
+			order_id,
+			org_id,
+			refer,
+			resp_chin,
+			resp_code,
+			settle_status,
+			sz_order_trace,
+			terno,
+			trace,
+			update_time,
+			userno
+		)
+		values
+		(
+			#{amount},
+			#{auth},
+			#{bankCode},
+			#{batch},
+			#{cardNo},
+			#{date},
+			#{dtPayMode},
+			#{expr},
+			
+			#{oldTerno},
+			#{orderId},
+			#{orgId},
+			#{refer},
+			#{respChin},
+			#{respCode},
+			#{settleStatus},
+			#{szOrderTrace},
+			#{terno},
+			#{trace},
+			#{updateTime},
+			#{userno}
+		)
+	</insert>
+	
+</mapper>

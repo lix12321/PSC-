@@ -1,0 +1,110 @@
+<script src="/resources/js/jquery.form.js"></script>
+<script src="/resources/js/jquery.qrcode.min.js"></script>
+
+<script>
+	function dosubmit(obj) {
+		var this_ = $(obj);
+		var form_ = this_.closest("form.api-form");
+		var targetUrl = form_.attr("action");
+		form_.ajaxSubmit({
+			url : targetUrl,
+			type : 'post',
+			success : function(data) {
+				if(data.success){
+					//二维码url
+					var codeUrl = data.data.codeUrl;
+					form_.empty();
+					form_.qrcode({
+			            render: "canvas", //table方式 
+			            width: 298, //宽度 
+			            height:298, //高度 
+			            text: codeUrl //URL
+			        }); 
+				} else{
+					this_.parent().siblings("p.pinfo").remove();
+					this_.parent().before("<p class='pinfo' style='color:red;margin-left: 20px'>"+data.msgInfo+"</p>");
+				}
+			}
+		});
+	}
+</script>
+
+
+<form class="api-form" method="post"
+	action="demo/accPay/dopay">
+	<input type="hidden" name="payType" value="011" />
+
+	<p>
+		<label>支付方式：</label> 
+		<select name="rcType">
+			<option value="-1">请选择...</option>
+			<option value="006">微信扫码</option>
+			<option value="004">支付宝扫码</option>
+			<option value="008">现金支付</option>
+		</select>
+	</p>
+	<p>
+		<label>二维码：</label> <input type="text" name="authCode" value="136070756006589088"
+				placeholder="请通过二维码工具将维码识别后填入此处" title="支付二维码"
+				required="required" />
+	</p>
+	<p>
+		<label>设备编号：</label> <input type="text" name="deviceInfo" value="001"
+				placeholder="由扫码终端传递" title="设备编号"
+				required="required" />
+	</p>
+	<p>
+		<label>用户ID：</label> <input type="text" name="pkPi"
+			placeholder="用户id" value="86203" title="患者主键"
+			required="required" />
+	</p>
+	<p>
+		<label>机构用户名：</label> <input type="text" name="encryptUser"
+			placeholder="" value="777290058110048" title="业务系统（机构）用户名"
+			required="required" />
+	</p>
+	<p>
+		<label>机构密码：</label> <input type="text" name="encryptPwd"
+			placeholder="" value="1" title="业务系统（机构）密码"
+			required="required" />
+	</p>
+	<p>
+		<label>机构号：</label> <input type="text" name="orgId"
+			placeholder="机构号" value="1" title="机构号，在支付平台授权后获得"
+			required="required" /> </label>
+	<p>
+	<p>
+		<label>订单发送时间：</label> <input type="text" name="tradeTime"
+			placeholder="订单发送时间" value="${time!}" title="GMT标准时间时间戳，即自1970至今的毫秒数"
+			required="required" /> </label>
+	</p>
+	<p>
+		<label>商户订单号：</label> <input type="text" name="orderId"
+			placeholder="商户订单号" value="" title="自行定义，32位以内数字字母"
+			required="required" />
+	</p>
+	<p>
+		<label>交易金额：</label> <input type="number" name="payAmount"
+			placeholder="交易金额" value="" title="单位：元" required="required"
+			max="9999999" min="1" />
+	</p>
+	<p>
+		<label>&nbsp;</label> <input type="button" onclick="dosubmit(this)"
+			class="button" value="提交" /> <input type="button" class="showFaqBtn"
+			value="遇到问题？" />
+	</p>
+</form>
+
+<div class="question">
+	<hr />
+	<h4>测试可能出现的问题</h4>
+	<p class="faq">
+		<ul style="font-size: .8em;">
+			<li style="margin: 10px auto;"><b>时间不合法，请重新发起支付请求</b><br> <em>请刷新此表单后重新发起支付请求，系统允许的发起请求至服务器响应最大时间相差为15秒</em></li>
+			<li style="margin: 10px auto;"><b>机构未授权支付服务，请联系管理员</b><br> <em>请确认使用的用户名正常授权</em></li>
+			<li style="margin: 10px auto;"><b>无效参数</b><br> <em>请确认请求的参数正确且类型正确</em></li>
+			<li style="margin: 10px auto;"><b>服务器繁忙，请稍后重试</b><br> <em>请确认参数正确且非空</em></li>
+		</ul>
+	</p>
+
+</div>

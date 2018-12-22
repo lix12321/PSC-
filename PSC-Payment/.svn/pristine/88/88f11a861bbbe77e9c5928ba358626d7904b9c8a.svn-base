@@ -1,0 +1,106 @@
+package cn.wellcare.handler.transaction.payment.integration;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import com.google.gson.Gson;
+
+import cn.wellcare.core.constant.BaseParam;
+import cn.wellcare.core.constant.Constants;
+import cn.wellcare.core.exception.BusinessException;
+import cn.wellcare.entity.order.PayOrder;
+import cn.wellcare.pojo.common.PaymentResult;
+import cn.wellcare.pojo.integrationpay.IntegrationPayConfig;
+import cn.wellcare.pojo.integrationpay.IntegrationPayResult;
+import cn.wellcare.service.transaction.payment.integrationpay.bean.AccessAddress;
+import cn.wellcare.support.HttpClientUtil;
+import cn.wellcare.support.MD5Util;
+
+@Service
+public class IntegrationPaymentHandler {
+
+	public PaymentResult doPay(Map<String, Object> param) {
+		PaymentResult pr = new PaymentResult();
+		try {
+			// 1.订单处理
+			PayOrder order = (PayOrder) param.get(Constants.ORDERS_INFO);
+			Assert.notNull(order);
+
+			// 2.支付操作
+			String totalFee = (String) param.get(BaseParam.PAY_AMOUNT);
+
+			// 支付的总金额（分）
+			BigDecimal needsPay = new BigDecimal(totalFee);
+			needsPay.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			String txnAmt = needsPay.toString(); // 付款金额，单位为分
+
+			// 组装验签字段
+			StringBuffer tmp = new StringBuffer(); // 验签字段
+			tmp.append("MERCHANTID=");
+			tmp.append(IntegrationPayConfig.MERCHANTID);
+			tmp.append("&POSID=");
+			tmp.append(IntegrationPayConfig.POSID);
+			tmp.append("&BRANCHID=");
+			tmp.append(IntegrationPayConfig.BRANCHID);
+			tmp.append("&ORDERID=");
+			tmp.append(order.getPaySn());
+			tmp.append("&PAYMENT=");
+			tmp.append(txnAmt);
+			tmp.append("&CURCODE=");
+			tmp.append(IntegrationPayConfig.CURCODE);
+			tmp.append("&TXCODE=");
+			tmp.append(IntegrationPayConfig.TXCODE);
+			tmp.append("&REMARK1=");
+			tmp.append("");
+			tmp.append("&REMARK2=");
+			tmp.append("");
+			tmp.append("&RETURNTYPE=");
+			tmp.append(IntegrationPayConfig.RETURNTYPE);
+			tmp.append("&TIMEOUT=");
+			tmp.append("");
+			tmp.append("&PUB=");
+			tmp.append(IntegrationPayConfig.PUB32TR2);
+
+			Map map = new HashMap();
+			map.put("CCB_IBSVersion", "V6"); // 必输项
+			map.put("MERCHANTID", IntegrationPayConfig.MERCHANTID);// 商户代码
+			map.put("BRANCHID", IntegrationPayConfig.BRANCHID);// 分行代码
+			map.put("POSID", IntegrationPayConfig.POSID);// 商户柜台代码
+			map.put("ORDERID", order.getPaySn());// 订单号
+			map.put("PAYMENT", txnAmt);// 订单金额
+			map.put("CURCODE", IntegrationPayConfig.CURCODE);// 币种
+			map.put("TXCODE", IntegrationPayConfig.TXCODE); // 交易码
+			map.put("REMARK1", "");// 备注1暂定为空
+			map.put("REMARK2", "");// 备注2暂定为空
+			map.put("RETURNTYPE", IntegrationPayConfig.RETURNTYPE);// 返回类型 目前是3 返回二维码json字符串
+			map.put("TIMEOUT", "");// 订单超时时间（由于支付方式为打印二维码，故暂未设置失效时间）
+			map.put("MAC", MD5Util.md5Str(tmp.toString()));// MD5加密
+
+			String ret = HttpClientUtil.httpPost(IntegrationPayConfig.BANKURL, map); // 请求二维码生成链接串
+			Gson gson = new Gson();
+			AccessAddress qrurl = gson.fromJson(ret, AccessAddress.class);
+			// 新增判断
+			if (qrurl == null || !qrurl.getSUCCESS().equals("true")) {
+				throw new BusinessException("请求二维码链接失败");
+			}
+			ret = HttpClientUtil.httpGet(qrurl.getPAYURL(), "UTF-8");// 获取二维码串
+			// 处理返回的二维码字符串
+			String aggregatePayQrCode = ret.replace("%3A", ":").replace("%2F", "/").replace("%3F", "?").replace("%3D",
+					"=");
+			String qrCode = aggregatePayQrCode.substring(aggregatePayQrCode.indexOf("https"));
+			String srcode = qrCode.substring(0, qrCode.indexOf("\""));
+			String qrCodes = srcode.replace("\"", "");
+
+			pr = new IntegrationPayResult(totalFee, order.getId(), qrCodes);
+		} catch (Exception e) {
+			pr.setSuccess(false);
+			throw e;
+		}
+		return pr;
+	}
+
+}

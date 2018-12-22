@@ -1,0 +1,59 @@
+package cn.wellcare.core.constant;
+
+import cn.wellcare.core.utils.CommonUtils;
+
+public enum PaymentType {
+	WECHAT_NATIVE("001", "wechatNative"), WECHAT_JSAPI("002", "wechatJS"), ALIPAY("003", "alipayNative"),
+	ALIPAY_SAOMA("004", "aliSaoMaPay"), MISPOS("005", "mispos"), WECHAT_SAOMA("006", "wechatSaoMaPay"),
+	ACCOUNT_PAY("007", "accountPay"),CASH_PAY("008","cashPay"), JUHPAY("009", "juhpay"), UNIONPAY("010", "unionpayQrCode"), ACCRECHARGE("011",
+			"accountRecharge");
+
+	private String paymentCode;
+	private String paymentName;
+
+	private PaymentType(String paymentCode, String paymentName) {
+		this.paymentCode = paymentCode;
+		this.paymentName = paymentName;
+	}
+
+	public static String getPaymentCodeByName(String name) {
+		if (CommonUtils.isNull(name)) {
+			return "";
+		}
+		for (PaymentType pt : PaymentType.values()) {
+			if (pt.getPaymentName().equals(name)) {
+				return pt.getPaymentCode();
+			}
+		}
+		return "";
+	}
+
+	public static String getPaymentCodeByNameOrCode(String obj) {
+		if (CommonUtils.isNull(obj)) {
+			return "";
+		}
+		for (PaymentType pt : PaymentType.values()) {
+			if (pt.getPaymentName().equals(obj) || pt.getPaymentCode().equals(obj)) {
+				return pt.getPaymentCode();
+			}
+		}
+		return "";
+	}
+
+	public String getPaymentCode() {
+		return paymentCode;
+	}
+
+	public void setPaymentCode(String paymentCode) {
+		this.paymentCode = paymentCode;
+	}
+
+	public String getPaymentName() {
+		return paymentName;
+	}
+
+	public void setPaymentName(String paymentName) {
+		this.paymentName = paymentName;
+	}
+
+}

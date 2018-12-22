@@ -1,0 +1,66 @@
+package cn.wellcare.pojo.common;
+
+import java.io.Serializable;
+
+/**
+ * 支付返回结果
+ * 
+ * @author zhaihl
+ * @date 2018年10月15日
+ */
+public class PaymentResult implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4136276831033390226L;
+	private String totalFee;
+	private Integer orderId;
+	private boolean success;
+
+	public PaymentResult() {
+		this.success = true;
+	}
+
+	public PaymentResult(String totalFee, Integer orderId) {
+		this.totalFee = totalFee;
+		this.setOrderId(orderId);
+		this.success = false;
+	}
+
+	public boolean isSuccess() {
+		return this.success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getTotalFee() {
+		return this.totalFee;
+	}
+
+	public void setTotalFee(String totalFee) {
+		this.totalFee = totalFee;
+	}
+
+	/**
+	 * @return the orderId
+	 */
+	public Integer getOrderId() {
+		return this.orderId;
+	}
+
+	/**
+	 * @param orderId
+	 *            the orderId to set
+	 */
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+
+	@Override
+	public String toString() {
+		return "PaymentResult [totalFee=" + totalFee + ", orderId=" + orderId + ", success=" + success + "]";
+	}
+
+}

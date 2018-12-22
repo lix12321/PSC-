@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace和dao对应  -->
+<mapper namespace="cn.wellcare.dao.payset.PayTypeDao">
+	<resultMap id="PayTypeResult" type="cn.wellcare.entity.payset.PayType">
+			<result property="alipaySmNature" column="alipay_sm_nature" />
+			<result property="alipaySmPassive" column="alipay_sm_passive" />
+			<result property="balance" column="balance" />
+			<result property="cash" column="cash" />
+			<result property="credit" column="credit" />
+			<result property="id" column="id" />
+			<result property="jhSmNature" column="jh_sm_nature" />
+			<result property="jhSmPassive" column="jh_sm_passive" />
+			<result property="orgId" column="org_id" />
+			<result property="wxSmNature" column="wx_sm_nature" />
+			<result property="wxSmPassive" column="wx_sm_passive" />
+	</resultMap>
+	
+	<select id="get" parameterType="Integer" resultMap="PayTypeResult">
+		select
+			alipay_sm_nature,
+			alipay_sm_passive,
+			balance,
+			cash,
+			credit,
+			id,
+			jh_sm_nature,
+			jh_sm_passive,
+			org_id,
+			wx_sm_nature,
+			wx_sm_passive
+		from pay_type
+		where id = #{id}
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		select count(1) from pay_type t1
+		<include refid="whereConditions" />
+	</select>
+	
+	<select id="getList" resultType="cn.wellcare.entity.payset.PayType">
+		select 
+			alipay_sm_nature,
+			alipay_sm_passive,
+			balance,
+			cash,
+			credit,
+			id,
+			jh_sm_nature,
+			jh_sm_passive,
+			org_id,
+			wx_sm_nature,
+			wx_sm_passive
+		from pay_type
+		<include refid="whereConditions" />
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="whereConditions">
+		where 1=1
+		<trim  suffixOverrides="," >
+		<if test="alipaySmNature != null and alipaySmNature !=''"  > 
+			and alipay_sm_nature= #{alipaySmNature}
+		</if>
+		<if test="alipaySmPassive != null and alipaySmPassive !=''"  > 
+			and alipay_sm_passive= #{alipaySmPassive}
+		</if>
+		<if test="balance != null and balance !=''"  > 
+			and balance= #{balance}
+		</if>
+		<if test="cash != null and cash !=''"  > 
+			and cash= #{cash}
+		</if>
+		<if test="credit != null and credit !=''"  > 
+			and credit= #{credit}
+		</if>
+		<if test="id != null and id !=''"  > 
+			and id= #{id}
+		</if>
+		<if test="jhSmNature != null and jhSmNature !=''"  > 
+			and jh_sm_nature= #{jhSmNature}
+		</if>
+		<if test="jhSmPassive != null and jhSmPassive !=''"  > 
+			and jh_sm_passive= #{jhSmPassive}
+		</if>
+		<if test="orgId != null and orgId !=''"  > 
+			and org_id= #{orgId}
+		</if>
+		<if test="wxSmNature != null and wxSmNature !=''"  > 
+			and wx_sm_nature= #{wxSmNature}
+		</if>
+		<if test="wxSmPassive != null and wxSmPassive !=''"  > 
+			and wx_sm_passive= #{wxSmPassive}
+		</if>
+		</trim>
+	</sql>
+	
+	<delete id="del">
+        delete from pay_type where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.wellcare.entity.payset.PayType">
+        update pay_type
+    	<set>
+			<if test="alipaySmNature != null">alipay_sm_nature= #{alipaySmNature},</if>
+			<if test="alipaySmPassive != null">alipay_sm_passive= #{alipaySmPassive},</if>
+			<if test="balance != null">balance= #{balance},</if>
+			<if test="cash != null">cash= #{cash},</if>
+			<if test="credit != null">credit= #{credit},</if>
+			<if test="id != null">id= #{id},</if>
+			<if test="jhSmNature != null">jh_sm_nature= #{jhSmNature},</if>
+			<if test="jhSmPassive != null">jh_sm_passive= #{jhSmPassive},</if>
+			<if test="orgId != null">org_id= #{orgId},</if>
+			<if test="wxSmNature != null">wx_sm_nature= #{wxSmNature},</if>
+			<if test="wxSmPassive != null">wx_sm_passive= #{wxSmPassive}</if>
+	    </set>
+        where id = #{id}
+	</update>
+	
+	<insert id="save" parameterType="cn.wellcare.entity.payset.PayType" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into 
+			pay_type
+		(
+			alipay_sm_nature,
+			alipay_sm_passive,
+			balance,
+			cash,
+			credit,
+			
+			jh_sm_nature,
+			jh_sm_passive,
+			org_id,
+			wx_sm_nature,
+			wx_sm_passive
+		)
+		values
+		(
+			#{alipaySmNature},
+			#{alipaySmPassive},
+			#{balance},
+			#{cash},
+			#{credit},
+			
+			#{jhSmNature},
+			#{jhSmPassive},
+			#{orgId},
+			#{wxSmNature},
+			#{wxSmPassive}
+		)
+	</insert>
+	
+</mapper>

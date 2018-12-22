@@ -1,0 +1,163 @@
+[{
+    "name": "layoutControls",
+    "cname": "布局控件",
+    "cells": [{
+        "name": "CellLayout",
+        "params": {
+            "struct": [{
+                "type": "layout.grid",
+                "seq": 0,
+                "child": [{
+                    "type": "layout.grid.row",
+                    "seq": 0,
+                    "child": [{
+                        "type": "layout.grid.column",
+                        "seq": 0
+                    }]
+                }, {
+                    "type": "layout.grid.row",
+                    "seq": 1,
+                    "child": [{
+                        "type": "layout.grid.column",
+                        "seq": 1
+                    }]
+                }]
+            }],
+            "number": {
+                "layout.grid": 1,
+                "layout.grid.row": 2,
+                "layout.grid.column": 2
+            }
+        }
+    }]
+}, {
+    "name": "standardControls",
+    "cname": "标准控件",
+    "cells": [{
+        "name": "Form",
+        "params": {
+            "struct": [{
+                "type": "form",
+                "seq": 0,
+                "child": [{
+                    "type": "layout.grid.row",
+                    "seq": 0,
+                    "child": [{
+                        "type": "layout.grid.column",
+                        "seq": 0
+                    }, {
+                        "type": "layout.grid.column",
+                        "seq": 1
+                    }, {
+                        "type": "layout.grid.column",
+                        "seq": 2
+                    }]
+                }]
+            }],
+            "number": {
+                "form": 1,
+                "layout.grid.row": 1,
+                "layout.grid.column": 3
+            }
+        }
+    }, {
+        "name": "datagrid",
+        "params": {
+            "struct": [{
+                "type": "datagrid",
+                "seq": 0,
+                "child": [{
+                    "type": "datagrid.item",
+                    "seq": 0
+                }, {
+                    "type": "datagrid.item",
+                    "seq": 1
+                }, {
+                    "type": "datagrid.item",
+                    "seq": 2
+                }]
+            }],
+            "number": {
+                "datagrid": 1,
+                "datagrid.item": 3
+            }
+        }
+    }, {
+        "name": "panel"
+    }, {
+        "name": "tabs"
+    }, {
+        "name": "menu"
+    }, {
+        "name": "tree"
+    }, {
+        "name": "treegrid"
+    }, {
+        "name": "toolbar",
+        "params": {
+            "struct": [{
+                "type": "toolbar",
+                "seq": 0,
+                "child": [{
+                    "type": "layout.grid.row",
+                    "seq": 0,
+                    "child": [{
+                        "type": "layout.grid.column",
+                        "seq": 0
+                    }, {
+                        "type": "layout.grid.column",
+                        "seq": 1
+                    }, {
+                        "type": "layout.grid.column",
+                        "seq": 2
+                    }]
+                }]
+            }],
+            "number": {
+                "toolbar": 1,
+                "layout.grid.row": 1,
+                "layout.grid.column": 3
+            }
+        }
+    }, {
+        "name": "html"
+    }]
+}, {
+    "name": "inputControls",
+    "cname": "输入控件",
+    "cells": [{
+        "name": "textbox"
+    }, {
+        "name": "combobox"
+    }, {
+        "name": "combotree"
+    }, {
+        "name": "spinner"
+    }, {
+        "name": "button"
+    }, {
+        "name": "datetimebox"
+    }, {
+        "name": "switchbutton"
+    }, {
+        "name": "combogrid"
+    }, {
+        "name": "combotreegrid"
+    }, {
+        "name": "numberbox"
+    }, {
+        "name": "datebox"
+    }, {
+        "name": "datetimespinner"
+    }, {
+        "name": "filebox"
+    }, {
+        "name": "label"
+    }, {
+        "name": "checkboxlist"
+    }, {
+        "name": "radiobuttonlist"
+    }, {
+        "name": "searchbox"
+    }]
+}]

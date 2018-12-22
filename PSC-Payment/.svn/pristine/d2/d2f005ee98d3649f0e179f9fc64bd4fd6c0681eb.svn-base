@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://code.alibabatech.com/schema/dubbo 
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="psc-payment-service-provider" />
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20880" accepts="2000"
+		host="127.0.0.1" />
+	<!-- 服务调用超时设置为8秒,超时不重试 -->
+	<dubbo:provider retries="0" timeout="15000" filter="pscDubboExceptionFilter,-exception"/>
+
+	<!-- =================================接口注册================================= -->
+	<!-- 声明需要暴露的服务接口 -->
+	<!-- 支付 -->
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="wechatNativePaymentService" group="wxnative"/>
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="wechatJsAPI" group="wxjs"/>
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="wechatSaoMaPaymentService" group="wxsm"/>
+	
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="integrationPaymentService" group="itgs"/>
+	
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="alipayNativePaymentService" group="anpt"/>
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="alipaySaoMaPaymentService" group="asmp"/>
+
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="accountPayService" group="accpay"/>
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="accRechargeService" group="accrecharge"/>
+	
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="cashPayService" group="cashpay"/>
+	<dubbo:service interface="cn.wellcare.payment.api.PaymentApi" ref="misPosPaymentService" group="mispospay"/>
+	
+	<!-- 退款 -->
+	<dubbo:service interface="cn.wellcare.payment.api.RefundPayApi" ref="accountRefundService" group="accrefund"/>
+	<dubbo:service interface="cn.wellcare.payment.api.RefundPayApi" ref="refundPayService" group="integrefund"/>
+	<dubbo:service interface="cn.wellcare.payment.api.RefundPayApi" ref="wxNativeRefundPayService" group="cashpay"/>
+	
+	<!-- 通知 -->
+	<dubbo:service interface="cn.wellcare.payment.notify.PaymentNotifyRpc" ref="alipayNotifyService" group="alipaynotify"/>
+	
+	<!-- 订单 -->
+	<dubbo:service interface="cn.wellcare.payment.order.IOrderService" ref="orderService" group="orderserv"/>
+	
+	<dubbo:service interface="cn.wellcare.payment.modules.system.ISysOrganizationService" ref="sysOrganizationService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.system.ISysCodeMasterService" ref="sysCodeMasterService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.statistics.IMonthOrderRefundRateService" ref="monthOrderRefundRateService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.statistics.IOrderCompletedCountService" ref="orderCompletedCountService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.statistics.IOrderPayModelCountService" ref="orderPayModelCountService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.statistics.IOrderPayModelTrendByDayService" ref="orderPayModelTrendByDayService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.statistics.IOrderPayModelTrendByHourService" ref="orderPayModelTrendByHourService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.statistics.ITodayOrderPayStateCountService" ref="todayOrderPayStateCountService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.refund.IPayRefundService" ref="payRefundService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.payset.IPaySettingAlipayService" ref="paySettingAlipayService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.payset.IPaySettingIntegrationService" ref="paySettingIntegrationService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.payset.IPaySettingWechatService" ref="paySettingWechatService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.payset.IPayStrategyService" ref="payStrategyService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.payset.IPayTypeService" ref="payTypeService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.order.IPayOrderService" ref="payOrderService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.order.IPayPosOrderService" ref="payPosOrderService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.notify.IPayNotifyLog" ref="payNotifyLogService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.log.IPayLogService" ref="payLogService"/>
+	<dubbo:service interface="cn.wellcare.payment.modules.log.IPayOrderLogService" ref="payOrderLogService"/>
+
+</beans>
