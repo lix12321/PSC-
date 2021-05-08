@@ -17,7 +17,7 @@
 		<java.version>1.8</java.version>
 		<javax.inject.version>1</javax.inject.version>
 		<version-spring>4.3.2.RELEASE</version-spring>
-		<shiro-version>1.2.4</shiro-version>
+		<shiro-version>1.6.0</shiro-version>
 		<project.version>1.8.0</project.version>
 	</properties>
 
